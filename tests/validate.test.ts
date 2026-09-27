@@ -35,7 +35,7 @@ describe('validateDataset', () => {
   })
 
   it('accepte un /data vide en prod avec un avertissement', () => {
-    const r = run({ candidates: { dateMaj: TODAY, candidats: [] }, measures: {} }, 'prod')
+    const r = run({ candidates: { dateMaj: TODAY, candidats: [] }, measures: {}, castypes: null }, 'prod')
     expect(r.errors).toEqual([])
     expect(r.warnings).toContain('candidates.json : aucun candidat')
   })
@@ -195,6 +195,39 @@ describe('validateDataset', () => {
       const d = fixtures()
       d.measures['candidat-b.json'].mesures[0].id = 'a-smic-5'
       expectError(d, /id de mesure en double/)
+    })
+  })
+
+  describe('précalcul OpenFisca (castypes)', () => {
+    it('effet "castype" sans dossier castypes/', () => {
+      const d = fixtures()
+      d.castypes = null
+      expectError(d, /castypes\/ absent/)
+    })
+
+    it('mesure sans précalcul', () => {
+      const d = fixtures()
+      delete (d.castypes as Json).candidats['candidat-a.json'].mesures['a-smic-5']
+      expectError(d, /aucun précalcul pour a-smic-5/)
+    })
+
+    it('précalcul obsolète (paramètres modifiés)', () => {
+      const d = fixtures()
+      d.measures['candidat-a.json'].mesures[0].parametres.variationPct = 10
+      expectError(d, /précalcul obsolète/)
+    })
+
+    it('cas-type manquant dans le précalcul', () => {
+      const d = fixtures()
+      delete (d.castypes as Json).candidats['candidat-b.json'].mesures['b-csg-baisse'].parCastype.cadre
+      expectError(d, /cas-type "cadre" absent/)
+    })
+
+    it('ampleur castype sur une mesure non chiffrable', () => {
+      const d = fixtures()
+      d.measures['candidat-a.json'].mesures[3].effets[0].type = 'chiffre'
+      d.measures['candidat-a.json'].mesures[3].effets[0].ampleur = { kind: 'castype' }
+      expectError(d, /réservée aux mesures chiffrables/)
     })
   })
 })

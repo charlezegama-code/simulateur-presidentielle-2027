@@ -18,5 +18,18 @@ export function loadRaw(dir: string): RawDataset {
       measures[f] = readJson(join(measuresDir, f))
     }
   }
-  return { candidates: readJson(join(dir, 'candidates.json')), measures }
+  const castypesDir = join(dir, 'castypes')
+  let castypes: RawDataset['castypes'] = null
+  if (existsSync(join(castypesDir, 'grid.json'))) {
+    const candidats: Record<string, unknown> = {}
+    for (const f of readdirSync(castypesDir).filter((f) => f.endsWith('.json')).sort()) {
+      if (f !== 'grid.json' && f !== 'baseline.json') candidats[f] = readJson(join(castypesDir, f))
+    }
+    castypes = {
+      grid: readJson(join(castypesDir, 'grid.json')),
+      baseline: readJson(join(castypesDir, 'baseline.json')),
+      candidats,
+    }
+  }
+  return { candidates: readJson(join(dir, 'candidates.json')), measures, castypes }
 }

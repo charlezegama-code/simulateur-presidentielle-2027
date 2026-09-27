@@ -1,5 +1,12 @@
 import { z } from 'zod'
 import { candidatesFileSchema, type CandidatesFile } from './candidate'
+import {
+  baselineFileSchema,
+  candidateCastypesFileSchema,
+  gridFileSchema,
+  type CandidateCastypesFile,
+  type GridFile,
+} from './castype'
 import { measuresFileSchema, type MeasuresFile } from './measure'
 import { THEMES } from './theme'
 import { findForbiddenWord } from './vocabulary'
@@ -8,11 +15,19 @@ export interface RawDataset {
   candidates: unknown
   /** clé = nom de fichier (ex. "candidat-a.json") */
   measures: Record<string, unknown>
+  /** Contenu de castypes/ (absent tant qu'OpenFisca n'a pas tourné). */
+  castypes: { grid: unknown; baseline: unknown; candidats: Record<string, unknown> } | null
+}
+
+export interface CastypesData {
+  grid: GridFile
+  candidats: Record<string, CandidateCastypesFile>
 }
 
 export interface Dataset {
   candidates: CandidatesFile
   measures: Record<string, MeasuresFile>
+  castypes: CastypesData | null
 }
 
 export interface ValidationOptions {
@@ -51,6 +66,21 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
     const parsed = measuresFileSchema.safeParse(content)
     if (parsed.success) measures[file] = parsed.data
     else errors.push(...zodErrors(`measures/${file}`, parsed.error))
+  }
+
+  let castypes: CastypesData | null = null
+  if (raw.castypes) {
+    const grid = gridFileSchema.safeParse(raw.castypes.grid)
+    const baseline = baselineFileSchema.safeParse(raw.castypes.baseline)
+    if (!grid.success) errors.push(...zodErrors('castypes/grid.json', grid.error))
+    if (!baseline.success) errors.push(...zodErrors('castypes/baseline.json', baseline.error))
+    const byCandidate: Record<string, CandidateCastypesFile> = {}
+    for (const [file, content] of Object.entries(raw.castypes.candidats)) {
+      const parsed = candidateCastypesFileSchema.safeParse(content)
+      if (parsed.success) byCandidate[parsed.data.candidatId] = parsed.data
+      else errors.push(...zodErrors(`castypes/${file}`, parsed.error))
+    }
+    if (grid.success) castypes = { grid: grid.data, candidats: byCandidate }
   }
 
   if (!cands.success || errors.length > 0) return { errors, warnings, dataset: null }
@@ -109,6 +139,19 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
       }
     }
 
+    // Un effet "castype" exige un précalcul OpenFisca à jour pour cette mesure et pour tous les cas-types.
+    const checkCastype = (where: string, measureId: string, parametres: unknown) => {
+      if (!castypes) return errors.push(`${where} : ampleur "castype" mais castypes/ absent (lancer scripts/openfisca/run.py)`)
+      const pre = castypes.candidats[mf.candidatId]?.mesures[measureId]
+      if (!pre) return errors.push(`${where} : aucun précalcul pour ${measureId} dans castypes/${mf.candidatId}.json`)
+      if (JSON.stringify(pre.parametres) !== JSON.stringify(parametres)) {
+        return errors.push(`${where} : précalcul obsolète (paramètres modifiés depuis), relancer run.py`)
+      }
+      for (const ct of castypes.grid.castypes) {
+        if (!(ct.id in pre.parCastype)) errors.push(`${where} : cas-type "${ct.id}" absent du précalcul`)
+      }
+    }
+
     const covered = new Set<string>()
     for (const m of mf.mesures) {
       const where = `${whereFile} › ${m.id}`
@@ -132,6 +175,7 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
         effectIds.add(e.id)
         refSources(we, e.sourceIds)
         if (e.ampleur?.kind === 'fourchette') refSources(`${we} › ampleur`, e.ampleur.sourceIds)
+        if (e.ampleur?.kind === 'castype') checkCastype(we, m.id, m.parametres)
         checkText(`${we} › libelle`, e.libelle)
       }
     }
@@ -155,5 +199,5 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
 
   if (cands.data.candidats.length === 0) warnings.push('candidates.json : aucun candidat')
 
-  return { errors, warnings, dataset: errors.length === 0 ? { candidates: cands.data, measures } : null }
+  return { errors, warnings, dataset: errors.length === 0 ? { candidates: cands.data, measures, castypes } : null }
 }
