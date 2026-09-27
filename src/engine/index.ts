@@ -1,5 +1,6 @@
-export * from './castype'
 export * from './compare'
 export * from './condition'
+export * from './conso'
+export * from './perimetre'
 export * from './shuffle'
 export * from './simulate'

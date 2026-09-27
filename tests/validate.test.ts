@@ -26,7 +26,9 @@ describe('validateDataset', () => {
   it('accepte les fixtures valides (candidats A et B)', () => {
     const r = run(fixtures())
     expect(r.errors).toEqual([])
-    expect(r.warnings).toEqual([])
+    // Seul avertissement attendu : l'écart de chiffrabilité entre A et B (voulu dans les fixtures).
+    expect(r.warnings).toHaveLength(1)
+    expect(r.warnings[0]).toMatch(/^équité/)
     expect(r.dataset?.candidates.candidats).toHaveLength(2)
   })
 
@@ -35,7 +37,7 @@ describe('validateDataset', () => {
   })
 
   it('accepte un /data vide en prod avec un avertissement', () => {
-    const r = run({ candidates: { dateMaj: TODAY, candidats: [] }, measures: {}, castypes: null }, 'prod')
+    const r = run({ candidates: { dateMaj: TODAY, candidats: [] }, measures: {}, castypes: null, conso: null }, 'prod')
     expect(r.errors).toEqual([])
     expect(r.warnings).toContain('candidates.json : aucun candidat')
   })
@@ -75,6 +77,21 @@ describe('validateDataset', () => {
       const d = fixtures()
       d.measures['candidat-b.json'].sources[0].datePublication = '15/08/2026'
       expectError(d, /date ISO attendue/)
+    })
+
+    it('une date d’application future est acceptée (seules publication et consultation sont contrôlées)', () => {
+      const d = fixtures()
+      d.measures['candidat-a.json'].mesures[0].dateMaj = '2027-06-01'
+      d.measures['candidat-a.json'].mesures[0].historique = [{ date: '2028-01-01', changement: 'Entrée en vigueur prévue', sourceIds: ['a-prog'] }]
+      d.candidates.candidats[0].statutDate = '2027-01-01'
+      expect(run(d).errors).toEqual([])
+    })
+
+    it('date de publication dans le futur', () => {
+      const d = fixtures()
+      d.measures['candidat-b.json'].sources[0].datePublication = '2027-01-01'
+      d.measures['candidat-b.json'].sources[0].dateConsultation = '2027-01-02'
+      expectError(d, /datePublication : date 2027-01-01 dans le futur/)
     })
 
     it('date dans le futur', () => {
@@ -136,6 +153,18 @@ describe('validateDataset', () => {
     })
   })
 
+  describe('équité', () => {
+    it('avertit si la part d’effets chiffrés diffère fortement entre candidats', () => {
+      const d = fixtures()
+      for (const m of d.measures['candidat-b.json'].mesures) for (const e of m.effets) if (e.type === 'chiffre') { e.type = 'qualitatif'; e.ampleur = null }
+      d.measures['candidat-b.json'].mesures[0].type = 'qualitatif'
+      d.measures['candidat-b.json'].mesures[0].parametres = null
+      const r = run(d)
+      expect(r.errors).toEqual([])
+      expect(r.warnings.join()).toMatch(/équité : écart de \d+ points/)
+    })
+  })
+
   describe('mesures et effets', () => {
     it('mesure chiffrable sans paramètres', () => {
       const d = fixtures()
@@ -187,7 +216,7 @@ describe('validateDataset', () => {
 
     it('contradiction avec une seule source', () => {
       const d = fixtures()
-      d.measures['candidat-a.json'].mesures[4].contradictions[0].sourceIds = ['a-prog']
+      d.measures['candidat-a.json'].mesures.find((m: Json) => m.id === 'a-retraites-flou').contradictions[0].sourceIds = ['a-prog']
       expectError(d, /contradictions/)
     })
 
@@ -217,17 +246,30 @@ describe('validateDataset', () => {
       expectError(d, /précalcul obsolète/)
     })
 
-    it('cas-type manquant dans le précalcul', () => {
+    it('précalcul incomplet (tableau tronqué)', () => {
       const d = fixtures()
-      delete (d.castypes as Json).candidats['candidat-b.json'].mesures['b-csg-baisse'].parCastype.cadre
-      expectError(d, /cas-type "cadre" absent/)
+      ;(d.castypes as Json).candidats['candidat-b.json'].mesures['b-csg-baisse'].total.pop()
+      expectError(d, /précalcul incomplet/)
+    })
+
+    it('précalcul fait sur une autre grille', () => {
+      const d = fixtures()
+      ;(d.castypes as Json).baseline.gridHash = '00000000'
+      expectError(d, /calculé sur une autre grille/)
+    })
+
+    it('poste de consommation inconnu', () => {
+      const d = fixtures()
+      d.measures['candidat-a.json'].mesures[2].parametres.postes = ['9999']
+      expectError(d, /poste de consommation "9999" inconnu/)
     })
 
     it('ampleur castype sur une mesure non chiffrable', () => {
       const d = fixtures()
-      d.measures['candidat-a.json'].mesures[3].effets[0].type = 'chiffre'
-      d.measures['candidat-a.json'].mesures[3].effets[0].ampleur = { kind: 'castype' }
-      expectError(d, /réservée aux mesures chiffrables/)
+      const repas = d.measures['candidat-a.json'].mesures.find((m: Json) => m.id === 'a-etudes-repas')
+      repas.effets[0].type = 'chiffre'
+      repas.effets[0].ampleur = { kind: 'castype' }
+      expectError(d, /réservée aux mesures chiffrables par OpenFisca/)
     })
   })
 })

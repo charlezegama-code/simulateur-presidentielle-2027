@@ -1,14 +1,19 @@
 import { z } from 'zod'
+import { enumerateCells, gridHash } from '../domain/grid'
+import { THEMES } from '../domain/theme'
 import { candidatesFileSchema, type CandidatesFile } from './candidate'
 import {
   baselineFileSchema,
+  bourseFileSchema,
   candidateCastypesFileSchema,
   gridFileSchema,
+  type BaselineFile,
+  type BourseFile,
   type CandidateCastypesFile,
   type GridFile,
 } from './castype'
+import { consoFileSchema, type ConsoFile } from './conso'
 import { measuresFileSchema, type MeasuresFile } from './measure'
-import { THEMES } from './theme'
 import { findForbiddenWord } from './vocabulary'
 
 export interface RawDataset {
@@ -16,11 +21,15 @@ export interface RawDataset {
   /** clé = nom de fichier (ex. "candidat-a.json") */
   measures: Record<string, unknown>
   /** Contenu de castypes/ (absent tant qu'OpenFisca n'a pas tourné). */
-  castypes: { grid: unknown; baseline: unknown; candidats: Record<string, unknown> } | null
+  castypes: { grid: unknown; baseline: unknown; bourse: unknown; candidats: Record<string, unknown> } | null
+  /** data/conso/bdf2017.json */
+  conso: unknown
 }
 
 export interface CastypesData {
   grid: GridFile
+  baseline: BaselineFile
+  bourse: BourseFile
   candidats: Record<string, CandidateCastypesFile>
 }
 
@@ -28,6 +37,7 @@ export interface Dataset {
   candidates: CandidatesFile
   measures: Record<string, MeasuresFile>
   castypes: CastypesData | null
+  conso: ConsoFile | null
 }
 
 export interface ValidationOptions {
@@ -37,6 +47,8 @@ export interface ValidationOptions {
   today: string
   /** Au-delà, une source consultée est signalée "à revérifier". */
   maxSourceAgeDays?: number
+  /** Écart maximal de part d'effets chiffrés entre candidats avant avertissement (0–1). */
+  maxEcartChiffrage?: number
 }
 
 export interface ValidationReport {
@@ -51,6 +63,16 @@ function zodErrors(prefix: string, err: z.ZodError): string[] {
 
 function daysBetween(a: string, b: string): number {
   return Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000)
+}
+
+/** Part d'effets chiffrés (type "chiffre") par candidat, sur l'ensemble des effets des mesures non abandonnées. */
+export function partChiffree(measures: Record<string, MeasuresFile>): Record<string, number> {
+  const out: Record<string, number> = {}
+  for (const mf of Object.values(measures)) {
+    const effets = mf.mesures.filter((m) => m.statut !== 'abandonnee').flatMap((m) => m.effets)
+    out[mf.candidatId] = effets.length === 0 ? 0 : effets.filter((e) => e.type === 'chiffre').length / effets.length
+  }
+  return out
 }
 
 export function validateDataset(raw: RawDataset, opts: ValidationOptions): ValidationReport {
@@ -68,29 +90,53 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
     else errors.push(...zodErrors(`measures/${file}`, parsed.error))
   }
 
+  let conso: ConsoFile | null = null
+  if (raw.conso) {
+    const parsed = consoFileSchema.safeParse(raw.conso)
+    if (parsed.success) conso = parsed.data
+    else errors.push(...zodErrors('conso/bdf2017.json', parsed.error))
+  }
+
   let castypes: CastypesData | null = null
   if (raw.castypes) {
     const grid = gridFileSchema.safeParse(raw.castypes.grid)
     const baseline = baselineFileSchema.safeParse(raw.castypes.baseline)
+    const bourse = bourseFileSchema.safeParse(raw.castypes.bourse)
     if (!grid.success) errors.push(...zodErrors('castypes/grid.json', grid.error))
     if (!baseline.success) errors.push(...zodErrors('castypes/baseline.json', baseline.error))
+    if (!bourse.success) errors.push(...zodErrors('castypes/bourse.json', bourse.error))
     const byCandidate: Record<string, CandidateCastypesFile> = {}
     for (const [file, content] of Object.entries(raw.castypes.candidats)) {
       const parsed = candidateCastypesFileSchema.safeParse(content)
       if (parsed.success) byCandidate[parsed.data.candidatId] = parsed.data
       else errors.push(...zodErrors(`castypes/${file}`, parsed.error))
     }
-    if (grid.success) castypes = { grid: grid.data, candidats: byCandidate }
+    if (grid.success && baseline.success && bourse.success) {
+      castypes = { grid: grid.data, baseline: baseline.data, bourse: bourse.data, candidats: byCandidate }
+      // Le précalcul doit porter sur exactement la grille du questionnaire actuel.
+      const cells = enumerateCells()
+      const hash = gridHash(cells)
+      for (const [name, f] of [['grid.json', grid.data], ['baseline.json', baseline.data], ...Object.entries(byCandidate)] as const) {
+        if (f.gridHash !== hash || f.nCells !== cells.length) {
+          errors.push(`castypes/${name} : calculé sur une autre grille (${f.gridHash}/${f.nCells} ≠ ${hash}/${cells.length}), relancer export-grid puis run.py`)
+        }
+      }
+      if (baseline.data.revenuDisponible.length !== cells.length) errors.push('castypes/baseline.json : longueur ≠ nombre de cases')
+    }
   }
 
   if (!cands.success || errors.length > 0) return { errors, warnings, dataset: null }
 
-  const checkDate = (where: string, date: string) => {
+  // Seules les dates de publication et de consultation ne peuvent pas être futures
+  // (une date d'application d'une mesure ou un horizon peuvent l'être).
+  const checkNotFuture = (where: string, date: string) => {
     if (date > opts.today) errors.push(`${where} : date ${date} dans le futur`)
   }
-  const checkSourceAge = (where: string, dateConsultation: string) => {
-    const age = daysBetween(dateConsultation, opts.today)
-    if (age > maxAge) warnings.push(`${where} : source consultée il y a ${age} j (> ${maxAge} j), à revérifier`)
+  const checkSource = (where: string, s: { id: string; datePublication: string; dateConsultation: string }) => {
+    checkNotFuture(`${where} › source ${s.id} › datePublication`, s.datePublication)
+    checkNotFuture(`${where} › source ${s.id} › dateConsultation`, s.dateConsultation)
+    const age = daysBetween(s.dateConsultation, opts.today)
+    if (age > maxAge) warnings.push(`${where} › source ${s.id} : consultée il y a ${age} j (> ${maxAge} j), à revérifier`)
   }
   const checkText = (where: string, text: string) => {
     const w = findForbiddenWord(text)
@@ -108,13 +154,12 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
     for (const id of [...c.statutSourceIds, ...c.historiqueStatut.flatMap((h) => h.sourceIds)]) {
       if (!srcIds.has(id)) errors.push(`${where} : source "${id}" introuvable`)
     }
-    checkDate(`${where} › statutDate`, c.statutDate)
-    for (const s of c.sources) {
-      checkDate(`${where} › source ${s.id}`, s.dateConsultation)
-      checkSourceAge(`${where} › source ${s.id}`, s.dateConsultation)
+    if (c.programme) checkNotFuture(`${where} › programme › datePublication`, c.programme.datePublication)
+    for (const s of c.sources) checkSource(where, s)
+    if (c.analyse && !(`${c.id}.json` in measures)) {
+      errors.push(`${where} : fichier measures/${c.id}.json manquant (gabarit incomplet)`)
     }
-    const file = `${c.id}.json`
-    if (!(file in measures)) errors.push(`${where} : fichier measures/${file} manquant (gabarit incomplet)`)
+    if (!c.analyse && `${c.id}.json` in measures) errors.push(`${where} : mesures présentes mais "analyse" vaut false`)
   }
 
   // --- Mesures
@@ -128,8 +173,7 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
     for (const s of mf.sources) {
       if (srcIds.has(s.id)) errors.push(`${whereFile} › source ${s.id} : id en double`)
       srcIds.add(s.id)
-      checkDate(`${whereFile} › source ${s.id}`, s.dateConsultation)
-      checkSourceAge(`${whereFile} › source ${s.id}`, s.dateConsultation)
+      checkSource(whereFile, s)
     }
     const usedSources = new Set<string>()
     const refSources = (where: string, ids: string[]) => {
@@ -139,7 +183,7 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
       }
     }
 
-    // Un effet "castype" exige un précalcul OpenFisca à jour pour cette mesure et pour tous les cas-types.
+    // Un effet "castype" exige un précalcul OpenFisca à jour pour cette mesure.
     const checkCastype = (where: string, measureId: string, parametres: unknown) => {
       if (!castypes) return errors.push(`${where} : ampleur "castype" mais castypes/ absent (lancer scripts/openfisca/run.py)`)
       const pre = castypes.candidats[mf.candidatId]?.mesures[measureId]
@@ -147,8 +191,12 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
       if (JSON.stringify(pre.parametres) !== JSON.stringify(parametres)) {
         return errors.push(`${where} : précalcul obsolète (paramètres modifiés depuis), relancer run.py`)
       }
-      for (const ct of castypes.grid.castypes) {
-        if (!(ct.id in pre.parCastype)) errors.push(`${where} : cas-type "${ct.id}" absent du précalcul`)
+      if ('total' in pre && pre.total.length !== castypes.grid.nCells) errors.push(`${where} : précalcul incomplet`)
+    }
+    const checkConso = (where: string, parametres: { postes: string[] }) => {
+      if (!conso) return errors.push(`${where} : ampleur "consommation" mais data/conso/bdf2017.json absent`)
+      for (const p of parametres.postes) {
+        if (!(p in conso.depensesParDecile)) errors.push(`${where} : poste de consommation "${p}" inconnu de l'enquête Budget de famille`)
       }
     }
 
@@ -159,7 +207,6 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
       measureIds.add(m.id)
       if (m.candidatId !== mf.candidatId) errors.push(`${where} : candidatId incohérent`)
       if (m.statut !== 'abandonnee') covered.add(m.theme)
-      checkDate(`${where} › dateMaj`, m.dateMaj)
       refSources(where, m.sourceIds)
       if ('sourceIds' in m.financement) refSources(`${where} › financement`, m.financement.sourceIds)
       m.historique.forEach((h, i) => refSources(`${where} › historique[${i}]`, h.sourceIds))
@@ -176,6 +223,7 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
         refSources(we, e.sourceIds)
         if (e.ampleur?.kind === 'fourchette') refSources(`${we} › ampleur`, e.ampleur.sourceIds)
         if (e.ampleur?.kind === 'castype') checkCastype(we, m.id, m.parametres)
+        if (e.ampleur?.kind === 'consommation' && m.parametres && 'postes' in m.parametres) checkConso(we, m.parametres)
         checkText(`${we} › libelle`, e.libelle)
       }
     }
@@ -194,10 +242,22 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
         errors.push(`${whereFile} : thème "${t}" à la fois couvert et déclaré sans position`)
       }
     }
-    for (const s of mf.sansPosition) checkDate(`${whereFile} › sansPosition ${s.theme}`, s.dateRecherche)
+  }
+
+  // Équité : un écart fort de chiffrabilité entre candidats peut donner l'impression qu'un programme est plus concret.
+  const parts = Object.values(partChiffree(measures))
+  if (parts.length > 1) {
+    const ecart = Math.max(...parts) - Math.min(...parts)
+    if (ecart > (opts.maxEcartChiffrage ?? 0.25)) {
+      warnings.push(`équité : écart de ${Math.round(ecart * 100)} points de part d'effets chiffrés entre candidats (avertissement affiché dans l'app)`)
+    }
   }
 
   if (cands.data.candidats.length === 0) warnings.push('candidates.json : aucun candidat')
 
-  return { errors, warnings, dataset: errors.length === 0 ? { candidates: cands.data, measures, castypes } : null }
+  return {
+    errors,
+    warnings,
+    dataset: errors.length === 0 ? { candidates: cands.data, measures, castypes, conso } : null,
+  }
 }

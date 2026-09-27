@@ -10,6 +10,8 @@ export const candidateSchema = z
     nom: z.string().min(1),
     parti: z.string().min(1),
     fictif: z.boolean(),
+    /** Programme analysé dans cette version (mesures dans measures/<id>.json). Sinon : listé, sans mesures. */
+    analyse: z.boolean(),
     statut: z.enum(CANDIDATE_STATUTS),
     statutDate: isoDate,
     statutSourceIds: z.array(slug).min(1),

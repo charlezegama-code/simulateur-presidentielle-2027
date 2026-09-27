@@ -7,14 +7,32 @@
       "nom": "A",
       "parti": "Parti fictif A",
       "fictif": true,
+      "analyse": true,
       "statut": "declare",
       "statutDate": "2026-09-01",
-      "statutSourceIds": ["a-annonce"],
-      "historiqueStatut": [
-        { "statut": "pressenti", "date": "2026-06-01", "sourceIds": ["a-annonce"] },
-        { "statut": "declare", "date": "2026-09-01", "sourceIds": ["a-annonce"] }
+      "statutSourceIds": [
+        "a-annonce"
       ],
-      "programme": { "url": "https://example.org/candidat-a/programme", "datePublication": "2026-09-10" },
+      "historiqueStatut": [
+        {
+          "statut": "pressenti",
+          "date": "2026-06-01",
+          "sourceIds": [
+            "a-annonce"
+          ]
+        },
+        {
+          "statut": "declare",
+          "date": "2026-09-01",
+          "sourceIds": [
+            "a-annonce"
+          ]
+        }
+      ],
+      "programme": {
+        "url": "https://example.org/candidat-a/programme",
+        "datePublication": "2026-09-10"
+      },
       "sources": [
         {
           "id": "a-annonce",
@@ -35,10 +53,21 @@
       "nom": "B",
       "parti": "Parti fictif B",
       "fictif": true,
+      "analyse": true,
       "statut": "pressenti",
       "statutDate": "2026-08-15",
-      "statutSourceIds": ["b-interview"],
-      "historiqueStatut": [{ "statut": "pressenti", "date": "2026-08-15", "sourceIds": ["b-interview"] }],
+      "statutSourceIds": [
+        "b-interview"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "pressenti",
+          "date": "2026-08-15",
+          "sourceIds": [
+            "b-interview"
+          ]
+        }
+      ],
       "programme": null,
       "sources": [
         {

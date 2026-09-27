@@ -23,13 +23,17 @@ export function loadRaw(dir: string): RawDataset {
   if (existsSync(join(castypesDir, 'grid.json'))) {
     const candidats: Record<string, unknown> = {}
     for (const f of readdirSync(castypesDir).filter((f) => f.endsWith('.json')).sort()) {
-      if (f !== 'grid.json' && f !== 'baseline.json') candidats[f] = readJson(join(castypesDir, f))
+      if (!['grid.json', 'baseline.json', 'bourse.json'].includes(f)) candidats[f] = readJson(join(castypesDir, f))
     }
     castypes = {
       grid: readJson(join(castypesDir, 'grid.json')),
       baseline: readJson(join(castypesDir, 'baseline.json')),
+      bourse: readJson(join(castypesDir, 'bourse.json')),
       candidats,
     }
   }
-  return { candidates: readJson(join(dir, 'candidates.json')), measures, castypes }
+  // Données statistiques publiques (INSEE), partagées : repli sur data/conso pour les fixtures.
+  const consoFile = [join(dir, 'conso', 'bdf2017.json'), join('data', 'conso', 'bdf2017.json')].find((f) => existsSync(f))
+  const conso = consoFile ? readJson(consoFile) : null
+  return { candidates: readJson(join(dir, 'candidates.json')), measures, castypes, conso }
 }

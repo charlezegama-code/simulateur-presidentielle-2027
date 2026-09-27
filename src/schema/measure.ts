@@ -1,13 +1,14 @@
 import { z } from 'zod'
 import { isoDate, slug, sourceSchema } from './common'
 import { conditionSchema } from './condition'
-import { THEMES } from './theme'
+import { THEMES } from '../domain/theme'
 
 const PRESTATIONS = ['rsa', 'apl', 'aah', 'allocations_familiales', 'prime_activite', 'bourse'] as const
 
 /** Paramètres qu'un script OpenFisca (scripts/openfisca) sait traduire en réforme. */
 export const parametresSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('smic_pct'), variationPct: z.number() }).strict(),
+  z.object({ kind: z.literal('smic_net'), montantNetMensuel: z.number().positive() }).strict(),
   z.object({ kind: z.literal('montant_prestation'), prestation: z.enum(PRESTATIONS), variationPct: z.number() }).strict(),
   z.object({ kind: z.literal('taux_csg'), tauxPct: z.number().min(0).max(100) }).strict(),
   z
@@ -17,7 +18,28 @@ export const parametresSchema = z.discriminatedUnion('kind', [
     })
     .strict(),
   z.object({ kind: z.literal('age_retraite'), age: z.number().min(55).max(70) }).strict(),
+  // Consommation (non modélisée par OpenFisca) : estimée à partir de l'enquête Budget de famille (data/conso).
+  z
+    .object({
+      kind: z.literal('conso_tva'),
+      postes: z.array(z.string().regex(/^\d{2,5}$/)).min(1),
+      tauxAvantPct: z.number().min(0).max(100),
+      tauxApresPct: z.number().min(0).max(100),
+    })
+    .strict(),
+  z
+    .object({
+      kind: z.literal('conso_prix'),
+      postes: z.array(z.string().regex(/^\d{2,5}$/)).min(1),
+      variationPrixPct: z.number().min(-100).max(100),
+    })
+    .strict(),
 ])
+
+/** Paramètres qu'OpenFisca sait traduire en réforme (scripts/openfisca/run.py). */
+export const OPENFISCA_KINDS = ['smic_pct', 'smic_net', 'taux_csg', 'montant_prestation', 'bareme_ir'] as const
+export const CONSO_KINDS = ['conso_tva', 'conso_prix'] as const
+export type Parametres = z.infer<typeof parametresSchema>
 
 export const EFFECT_TYPES = ['chiffre', 'qualitatif', 'flou'] as const
 export const SENS = ['positif', 'negatif', 'neutre', 'incertain'] as const
@@ -25,6 +47,8 @@ export const SENS = ['positif', 'negatif', 'neutre', 'incertain'] as const
 export const ampleurSchema = z.discriminatedUnion('kind', [
   // Montant précalculé par OpenFisca pour le cas-type le plus proche du profil.
   z.object({ kind: z.literal('castype') }).strict(),
+  // Estimation de l'effet sur les dépenses de consommation (TVA, accises, prix réglementés).
+  z.object({ kind: z.literal('consommation') }).strict(),
   // Fourchette issue d'un chiffrage tiers sourcé.
   z
     .object({
@@ -97,8 +121,14 @@ export const measureSchema = z
     if (m.type === 'flou' && m.effets.some((e) => e.type === 'chiffre')) {
       ctx.addIssue({ code: 'custom', path: ['effets'], message: 'mesure "flou" avec un effet chiffré' })
     }
-    if (m.effets.some((e) => e.ampleur?.kind === 'castype') && m.type !== 'chiffrable') {
-      ctx.addIssue({ code: 'custom', path: ['effets'], message: 'ampleur "castype" réservée aux mesures chiffrables' })
+    const kind = m.parametres?.kind
+    for (const e of m.effets) {
+      if (e.ampleur?.kind === 'castype' && !(OPENFISCA_KINDS as readonly string[]).includes(kind ?? '')) {
+        ctx.addIssue({ code: 'custom', path: ['effets'], message: `ampleur "castype" réservée aux mesures chiffrables par OpenFisca (${OPENFISCA_KINDS.join(', ')})` })
+      }
+      if (e.ampleur?.kind === 'consommation' && !(CONSO_KINDS as readonly string[]).includes(kind ?? '')) {
+        ctx.addIssue({ code: 'custom', path: ['effets'], message: 'ampleur "consommation" réservée aux paramètres conso_tva / conso_prix' })
+      }
     }
   })
 

@@ -1,137 +1,203 @@
 """
-Précalcul offline des cas-types avec OpenFisca-France.
+Précalcul offline de la grille complète de cas-types avec OpenFisca-France (calcul vectorisé).
 
-Usage (depuis scripts/openfisca) :
-    uv run python run.py --data ../../data
-    uv run python run.py --data ../../tests/fixtures/valid
+Usage (depuis la racine du projet) :
+    npx tsx scripts/export-grid.ts                                   # liste des cases (source unique : src/domain/grid.ts)
+    cd scripts/openfisca && uv run python run.py --data ../../data   # ou ../../tests/fixtures/valid
 
 Écrit dans <data>/castypes/ :
-    grid.json            définition des cas-types + hypothèses (affichées dans l'UI)
-    baseline.json        revenu disponible à législation constante
-    <candidatId>.json    delta annuel (€) par mesure chiffrable et par cas-type
+    grid.json           hypothèses, valeurs représentatives, empreinte de la grille
+    baseline.json       revenu disponible annuel par case (législation actuelle)
+    bourse.json         montant annuel de la bourse sur critères sociaux par échelon
+    <candidatId>.json   variation annuelle par case (ou par échelon) pour chaque mesure chiffrable
 
-Une mesure n'est chiffrée que si ses `parametres` correspondent à une réforme codée ci-dessous (REFORMES).
+Une mesure n'est chiffrée que si ses `parametres` correspondent à une réforme codée ici (REFORMES).
 Sinon le script échoue : on ne force jamais un chiffre.
 """
 import argparse
-import copy
 import json
+import time
 from datetime import date
 from importlib.metadata import version
 from pathlib import Path
 
+import numpy as np
 from openfisca_core.reforms import Reform
 from openfisca_core.simulation_builder import SimulationBuilder
 from openfisca_france import FranceTaxBenefitSystem
 
-from grid import DIMENSION_ORDONNEE, DIMENSIONS_EXACTES, HYPOTHESES_COMMUNES, build_grid
+from grid import (AGE_REPRESENTATIF, AGES_ENFANTS, CONJOINT_NET, HYPOTHESES_COMMUNES, REVENU_NET, REVENU_NET_R2_AUTRES,
+                  SMIC_HORAIRE_STATUTS, SOURCES)
 
 ANNEE = '2026'
-HISTORIQUE = ['2023', '2024', '2025']  # les aides (APL, prime d'activité…) dépendent des revenus passés
+ANNEES = ['2023', '2024', '2025', ANNEE]  # les aides dépendent des revenus passés : situation supposée stable
+MOIS = [f'{a}-{m:02d}' for a in ['2020', '2021', '2022'] + ANNEES for m in range(1, 13)]  # marge : certaines aides lisent des mois antérieurs
 OPENFISCA_VERSION = version('openfisca-france')
+HERE = Path(__file__).parent
 
-# Composantes du revenu disponible exportées pour expliquer chaque delta.
+# Composantes exportées pour expliquer chaque variation (entité individu → sommées sur le ménage).
 DETAIL = {
-    'salaire_net': 'Salaire net',
-    'retraite_nette': 'Pension de retraite nette',
-    'chomage_net': 'Allocation chômage nette',
-    'ppa': 'Prime d’activité',
-    'rsa': 'RSA',
-    'aide_logement': 'Aide au logement',
-    'af': 'Allocations familiales',
-    'aah': 'AAH',
-    'impot_revenu_restant_a_payer': 'Impôt sur le revenu',
+    'salaire_net': ('individu', 'Salaire net'),
+    'rpns_auto_entrepreneur_revenus_net': ('individu', 'Revenu d’activité indépendante'),
+    'retraite_nette': ('individu', 'Pension de retraite nette'),
+    'chomage_net': ('individu', 'Allocation chômage nette'),
+    'aah': ('individu', 'AAH'),
+    'ppa': ('famille', 'Prime d’activité'),
+    'rsa': ('famille', 'RSA'),
+    'aide_logement': ('famille', 'Aide au logement'),
+    'af': ('famille', 'Allocations familiales'),
+    'aspa': ('famille', 'Minimum vieillesse (ASPA)'),
+    'impot_revenu_restant_a_payer': ('foyer_fiscal', 'Impôt sur le revenu'),
 }
-
-
-def months(year, value):
-    return {f'{year}-{m:02d}': value for m in range(1, 13)}
+ARRONDI = 10  # € : les montants sont indicatifs, une précision à l'euro serait trompeuse
 
 
 # ---------------------------------------------------------------------------
-# Construction d'une situation OpenFisca à partir d'un cas-type
+# Construction vectorisée : une case = un ménage = une famille = un foyer fiscal
 # ---------------------------------------------------------------------------
 
-def build_case(ct, brut_annuel, brut_conjoint_annuel, smic_bump=0.0):
-    v, p = ct['valeurs'], ct['profil']
-    years = HISTORIQUE + [ANNEE]
-    moi = {'age': months(ANNEE, v['age'])}
-    statut = p['statutPro']
-    revenu = {y: brut_annuel for y in years}
-    if statut == 'retraite':
-        moi['retraite_brute'] = revenu
-    elif statut == 'demandeur_emploi':
-        moi['chomage_brut'] = revenu
-    elif statut in ('salarie_prive', 'etudiant'):
-        moi['salaire_de_base'] = {y: b * (1 + smic_bump) if y == ANNEE else b for y, b in revenu.items()}
-        if statut == 'etudiant':
-            moi['activite'] = months(ANNEE, 'etudiant')
-    # sans_activite : aucun revenu
+class Situation:
+    """Tableaux d'entrée OpenFisca pour une liste de cases (tous statuts confondus)."""
 
-    individus = {'moi': moi}
-    parents = ['moi']
-    if p['couple']:
-        individus['conjoint'] = {'age': months(ANNEE, v['age']),
-                                 'salaire_de_base': {y: brut_conjoint_annuel for y in years}}
-        parents.append('conjoint')
-    enfants = []
-    for i, age in enumerate(v['agesEnfants']):
-        individus[f'enfant{i}'] = {'age': months(ANNEE, age)}
-        enfants.append(f'enfant{i}')
+    def __init__(self, cells, revenus_bruts, conjoint_bruts, loyers):
+        self.cells = cells
+        persons, roles_fam, roles_ff, roles_men, owner = [], [], [], [], []
+        for i, c in enumerate(cells):
+            # Rôles à sous-rôles (parent, declarant) : il faut passer les sous-rôles au SimulationBuilder.
+            members = [('moi', 'demandeur', 'declarant_principal', 'personne_de_reference')]
+            if c['couple']:
+                members.append(('conjoint', 'conjoint', 'conjoint', 'conjoint'))
+            n = 3 if c['enfants'] == '3+' else int(c['enfants'])
+            members += [(f'enfant{k}', 'enfant', 'personne_a_charge', 'enfant') for k in range(n)]
+            for name, rf, rff, rm in members:
+                persons.append(name)
+                roles_fam.append(rf)
+                roles_ff.append(rff)
+                roles_men.append(rm)
+                owner.append(i)
+        self.kind = np.array(persons)
+        self.owner = np.array(owner)
+        self.roles = (roles_fam, roles_ff, roles_men)
+        self.n_cells = len(cells)
+        self.revenus_bruts = revenus_bruts
+        self.conjoint_bruts = conjoint_bruts
+        self.loyers = loyers
 
-    statut_logement = {
-        'locataire_prive': 'locataire_vide',
-        'locataire_social': 'locataire_hlm',
-        'proprietaire': 'proprietaire',
-        'heberge': 'loge_gratuitement',
-    }[p['logement']]
-    menage = {
-        'personne_de_reference': ['moi'],
-        'enfants': enfants,
-        'statut_occupation_logement': months(ANNEE, statut_logement),
-        'zone_apl': months(ANNEE, v['zoneApl']),
-        'loyer': months(ANNEE, v['loyerMensuel']),
-    }
-    if p['couple']:
-        menage['conjoint'] = ['conjoint']
-    return {
-        'individus': individus,
-        'familles': {'famille': {'parents': parents, 'enfants': enfants}},
-        'foyers_fiscaux': {'foyer': {'declarants': parents, 'personnes_a_charge': enfants}},
-        'menages': {'menage': menage},
-    }
+    def build(self, tbs, smic_bump=0.0):
+        cells, kind, owner = self.cells, self.kind, self.owner
+        n_p = len(kind)
+        sb = SimulationBuilder()
+        sb.create_entities(tbs)
+        sb.declare_person_entity('individu', [f'p{k}' for k in range(n_p)])
+        ids = [f'c{i}' for i in range(self.n_cells)]
+        for entity, roles in zip(('famille', 'foyer_fiscal', 'menage'), self.roles):
+            e = sb.declare_entity(entity, ids)
+            sb.join_with_persons(e, [f'c{i}' for i in owner], roles)
+        sim = sb.build(tbs)
+
+        is_moi = kind == 'moi'
+        is_conj = kind == 'conjoint'
+        is_child = np.char.startswith(kind, 'enfant')
+        statut = np.array([cells[i]['statutPro'] for i in owner])
+        moi_statut = np.where(is_moi, statut, '')
+
+        # Âges
+        age = np.zeros(n_p)
+        for k in range(n_p):
+            c = cells[owner[k]]
+            if kind[k] in ('moi', 'conjoint'):
+                age[k] = AGE_REPRESENTATIF[(c['statutPro'], c['ageCalcul'])]
+            else:
+                age[k] = AGES_ENFANTS[int(kind[k][len('enfant'):])]
+        # Revenus bruts annuels par personne
+        brut = np.where(is_moi, self.revenus_bruts[owner], 0.0)
+        brut_conj = np.where(is_conj, self.conjoint_bruts[owner], 0.0)
+        bump = np.array([1 + smic_bump if (cells[i]['statutPro'], cells[i]['revenuTranche']) in SMIC_HORAIRE_STATUTS else 1.0
+                         for i in owner])
+
+        salarie = np.isin(moi_statut, ['salarie_prive', 'alternant', 'etudiant'])
+        for a in ANNEES:
+            b = bump if a == ANNEE else 1.0
+            sim.set_input('salaire_de_base', a, np.where(salarie, brut * b, 0.0) + brut_conj)
+            sim.set_input('chomage_brut', a, np.where(moi_statut == 'demandeur_emploi', brut, 0.0))
+            sim.set_input('retraite_brute', a, np.where(moi_statut == 'retraite', brut, 0.0))
+        fonct = moi_statut == 'fonctionnaire'
+        indep = moi_statut == 'independant'
+        categorie = np.where(fonct, 'public_titulaire_etat', 'prive_non_cadre')
+        activite = np.full(n_p, 'actif', dtype=object)
+        activite[moi_statut == 'etudiant'] = 'etudiant'
+        activite[moi_statut == 'demandeur_emploi'] = 'chomeur'
+        activite[moi_statut == 'retraite'] = 'retraite'
+        activite[moi_statut == 'sans_activite'] = 'inactif'
+        activite[is_child] = 'inactif'
+        aah = np.array([cells[i]['handicapAAH'] for i in owner]) & is_moi
+        statut_log = {'locataire_prive': 'locataire_vide', 'locataire_social': 'locataire_hlm',
+                      'proprietaire': 'proprietaire', 'heberge': 'loge_gratuitement'}
+        occ = np.array([statut_log[c['logement']] for c in cells])
+        zone = np.array([c['zoneApl'] or 'zone_3' for c in cells])
+        def enum(var, values):
+            return tbs.variables[var].possible_values.encode(np.array(values, dtype=str))
+        categorie = enum('categorie_salarie', categorie)
+        activite = enum('activite', activite)
+        occ = enum('statut_occupation_logement', occ)
+        zone = enum('zone_apl', zone)
+        for m in MOIS:
+            sim.set_input('age', m, age)
+            sim.set_input('categorie_salarie', m, categorie)
+            sim.set_input('traitement_indiciaire_brut', m, np.where(fonct, brut / 12, 0.0))
+            sim.set_input('rpns_auto_entrepreneur_CA_bnc', m, np.where(indep, brut / 12, 0.0))
+            sim.set_input('apprenti', m, moi_statut == 'alternant')
+            sim.set_input('activite', m, activite)
+            sim.set_input('handicap', m, aah)
+            sim.set_input('taux_incapacite', m, np.where(aah, 0.8, 0.0))
+            sim.set_input('statut_occupation_logement', m, occ)
+            sim.set_input('zone_apl', m, zone)
+            sim.set_input('loyer', m, self.loyers)
+        return sim
 
 
-def compute(tbs, case):
-    sim = SimulationBuilder().build_from_entities(tbs, case)
-    out = {'revenu_disponible': float(sim.calculate('revenu_disponible', ANNEE).sum())}
-    for var in DETAIL:
-        period_unit = tbs.variables[var].definition_period.name
-        values = sim.calculate(var, ANNEE) if period_unit == 'YEAR' else sim.calculate_add(var, ANNEE)
-        out[var] = float(values.sum())
+def aggregate(tbs, sim, n_cells, owner):
+    """Revenu disponible et composantes, par case (ménage), en €/an."""
+    out = {'revenu_disponible': sim.calculate('revenu_disponible', ANNEE)}  # calculé en premier (voir resolve_bruts)
+    for var, (entity, _) in DETAIL.items():
+        unit = tbs.variables[var].definition_period.name
+        values = sim.calculate(var, ANNEE) if unit == 'YEAR' else sim.calculate_add(var, ANNEE)
+        out[var] = np.bincount(owner, weights=values, minlength=n_cells) if entity == 'individu' else values
     return out
 
 
-NET_VAR = {'retraite': 'retraite_nette', 'demandeur_emploi': 'chomage_net'}
+# ---------------------------------------------------------------------------
+# Revenus bruts : les tranches du questionnaire sont en net, OpenFisca attend du brut → bisection vectorisée
+# ---------------------------------------------------------------------------
+
+NET_VAR = {
+    'salarie_prive': 'salaire_net', 'alternant': 'salaire_net', 'etudiant': 'salaire_net',
+    'fonctionnaire': 'salaire_net', 'independant': 'rpns_auto_entrepreneur_revenus_net',
+    'demandeur_emploi': 'chomage_net', 'retraite': 'retraite_nette',
+}
 
 
-def resolve_brut(tbs, ct, net_mensuel, conjoint=False):
-    """Trouve par bisection le brut annuel qui donne le net mensuel visé (le cas-type est défini en net)."""
-    if net_mensuel == 0:
-        return 0.0
-    statut = 'salarie_prive' if conjoint else ct['profil']['statutPro']
-    var = NET_VAR.get(statut, 'salaire_net')
-    target = net_mensuel * 12
-    lo, hi = target, target * 1.6
-    for _ in range(40):
+def resolve_bruts(tbs, targets):
+    """targets : liste de (statut, net_mensuel). Renvoie les bruts annuels correspondants."""
+    fake = [{'statutPro': s, 'ageCalcul': 'retraite_65_plus' if s == 'retraite' else '25_plus', 'revenuTranche': 'r1',
+             'couple': False, 'revenuConjointTranche': None, 'enfants': '0', 'logement': 'proprietaire',
+             'zoneApl': None, 'handicapAAH': False} for s, _ in targets]
+    target = np.array([net * 12 for _, net in targets], dtype=float)
+    lo, hi = target.copy(), target * 1.8 + 1
+    for _ in range(30):
         mid = (lo + hi) / 2
-        c = copy.deepcopy(ct)
-        c['profil'] = {**c['profil'], 'statutPro': statut, 'couple': False}
-        c['valeurs'] = {**c['valeurs'], 'agesEnfants': []}
-        # Passer par compute() (revenu_disponible calculé d'abord) : appeler directement retraite_nette
-        # donne un résultat sans CSG dans OpenFisca-France 176 (ordre d'évaluation), on reste sur un seul chemin.
-        net = compute(tbs, build_case(c, mid, 0))[var]
-        lo, hi = (mid, hi) if net < target else (lo, mid)
+        st = Situation(fake, mid, np.zeros(len(fake)), np.zeros(len(fake)))
+        sim = st.build(tbs)
+        # Calculer revenu_disponible d'abord : appeler directement retraite_nette renvoie un montant sans CSG
+        # dans OpenFisca-France 176 (ordre d'évaluation). Voir test_regressions.py.
+        sim.calculate('revenu_disponible', ANNEE)
+        net = np.zeros(len(fake))
+        for s in set(s for s, _ in targets):
+            mask = np.array([t[0] == s for t in targets])
+            net[mask] = np.bincount(st.owner, weights=sim.calculate_add(NET_VAR[s], ANNEE), minlength=len(fake))[mask]
+        below = net < target
+        lo = np.where(below, mid, lo)
+        hi = np.where(below, hi, mid)
     return (lo + hi) / 2
 
 
@@ -142,20 +208,38 @@ def resolve_brut(tbs, ct, net_mensuel, conjoint=False):
 START = f'{ANNEE}-01-01'
 
 
-def reforme_smic_pct(tbs, p):
+def update_param(params, path, fn):
+    node = params
+    for k in path.split('.'):
+        node = getattr(node, k)
+    node.update(start=START, value=fn(node(START)))
+
+
+def param_reform(tbs, path, fn):
     class R(Reform):
         def apply(self):
             def modify(params):
-                node = params.marche_travail.salaire_minimum.smic.smic_b_horaire
-                node.update(start=START, value=node(START) * (1 + p['variationPct'] / 100))
+                update_param(params, path, fn)
                 return params
             self.modify_parameters(modifier_function=modify)
-    # Hypothèse de scénario : les cas-types payés au SMIC voient leur salaire suivre la hausse.
-    return R(tbs), p['variationPct'] / 100
+    return R(tbs)
 
 
-def reforme_taux_csg(tbs, p):
-    """Le taux global de CSG sur les revenus d'activité est porté à tauxPct ; l'écart porte sur la part déductible."""
+SMIC = 'marche_travail.salaire_minimum.smic.smic_b_horaire'
+
+
+def reforme_smic_pct(tbs, p, ctx):
+    k = p['variationPct'] / 100
+    return param_reform(tbs, SMIC, lambda v: v * (1 + k)), k
+
+
+def reforme_smic_net(tbs, p, ctx):
+    k = p['montantNetMensuel'] / ctx['smic_net_mensuel'] - 1
+    return param_reform(tbs, SMIC, lambda v: v * (1 + k)), k
+
+
+def reforme_taux_csg(tbs, p, ctx):
+    """Taux global de CSG sur les revenus d'activité porté à tauxPct ; l'écart porte sur la part déductible."""
     class R(Reform):
         def apply(self):
             def modify(params):
@@ -172,30 +256,14 @@ PARAM_PRESTATION = {
     'rsa': 'prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_m.montant_de_base_du_rsa',
     'aah': 'prestations_sociales.prestations_etat_de_sante.invalidite.aah.montant',
 }
-# Prestations sans paramètre de montant unique : on met à l'échelle la variable calculée.
-VARIABLE_PRESTATION = {
-    'apl': 'aide_logement_montant',
-    'prime_activite': 'ppa',
-    'allocations_familiales': 'af',
-}
+VARIABLE_PRESTATION = {'apl': 'aide_logement_montant', 'prime_activite': 'ppa', 'allocations_familiales': 'af'}
 
 
-def reforme_montant_prestation(tbs, p):
+def reforme_montant_prestation(tbs, p, ctx):
     factor = 1 + p['variationPct'] / 100
     prestation = p['prestation']
     if prestation in PARAM_PRESTATION:
-        path = PARAM_PRESTATION[prestation].split('.')
-
-        class R(Reform):
-            def apply(self):
-                def modify(params):
-                    node = params
-                    for k in path:
-                        node = getattr(node, k)
-                    node.update(start=START, value=node(START) * factor)
-                    return params
-                self.modify_parameters(modifier_function=modify)
-        return R(tbs), 0.0
+        return param_reform(tbs, PARAM_PRESTATION[prestation], lambda v: v * factor), 0.0
     if prestation in VARIABLE_PRESTATION:
         name = VARIABLE_PRESTATION[prestation]
         original = tbs.variables[name]
@@ -205,16 +273,15 @@ def reforme_montant_prestation(tbs, p):
                 class scaled(type(original)):
                     def formula(entity, period, parameters):
                         base = original.get_formula(period)
-                        n_args = base.__code__.co_argcount
-                        value = base(entity, period, parameters) if n_args == 3 else base(entity, period)
+                        value = base(entity, period, parameters) if base.__code__.co_argcount == 3 else base(entity, period)
                         return value * factor
                 scaled.__name__ = name
                 self.update_variable(scaled)
         return R(tbs), 0.0
-    raise NotImplementedError(f'prestation "{prestation}" non modélisée : la mesure doit rester qualitative')
+    raise NotImplementedError(f'prestation "{prestation}" : chiffrage par case non prévu (bourse : par échelon)')
 
 
-def reforme_bareme_ir(tbs, p):
+def reforme_bareme_ir(tbs, p, ctx):
     class R(Reform):
         def apply(self):
             def modify(params):
@@ -231,92 +298,149 @@ def reforme_bareme_ir(tbs, p):
 
 REFORMES = {
     'smic_pct': reforme_smic_pct,
+    'smic_net': reforme_smic_net,
     'taux_csg': reforme_taux_csg,
     'montant_prestation': reforme_montant_prestation,
     'bareme_ir': reforme_bareme_ir,
-    # 'age_retraite' : OpenFisca ne simule pas les carrières -> non chiffrable.
 }
+
+BOURSE = 'prestations_sociales.education.bourses.enseignement_superieur.criteres_sociaux.montants'
+ECHELONS = ['0bis', '1', '2', '3', '4', '5', '6', '7']
+
+
+def bourses_annuelles(tbs, factor=1.0):
+    """Montant annuel par échelon (barème mensuel OpenFisca × 10 mensualités)."""
+    scale = tbs.parameters(f'{ANNEE}-09-01').prestations_sociales.education.bourses.enseignement_superieur.criteres_sociaux.montants
+    return {e: round(float(scale.calc(np.array([i]))[0]) * 10 * factor) for i, e in enumerate(ECHELONS)}
 
 
 # ---------------------------------------------------------------------------
 
+# Statuts dont OpenFisca-France ne calcule pas de revenu disponible fiable : pas de chiffre (null), jamais d'approximation.
+# Micro-entrepreneur·e : le chiffre d'affaires mensuel déclaré n'alimente pas revenu_disponible dans la version 176.
+STATUTS_NON_SIMULES = {'independant'}
+MASK = None
+
+
+def rounded(a):
+    values = np.round(np.asarray(a, dtype=float) / ARRONDI) * ARRONDI
+    return [None if (MASK is not None and MASK[i]) else int(x) for i, x in enumerate(values)]
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--data', required=True, help='dossier de données (contient candidates.json et measures/)')
+    ap.add_argument('--data', required=True)
+    ap.add_argument('--limit', type=int, default=0, help='nombre de cases (tests rapides uniquement)')
     args = ap.parse_args()
     data_dir = Path(args.data).resolve()
     out_dir = data_dir / 'castypes'
     out_dir.mkdir(exist_ok=True)
+    grid = json.loads((HERE / 'cells.generated.json').read_text())
+    cells = grid['cells'][: args.limit or None]
+    t0 = time.time()
+    global MASK
+    MASK = np.array([c['statutPro'] in STATUTS_NON_SIMULES for c in cells])
 
     tbs = FranceTaxBenefitSystem()
-    grid = build_grid()
-    smic_brut_annuel = float(tbs.parameters(f'{ANNEE}-12-01').marche_travail.salaire_minimum.smic.smic_b_horaire) * 151.67 * 12
+    smic_brut = float(tbs.parameters(f'{ANNEE}-12-01').marche_travail.salaire_minimum.smic.smic_b_horaire) * 151.67 * 12
 
-    # 1. Résolution des revenus bruts de chaque cas-type
-    bruts = {}
-    for ct in grid:
-        net = ct['valeurs']['revenuNetMensuel']
-        if net == 'SMIC':
-            brut = smic_brut_annuel if ct['profil']['statutPro'] in ('salarie_prive', 'etudiant') else None
-            if brut is None:
-                raise ValueError(f"{ct['id']} : tranche SMIC réservée aux salariés")
-            ct['valeurs']['auSmic'] = True
-        else:
-            brut = resolve_brut(tbs, ct, net)
-            ct['valeurs']['auSmic'] = False
-        conj = ct['valeurs']['revenuConjointNetMensuel']
-        brut_conj = (smic_brut_annuel if conj == 'SMIC' else resolve_brut(tbs, ct, conj, conjoint=True)) if conj is not None else 0
-        bruts[ct['id']] = (brut, brut_conj)
+    # 1. Revenus bruts représentatifs (bisection vectorisée sur les couples statut × net distincts)
+    pairs = sorted({(c['statutPro'], c['revenuTranche']) for c in cells})
+    targets = []
+    for s, t in pairs:
+        v = REVENU_NET[t]
+        if s in ('sans_activite',) or s in STATUTS_NON_SIMULES or v == 0:
+            continue
+        if v == 'SMIC' and s == 'salarie_prive':
+            continue
+        # Fonctionnaire au niveau du SMIC : même net que le SMIC ; autres statuts : 1 250 € en tranche r2.
+        targets.append((s, 'SMIC' if v == 'SMIC' and s == 'fonctionnaire' else (REVENU_NET_R2_AUTRES if v == 'SMIC' else v)))
+    # SMIC net : calculé une fois sur un salarié au SMIC brut
+    st = Situation([{'statutPro': 'salarie_prive', 'ageCalcul': '25_plus', 'revenuTranche': 'r2', 'couple': False,
+                     'revenuConjointTranche': None, 'enfants': '0', 'logement': 'proprietaire', 'zoneApl': None,
+                     'handicapAAH': False}], np.array([smic_brut]), np.zeros(1), np.zeros(1))
+    sim = st.build(tbs)
+    sim.calculate('revenu_disponible', ANNEE)
+    smic_net = float(sim.calculate_add('salaire_net', ANNEE)[0]) / 12
+    resolved = resolve_bruts(tbs, [(s, smic_net if v == 'SMIC' else v) for s, v in targets])
+    brut_by_pair = {(s, t): 0.0 for s, t in pairs}
+    brut_by_pair[('salarie_prive', 'r2')] = smic_brut
+    k = 0
+    for s, t in pairs:
+        v = REVENU_NET[t]
+        if s == 'sans_activite' or s in STATUTS_NON_SIMULES or v == 0 or (v == 'SMIC' and s == 'salarie_prive'):
+            continue
+        brut_by_pair[(s, t)] = float(resolved[k])
+        k += 1
+    conj_bruts = dict(zip(CONJOINT_NET, resolve_bruts(tbs, [('salarie_prive', v) for v in CONJOINT_NET.values()])))
+    conj_bruts = {c: (0.0 if CONJOINT_NET[c] == 0 else b) for c, b in conj_bruts.items()}
+    print(f'bruts résolus en {time.time() - t0:.0f} s ; SMIC net = {smic_net:.0f} €/mois', flush=True)
 
-    # 2. Baseline
-    baseline = {}
-    for ct in grid:
-        b, bc = bruts[ct['id']]
-        r = compute(tbs, build_case(ct, b, bc))
-        ct['valeurs']['revenuNetMensuelCalcule'] = round(
-            (r['salaire_net'] + r['retraite_nette'] + r['chomage_net']) / 12 if not ct['profil']['couple'] else 0)
-        baseline[ct['id']] = {k: round(v) for k, v in r.items()}
+    revenus = np.array([brut_by_pair[(c['statutPro'], c['revenuTranche'])] for c in cells])
+    conjoints = np.array([conj_bruts[c['revenuConjointTranche']] if c['couple'] else 0.0 for c in cells])
 
-    meta = {'openfiscaFrance': OPENFISCA_VERSION, 'legislation': ANNEE, 'genereLe': date.today().isoformat()}
-    hypotheses = [h.format(annee=ANNEE, version=OPENFISCA_VERSION) for h in HYPOTHESES_COMMUNES]
+    # 2. Loyers : cas-type DREES (loyer ≥ plafond et < seuil de dégressivité) → 1,3 × plafond calculé par OpenFisca
+    loyers = np.zeros(len(cells))
+    locataire = np.array([c['logement'] in ('locataire_prive', 'locataire_social') for c in cells])
+    situation = Situation(cells, revenus, conjoints, np.where(locataire, 1.0, 0.0))
+    sim = situation.build(tbs)
+    plafond = sim.calculate('aide_logement_loyer_plafond', f'{ANNEE}-01')
+    loyers = np.where(locataire, np.round(plafond * 1.3), 0.0)
+    situation = Situation(cells, revenus, conjoints, loyers)
+
+    # 3. Situation actuelle
+    base = aggregate(tbs, situation.build(tbs), len(cells), situation.owner)
+    print(f'baseline : {len(cells)} cases en {time.time() - t0:.0f} s', flush=True)
+    bourses = bourses_annuelles(tbs)
+
+    meta = {'openfiscaFrance': OPENFISCA_VERSION, 'legislation': ANNEE, 'genereLe': date.today().isoformat(),
+            'gridHash': grid['gridHash'], 'nCells': len(cells)}
     write(out_dir / 'grid.json', {
         **meta,
-        'dimensionsExactes': DIMENSIONS_EXACTES,
-        'dimensionOrdonnee': DIMENSION_ORDONNEE,
-        'hypothesesCommunes': hypotheses,
-        'castypes': grid,
+        'hypothesesCommunes': [h.format(annee=ANNEE, version=OPENFISCA_VERSION) for h in HYPOTHESES_COMMUNES],
+        'smicNetMensuel': round(smic_net),
+        'statutsNonSimules': sorted(STATUTS_NON_SIMULES),
+        'revenusNetsMensuels': {t: (round(smic_net) if v == 'SMIC' else v) for t, v in REVENU_NET.items()},
+        'conjointsNetsMensuels': CONJOINT_NET,
+        'sources': SOURCES,
     })
-    write(out_dir / 'baseline.json', {**meta, 'resultats': baseline})
+    write(out_dir / 'baseline.json', {**meta, 'revenuDisponible': rounded(base['revenu_disponible'])})
+    write(out_dir / 'bourse.json', {**meta, 'montantsAnnuels': bourses})
 
-    # 3. Réformes par candidat
+    # 4. Réformes par candidat
+    ctx = {'smic_net_mensuel': smic_net}
     for f in sorted((data_dir / 'measures').glob('*.json')):
         mf = json.loads(f.read_text())
-        deltas = {}
+        mesures = {}
         for m in mf['mesures']:
             if not any((e.get('ampleur') or {}).get('kind') == 'castype' for e in m['effets']):
                 continue
-            kind = m['parametres']['kind']
-            if kind not in REFORMES:
-                raise NotImplementedError(f"{m['id']} : paramètres \"{kind}\" non modélisables, l'effet doit rester qualitatif")
-            reform_tbs, smic_bump = REFORMES[kind](tbs, m['parametres'])
-            par_castype = {}
-            for ct in grid:
-                b, bc = bruts[ct['id']]
-                bump = smic_bump if ct['valeurs']['auSmic'] else 0.0
-                r = compute(reform_tbs, build_case(ct, b, bc, smic_bump=bump))
-                base = baseline[ct['id']]
-                par_castype[ct['id']] = {
-                    'total': round(r['revenu_disponible'] - base['revenu_disponible']),
-                    'detail': {k: round(r[k] - base[k]) for k in DETAIL if round(r[k] - base[k]) != 0},
-                }
-            deltas[m['id']] = {'parametres': m['parametres'], 'parCastype': par_castype}
-            print(f"  {m['id']}: " + ', '.join(f"{k}={v['total']:+}" for k, v in par_castype.items()))
-        write(out_dir / f"{mf['candidatId']}.json", {**meta, 'candidatId': mf['candidatId'], 'libellesDetail': DETAIL, 'mesures': deltas})
-    print(f'OK -> {out_dir}')
+            p = m['parametres']
+            if p['kind'] == 'montant_prestation' and p['prestation'] == 'bourse':
+                apres = bourses_annuelles(tbs, 1 + p['variationPct'] / 100)
+                mesures[m['id']] = {'parametres': p, 'parEchelon': {e: apres[e] - bourses[e] for e in ECHELONS}}
+                continue
+            if p['kind'] not in REFORMES:
+                raise NotImplementedError(f"{m['id']} : paramètres \"{p['kind']}\" non modélisables par OpenFisca")
+            reform_tbs, bump = REFORMES[p['kind']](tbs, p, ctx)
+            r = aggregate(reform_tbs, situation.build(reform_tbs, smic_bump=bump), len(cells), situation.owner)
+            detail = {}
+            for var in DETAIL:
+                d = rounded(r[var] - base[var])
+                if any(x for x in d if x):
+                    detail[var] = d
+            mesures[m['id']] = {'parametres': p, 'total': rounded(r['revenu_disponible'] - base['revenu_disponible']),
+                                'detail': detail}
+            print(f"  {m['id']} ({time.time() - t0:.0f} s)", flush=True)
+        write(out_dir / f"{mf['candidatId']}.json", {
+            **meta, 'candidatId': mf['candidatId'],
+            'libellesDetail': {k: v[1] for k, v in DETAIL.items()}, 'mesures': mesures,
+        })
+    print(f'OK -> {out_dir} ({time.time() - t0:.0f} s)')
 
 
 def write(path, obj):
-    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + '\n')
+    path.write_text(json.dumps(obj, ensure_ascii=False, separators=(',', ':')) + '\n')
 
 
 if __name__ == '__main__':

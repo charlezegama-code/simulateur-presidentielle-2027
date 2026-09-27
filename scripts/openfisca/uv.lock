@@ -469,8 +469,16 @@ dependencies = [
     { name = "openfisca-france" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+]
+
 [package.metadata]
 requires-dist = [{ name = "openfisca-france", specifier = "==176.1.0" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=8" }]
 
 [[package]]
 name = "six"
