@@ -1,0 +1,59 @@
+{
+  "openfiscaFrance": "176.1.0",
+  "legislation": "2026",
+  "genereLe": "2026-09-27",
+  "candidatId": "candidat-b",
+  "libellesDetail": {
+    "salaire_net": "Salaire net",
+    "retraite_nette": "Pension de retraite nette",
+    "chomage_net": "Allocation chômage nette",
+    "ppa": "Prime d’activité",
+    "rsa": "RSA",
+    "aide_logement": "Aide au logement",
+    "af": "Allocations familiales",
+    "aah": "AAH",
+    "impot_revenu_restant_a_payer": "Impôt sur le revenu"
+  },
+  "mesures": {
+    "b-csg-baisse": {
+      "parametres": {
+        "kind": "taux_csg",
+        "tauxPct": 8.2
+      },
+      "parCastype": {
+        "etudiant-boursier": {
+          "total": 104,
+          "detail": {
+            "salaire_net": 104
+          }
+        },
+        "salarie-smic": {
+          "total": 178,
+          "detail": {
+            "salaire_net": 221,
+            "ppa": -42
+          }
+        },
+        "cadre": {
+          "total": 414,
+          "detail": {
+            "salaire_net": 566,
+            "impot_revenu_restant_a_payer": -152
+          }
+        },
+        "retraite": {
+          "total": 0,
+          "detail": {}
+        },
+        "parent-isole-locataire": {
+          "total": 157,
+          "detail": {
+            "salaire_net": 221,
+            "ppa": -42,
+            "aide_logement": -21
+          }
+        }
+      }
+    }
+  }
+}

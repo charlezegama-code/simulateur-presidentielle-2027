@@ -37,6 +37,21 @@ tests/
 public/_headers          CSP : aucune connexion hors du site
 ```
 
+## Chiffrage (OpenFisca-France)
+
+Les montants sont **précalculés hors ligne** pour une grille de cas-types (aucun backend, aucun appel réseau depuis l'app) :
+
+```bash
+cd scripts/openfisca
+uv sync                                   # installe openfisca-france (version épinglée)
+uv run python run.py --data ../../data    # écrit data/castypes/*.json
+```
+
+Relance le script après chaque modification des `parametres` d'une mesure chiffrable : sinon `validate-data` échoue
+(« précalcul obsolète »). Réformes modélisées : `smic_pct`, `taux_csg`, `montant_prestation` (RSA, AAH, APL,
+prime d'activité, allocations familiales), `bareme_ir`. Le reste reste qualitatif. Résultats de référence :
+[`docs/cas-types-reference.md`](docs/cas-types-reference.md).
+
 ## Contribuer aux données
 
 Chaque modification de `/data` doit respecter ces règles, vérifiées par `npm run validate-data` :

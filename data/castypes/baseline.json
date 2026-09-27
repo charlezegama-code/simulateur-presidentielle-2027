@@ -1,0 +1,67 @@
+{
+  "openfiscaFrance": "176.1.0",
+  "legislation": "2026",
+  "genereLe": "2026-09-27",
+  "resultats": {
+    "etudiant-boursier": {
+      "revenu_disponible": 10799,
+      "salaire_net": 8400,
+      "retraite_nette": 0,
+      "chomage_net": 0,
+      "ppa": 0,
+      "rsa": 0,
+      "aide_logement": 2399,
+      "af": 0,
+      "aah": 0,
+      "impot_revenu_restant_a_payer": 0
+    },
+    "salarie-smic": {
+      "revenu_disponible": 20476,
+      "salaire_net": 17735,
+      "retraite_nette": 0,
+      "chomage_net": 0,
+      "ppa": 2754,
+      "rsa": 0,
+      "aide_logement": 0,
+      "af": 0,
+      "aah": 0,
+      "impot_revenu_restant_a_payer": 0
+    },
+    "cadre": {
+      "revenu_disponible": 39741,
+      "salaire_net": 45600,
+      "retraite_nette": 0,
+      "chomage_net": 0,
+      "ppa": 0,
+      "rsa": 0,
+      "aide_logement": 0,
+      "af": 0,
+      "aah": 0,
+      "impot_revenu_restant_a_payer": -5859
+    },
+    "retraite": {
+      "revenu_disponible": 20851,
+      "salaire_net": 0,
+      "retraite_nette": 21000,
+      "chomage_net": 0,
+      "ppa": 0,
+      "rsa": 0,
+      "aide_logement": 0,
+      "af": 0,
+      "aah": 0,
+      "impot_revenu_restant_a_payer": -149
+    },
+    "parent-isole-locataire": {
+      "revenu_disponible": 31309,
+      "salaire_net": 17735,
+      "retraite_nette": 0,
+      "chomage_net": 0,
+      "ppa": 2567,
+      "rsa": 0,
+      "aide_logement": 2916,
+      "af": 1832,
+      "aah": 0,
+      "impot_revenu_restant_a_payer": 0
+    }
+  }
+}

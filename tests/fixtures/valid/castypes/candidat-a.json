@@ -1,0 +1,87 @@
+{
+  "openfiscaFrance": "176.1.0",
+  "legislation": "2026",
+  "genereLe": "2026-09-27",
+  "candidatId": "candidat-a",
+  "libellesDetail": {
+    "salaire_net": "Salaire net",
+    "retraite_nette": "Pension de retraite nette",
+    "chomage_net": "Allocation chômage nette",
+    "ppa": "Prime d’activité",
+    "rsa": "RSA",
+    "aide_logement": "Aide au logement",
+    "af": "Allocations familiales",
+    "aah": "AAH",
+    "impot_revenu_restant_a_payer": "Impôt sur le revenu"
+  },
+  "mesures": {
+    "a-smic-5": {
+      "parametres": {
+        "kind": "smic_pct",
+        "variationPct": 5
+      },
+      "parCastype": {
+        "etudiant-boursier": {
+          "total": 0,
+          "detail": {}
+        },
+        "salarie-smic": {
+          "total": 635,
+          "detail": {
+            "salaire_net": 887,
+            "ppa": -252
+          }
+        },
+        "cadre": {
+          "total": 0,
+          "detail": {}
+        },
+        "retraite": {
+          "total": 0,
+          "detail": {}
+        },
+        "parent-isole-locataire": {
+          "total": 537,
+          "detail": {
+            "salaire_net": 887,
+            "ppa": -253,
+            "aide_logement": -98
+          }
+        }
+      }
+    },
+    "a-apl-10": {
+      "parametres": {
+        "kind": "montant_prestation",
+        "prestation": "apl",
+        "variationPct": 10
+      },
+      "parCastype": {
+        "etudiant-boursier": {
+          "total": 239,
+          "detail": {
+            "aide_logement": 239
+          }
+        },
+        "salarie-smic": {
+          "total": 0,
+          "detail": {}
+        },
+        "cadre": {
+          "total": 0,
+          "detail": {}
+        },
+        "retraite": {
+          "total": 0,
+          "detail": {}
+        },
+        "parent-isole-locataire": {
+          "total": 291,
+          "detail": {
+            "aide_logement": 292
+          }
+        }
+      }
+    }
+  }
+}

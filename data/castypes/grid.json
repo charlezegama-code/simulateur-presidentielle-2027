@@ -1,0 +1,154 @@
+{
+  "openfiscaFrance": "176.1.0",
+  "legislation": "2026",
+  "genereLe": "2026-09-27",
+  "dimensionsExactes": [
+    "statutPro",
+    "couple",
+    "revenuConjointTranche",
+    "enfants",
+    "logement",
+    "zone",
+    "handicapAAH"
+  ],
+  "dimensionOrdonnee": "revenuTranche",
+  "hypothesesCommunes": [
+    "Législation 2026 modélisée par OpenFisca-France 176.1.0, à législation constante hors mesure",
+    "Situation stable depuis 3 ans (mêmes revenus les années précédentes)",
+    "Revenu net mensuel représentatif de la tranche (milieu de tranche ; SMIC net temps plein pour 1 000–1 500 €)",
+    "Loyer hors charges supposé selon le logement et le type de commune",
+    "Zone APL approximée à partir du type de commune (agglomération parisienne non couverte)",
+    "Montants annuels pour l’ensemble du ménage",
+    "Aucun effet sur l’emploi, les prix ou les comportements"
+  ],
+  "castypes": [
+    {
+      "id": "etudiant-boursier",
+      "libelle": "Étudiant·e boursier·e, job de 700 €/mois, seul·e, locataire en grande ville",
+      "profil": {
+        "statutPro": "etudiant",
+        "revenuTranche": "r1",
+        "couple": false,
+        "revenuConjointTranche": null,
+        "enfants": "0",
+        "logement": "locataire_prive",
+        "zone": "grande_ville",
+        "handicapAAH": false,
+        "boursier": true
+      },
+      "valeurs": {
+        "age": 20,
+        "revenuNetMensuel": 700,
+        "revenuConjointNetMensuel": null,
+        "loyerMensuel": 700,
+        "zoneApl": "zone_2",
+        "agesEnfants": [],
+        "auSmic": false,
+        "revenuNetMensuelCalcule": 700
+      }
+    },
+    {
+      "id": "salarie-smic",
+      "libelle": "Salarié·e au SMIC temps plein, seul·e, locataire en ville moyenne",
+      "profil": {
+        "statutPro": "salarie_prive",
+        "revenuTranche": "r2",
+        "couple": false,
+        "revenuConjointTranche": null,
+        "enfants": "0",
+        "logement": "locataire_prive",
+        "zone": "ville_moyenne",
+        "handicapAAH": false,
+        "boursier": false
+      },
+      "valeurs": {
+        "age": 30,
+        "revenuNetMensuel": "SMIC",
+        "revenuConjointNetMensuel": null,
+        "loyerMensuel": 550,
+        "zoneApl": "zone_3",
+        "agesEnfants": [],
+        "auSmic": true,
+        "revenuNetMensuelCalcule": 1478
+      }
+    },
+    {
+      "id": "cadre",
+      "libelle": "Cadre à 3 800 €/mois, seul·e, propriétaire en grande ville",
+      "profil": {
+        "statutPro": "salarie_prive",
+        "revenuTranche": "r5",
+        "couple": false,
+        "revenuConjointTranche": null,
+        "enfants": "0",
+        "logement": "proprietaire",
+        "zone": "grande_ville",
+        "handicapAAH": false,
+        "boursier": false
+      },
+      "valeurs": {
+        "age": 40,
+        "revenuNetMensuel": 3800,
+        "revenuConjointNetMensuel": null,
+        "loyerMensuel": 0,
+        "zoneApl": "zone_2",
+        "agesEnfants": [],
+        "auSmic": false,
+        "revenuNetMensuelCalcule": 3800
+      }
+    },
+    {
+      "id": "retraite",
+      "libelle": "Retraité·e, pension de 1 750 €/mois, seul·e, propriétaire en zone rurale",
+      "profil": {
+        "statutPro": "retraite",
+        "revenuTranche": "r3",
+        "couple": false,
+        "revenuConjointTranche": null,
+        "enfants": "0",
+        "logement": "proprietaire",
+        "zone": "rural",
+        "handicapAAH": false,
+        "boursier": false
+      },
+      "valeurs": {
+        "age": 70,
+        "revenuNetMensuel": 1750,
+        "revenuConjointNetMensuel": null,
+        "loyerMensuel": 0,
+        "zoneApl": "zone_3",
+        "agesEnfants": [],
+        "auSmic": false,
+        "revenuNetMensuelCalcule": 1750
+      }
+    },
+    {
+      "id": "parent-isole-locataire",
+      "libelle": "Parent isolé au SMIC, 2 enfants, locataire HLM en grande ville",
+      "profil": {
+        "statutPro": "salarie_prive",
+        "revenuTranche": "r2",
+        "couple": false,
+        "revenuConjointTranche": null,
+        "enfants": "2",
+        "logement": "locataire_social",
+        "zone": "grande_ville",
+        "handicapAAH": false,
+        "boursier": false
+      },
+      "valeurs": {
+        "age": 35,
+        "revenuNetMensuel": "SMIC",
+        "revenuConjointNetMensuel": null,
+        "loyerMensuel": 520,
+        "zoneApl": "zone_2",
+        "agesEnfants": [
+          6,
+          10
+        ],
+        "auSmic": true,
+        "revenuNetMensuelCalcule": 1478
+      }
+    }
+  ]
+}
