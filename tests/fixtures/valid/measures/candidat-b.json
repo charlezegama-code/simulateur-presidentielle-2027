@@ -1,0 +1,182 @@
+{
+  "candidatId": "candidat-b",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    { "id": "b-interview", "url": "https://example.org/candidat-b/interview", "titre": "Entretien (fictif)", "editeur": "Média exemple", "datePublication": "2026-08-15", "dateConsultation": "2026-09-27", "type": "declaration", "archiveUrl": null },
+    { "id": "b-tribune", "url": "https://example.org/candidat-b/tribune", "titre": "Tribune (fictive)", "editeur": "Journal exemple", "datePublication": "2026-09-05", "dateConsultation": "2026-09-27", "type": "declaration", "archiveUrl": null }
+  ],
+  "mesures": [
+    {
+      "id": "b-csg-baisse",
+      "candidatId": "candidat-b",
+      "theme": "fiscalite",
+      "intitule": "Baisse de la CSG sur les revenus d'activité",
+      "description": "Le candidat B (fictif) propose de baisser d'un point la CSG sur les salaires.",
+      "type": "chiffrable",
+      "parametres": { "kind": "taux_csg", "tauxPct": 8.2 },
+      "financement": { "texte": "Le candidat annonce un financement par une hausse de la TVA de 0,5 point.", "sourceIds": ["b-tribune"] },
+      "sourceIds": ["b-tribune"],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "b-csg-baisse-gain",
+          "cible": { "all": [{ "champ": "statutPro", "op": "in", "valeur": ["salarie_prive", "fonctionnaire", "alternant"] }] },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse du salaire net liée à la baisse de la CSG",
+          "ampleur": { "kind": "castype" },
+          "hypotheses": ["Salaire brut inchangé", "Appliqué dès 2028"],
+          "perimetreSimulation": "Ne modélise pas la hausse de TVA annoncée en contrepartie (voir l'effet séparé).",
+          "confiance": "moyenne",
+          "horizon": "2028",
+          "sourceIds": ["b-tribune"]
+        },
+        {
+          "id": "b-csg-baisse-tva",
+          "cible": { "tous": true },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Hausse des prix liée à la hausse de TVA annoncée pour financer la mesure",
+          "ampleur": null,
+          "hypotheses": ["Hausse de TVA répercutée sur les prix"],
+          "perimetreSimulation": "L'effet sur ton budget dépend de ta consommation, non demandée.",
+          "confiance": "faible",
+          "horizon": "2028",
+          "sourceIds": ["b-tribune"]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "b-rsa-conditions",
+      "candidatId": "candidat-b",
+      "theme": "aides_sociales",
+      "intitule": "RSA conditionné à 15 heures d'activité par semaine",
+      "description": "Le candidat B (fictif) prévoit de conditionner le versement du RSA à 15 heures d'activité hebdomadaires.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": { "nonPrecise": true },
+      "sourceIds": ["b-interview"],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "b-rsa-conditions-effet",
+          "cible": { "all": [{ "champ": "statutPro", "op": "in", "valeur": ["demandeur_emploi", "sans_activite"] }, { "champ": "revenuTranche", "op": "lte", "valeur": "r1" }] },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Conditions d'accès au RSA plus strictes",
+          "ampleur": null,
+          "hypotheses": ["Allocataire ou futur allocataire du RSA"],
+          "perimetreSimulation": "Les modalités (activités acceptées, sanctions) ne sont pas précisées.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": ["b-interview"]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "b-age-retraite",
+      "candidatId": "candidat-b",
+      "theme": "retraites",
+      "intitule": "Âge légal de départ porté à 65 ans",
+      "description": "Le candidat B (fictif) propose de relever progressivement l'âge légal de départ à 65 ans.",
+      "type": "chiffrable",
+      "parametres": { "kind": "age_retraite", "age": 65 },
+      "financement": { "texte": "Le candidat présente la mesure comme une source d'économies pour le système de retraites.", "sourceIds": ["b-interview"] },
+      "sourceIds": ["b-interview"],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "b-age-retraite-effet",
+          "cible": { "all": [{ "champ": "statutPro", "op": "neq", "valeur": "retraite" }] },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Départ à la retraite plus tardif",
+          "ampleur": null,
+          "hypotheses": ["Personne non encore partie à la retraite"],
+          "perimetreSimulation": "Le calendrier de relèvement par génération n'est pas précisé ; OpenFisca ne simule pas les carrières.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": ["b-interview"]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "b-af-premier-enfant",
+      "candidatId": "candidat-b",
+      "theme": "famille",
+      "intitule": "Allocations familiales dès le premier enfant",
+      "description": "Le candidat B (fictif) propose de verser des allocations familiales dès le premier enfant.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": { "nonPrecise": true },
+      "sourceIds": ["b-tribune"],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "b-af-premier-enfant-effet",
+          "cible": { "all": [{ "champ": "enfants", "op": "eq", "valeur": "1" }] },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Nouvelle allocation pour les familles avec un enfant",
+          "ampleur": null,
+          "hypotheses": ["Montant non précisé par le candidat"],
+          "perimetreSimulation": "Montant inconnu : l'effet ne peut pas être chiffré.",
+          "confiance": "faible",
+          "horizon": "non précisé",
+          "sourceIds": ["b-tribune"]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "b-service-civique",
+      "candidatId": "candidat-b",
+      "theme": "service_national",
+      "intitule": "Service civique obligatoire de 3 mois",
+      "description": "Le candidat B (fictif) évoque un service civique obligatoire pour les 18-25 ans, sans calendrier.",
+      "type": "flou",
+      "parametres": null,
+      "financement": { "nonPrecise": true },
+      "sourceIds": ["b-interview"],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "b-service-civique-effet",
+          "cible": { "all": [{ "champ": "ageTranche", "op": "eq", "valeur": "18-24" }] },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Période de service civique obligatoire à effectuer",
+          "ampleur": null,
+          "hypotheses": ["Tranche d'âge concernée selon la déclaration"],
+          "perimetreSimulation": "Durée, rémunération et calendrier non précisés.",
+          "confiance": "faible",
+          "horizon": "non précisé",
+          "sourceIds": ["b-interview"]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": [
+    { "theme": "salaires", "dateRecherche": "2026-09-27" },
+    { "theme": "etudes", "dateRecherche": "2026-09-27" },
+    { "theme": "logement", "dateRecherche": "2026-09-27" },
+    { "theme": "emploi_chomage", "dateRecherche": "2026-09-27" },
+    { "theme": "sante", "dateRecherche": "2026-09-27" },
+    { "theme": "energie_prix", "dateRecherche": "2026-09-27" },
+    { "theme": "handicap", "dateRecherche": "2026-09-27" }
+  ]
+}

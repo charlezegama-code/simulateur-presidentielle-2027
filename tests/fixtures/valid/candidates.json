@@ -1,0 +1,58 @@
+{
+  "dateMaj": "2026-09-27",
+  "candidats": [
+    {
+      "id": "candidat-a",
+      "prenom": "Candidat",
+      "nom": "A",
+      "parti": "Parti fictif A",
+      "fictif": true,
+      "statut": "declare",
+      "statutDate": "2026-09-01",
+      "statutSourceIds": ["a-annonce"],
+      "historiqueStatut": [
+        { "statut": "pressenti", "date": "2026-06-01", "sourceIds": ["a-annonce"] },
+        { "statut": "declare", "date": "2026-09-01", "sourceIds": ["a-annonce"] }
+      ],
+      "programme": { "url": "https://example.org/candidat-a/programme", "datePublication": "2026-09-10" },
+      "sources": [
+        {
+          "id": "a-annonce",
+          "url": "https://example.org/candidat-a/annonce",
+          "titre": "Annonce de candidature (fictive)",
+          "editeur": "Exemple",
+          "datePublication": "2026-09-01",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "candidat-b",
+      "prenom": "Candidat",
+      "nom": "B",
+      "parti": "Parti fictif B",
+      "fictif": true,
+      "statut": "pressenti",
+      "statutDate": "2026-08-15",
+      "statutSourceIds": ["b-interview"],
+      "historiqueStatut": [{ "statut": "pressenti", "date": "2026-08-15", "sourceIds": ["b-interview"] }],
+      "programme": null,
+      "sources": [
+        {
+          "id": "b-interview",
+          "url": "https://example.org/candidat-b/interview",
+          "titre": "Entretien (fictif)",
+          "editeur": "Exemple",
+          "datePublication": "2026-08-15",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ]
+}
