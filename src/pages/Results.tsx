@@ -14,6 +14,9 @@ import { useProfile } from '../state/profile'
 
 const byCandidateId = (r: CandidateResult) => r.candidat.id
 
+/** Minuscule initiale, sauf pour les sigles (AAH, HLM…). */
+const lowerFirst = (t: string) => (t.length > 1 && t[1] === t[1].toLowerCase() ? t[0].toLowerCase() + t.slice(1) : t)
+
 export function ProfileSummary({ profile }: { profile: Profile }) {
   const parts = QUESTIONS.flatMap((q) => {
     const v = profile[q.id]
@@ -22,7 +25,7 @@ export function ProfileSummary({ profile }: { profile: Profile }) {
     const o = q.options(profile).find((x) => x.value === v)
     return o ? [o.label] : []
   })
-  return <p className="text-sm text-slate-600 dark:text-slate-400">Ton profil : {parts.join(' · ').toLowerCase()}</p>
+  return <p className="text-sm text-slate-600 dark:text-slate-400">Ton profil : {parts.map(lowerFirst).join(' · ')}</p>
 }
 
 export function Results() {
@@ -31,6 +34,10 @@ export function Results() {
   const results = useMemo(() => (profile && dataset ? simulate(profile, dataset) : []), [profile, dataset])
   const ordered = useShuffled(results, byCandidateId)
   const ecart = useMemo(() => ecartChiffrage(measures), [])
+  const couverture = useMemo(() => {
+    const n = Object.values(measures).map((mf) => mf.mesures.filter((m) => m.statut !== 'abandonnee').length)
+    return { min: Math.min(...n), max: Math.max(...n) }
+  }, [])
   const nonAnalyses = candidates.candidats.filter((c) => !c.analyse).length
 
   if (!profile) return <Redirect to="/questionnaire" />
@@ -51,12 +58,12 @@ export function Results() {
         Montants par an pour ton foyer. Pas de total : les mesures ne s’additionnent pas simplement. Sous chaque ligne, « Hypothèses, limites
         et sources » explique le calcul.
       </p>
-      {ecart > 0.25 && (
-        <Notice tone="warn">
-          Les programmes ne sont pas tous aussi précis : la part de mesures chiffrables varie de {Math.round(ecart * 100)} points d’un·e candidat·e à
-          l’autre. Un programme avec moins de chiffres n’a pas moins d’effets : ils sont seulement moins précisés à ce jour.
-        </Notice>
-      )}
+      <Notice tone="warn">
+        Les programmes ne sont pas tous aussi détaillés à ce jour : entre {couverture.min} et {couverture.max} mesures analysées selon les
+        candidat·es
+        {ecart > 0.25 && <>, et une part de mesures chiffrables qui varie de {Math.round(ecart * 100)} points</>}. Moins de lignes ou moins de
+        chiffres ne veut pas dire moins d’effets : seulement des propositions moins précisées pour l’instant.
+      </Notice>
       <SeedBar />
       {ordered.length > 0 && (
         <nav aria-label="Candidat·es" className="flex flex-wrap gap-2 text-sm">
@@ -71,7 +78,7 @@ export function Results() {
       {!dataset && !error && <p aria-live="polite">Calcul en cours…</p>}
       <div className="space-y-6">
         {ordered.map((r) => (
-          <CandidateCard key={r.candidat.id} r={r} />
+          <CandidateCard key={r.candidat.id} r={r} nbMesures={measures[`${r.candidat.id}.json`].mesures.filter((m) => m.statut !== 'abandonnee').length} />
         ))}
       </div>
       <p className="text-sm text-slate-600 dark:text-slate-400">

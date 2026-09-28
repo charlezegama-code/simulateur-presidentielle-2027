@@ -17,13 +17,14 @@ export const sourceSchema = z
     url: httpsUrl,
     titre: z.string().min(3),
     editeur: z.string().min(2),
-    datePublication: isoDate,
+    /** null : page non datée (la date de consultation fait alors foi). */
+    datePublication: isoDate.nullable(),
     dateConsultation: isoDate,
     type: z.enum(SOURCE_TYPES),
     archiveUrl: httpsUrl.nullable(),
   })
   .strict()
-  .refine((s) => s.dateConsultation >= s.datePublication, {
+  .refine((s) => s.datePublication === null || s.dateConsultation >= s.datePublication, {
     message: 'dateConsultation antérieure à datePublication',
     path: ['dateConsultation'],
   })

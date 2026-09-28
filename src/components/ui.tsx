@@ -55,17 +55,19 @@ export function SourceLinks({ sources }: { sources: Source[] }) {
     <ul className="space-y-1">
       {sources.map((s) => (
         <li key={s.id} className="text-sm">
-          <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-400 underline-offset-2">
+          {/* Version archivée en lien principal quand elle existe : elle reste consultable si la page d'origine change ou disparaît. */}
+          <a href={s.archiveUrl ?? s.url} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-400 underline-offset-2">
             {s.titre}
           </a>{' '}
           <span className="text-slate-600 dark:text-slate-400">
-            — {s.editeur}, {dateFr(s.datePublication)} · {SOURCE_TYPE[s.type]} · consulté le {dateFr(s.dateConsultation)}
+            — {s.editeur}, {s.datePublication ? dateFr(s.datePublication) : 'page non datée'} · {SOURCE_TYPE[s.type]} · consulté le{' '}
+            {dateFr(s.dateConsultation)}
           </span>
           {s.archiveUrl && (
             <>
               {' '}
-              <a href={s.archiveUrl} target="_blank" rel="noopener noreferrer" className="text-slate-600 underline dark:text-slate-400">
-                (archive)
+              <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-slate-600 underline dark:text-slate-400">
+                (lien d’origine)
               </a>
             </>
           )}

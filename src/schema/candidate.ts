@@ -18,7 +18,7 @@ export const candidateSchema = z
     historiqueStatut: z.array(
       z.object({ statut: z.enum(CANDIDATE_STATUTS), date: isoDate, sourceIds: z.array(slug).min(1) }).strict(),
     ),
-    programme: z.object({ url: httpsUrl, datePublication: isoDate }).strict().nullable(),
+    programme: z.object({ url: httpsUrl, datePublication: isoDate.nullable() }).strict().nullable(),
     sources: z.array(sourceSchema).min(1),
     /** Précision factuelle affichée telle quelle (ex. procédure en cours, écart entre sources). */
     note: z.string().min(10).max(400).nullable(),

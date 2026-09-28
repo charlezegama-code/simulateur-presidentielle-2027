@@ -5,9 +5,9 @@
     {
       "id": "attal-travail-salaires",
       "url": "https://attalpresident.fr/programme/travail-salaires",
-      "titre": "Chantier capital « Travail & salaires » (page non datée)",
+      "titre": "Chantier capital « Travail & salaires »",
       "editeur": "Campagne Gabriel Attal",
-      "datePublication": "2026-09-27",
+      "datePublication": null,
       "dateConsultation": "2026-09-27",
       "type": "programme",
       "archiveUrl": null
@@ -160,8 +160,8 @@
       "id": "attal-assurance-chomage",
       "candidatId": "attal",
       "theme": "emploi_chomage",
-      "intitule": "Réforme de l'assurance chômage « qui incite au travail »",
-      "description": "Le candidat porte une réforme de l'assurance chômage présentée comme incitant au travail, dont il attend 100 000 emplois supplémentaires.",
+      "intitule": "Réforme de l'assurance chômage",
+      "description": "Le candidat porte une réforme de l'assurance chômage qui, selon lui, « incite au travail » et créerait 100 000 emplois supplémentaires.",
       "type": "flou",
       "parametres": null,
       "financement": {
@@ -464,8 +464,8 @@
       "id": "attal-etudes",
       "candidatId": "attal",
       "theme": "etudes",
-      "intitule": "Démassification de l'enseignement supérieur",
-      "description": "Le candidat propose de démassifier l'enseignement supérieur, de valoriser les métiers manuels, techniques et industriels et de réduire la durée initiale des études.",
+      "intitule": "Réorganisation de l'enseignement supérieur",
+      "description": "Le candidat propose de « démassifier » l'enseignement supérieur, de valoriser les métiers manuels, techniques et industriels et de réduire la durée initiale des études.",
       "type": "flou",
       "parametres": null,
       "financement": {

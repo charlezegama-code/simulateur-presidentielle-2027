@@ -279,7 +279,7 @@
       "candidatId": "melenchon",
       "theme": "retraites",
       "intitule": "Retraite à 60 ans à taux plein avec 40 annuités",
-      "description": "Le programme prévoit d'abroger le passage à 64 ans et de restaurer le droit à la retraite à 60 ans à taux plein pour 40 annuités. Le 27 août 2026, le candidat a évoqué un retour à 62 ans d'abord, puis à 60 ans.",
+      "description": "Le programme prévoit d'abroger le passage à 64 ans et de restaurer le droit à la retraite à 60 ans à taux plein pour 40 annuités.",
       "type": "qualitatif",
       "parametres": null,
       "financement": {
@@ -291,7 +291,15 @@
       ],
       "statut": "active",
       "historique": [],
-      "contradictions": [],
+      "contradictions": [
+        {
+          "description": "Le programme (édition 2025) prévoit la retraite à 60 ans ; le 27 août 2026, le candidat a évoqué un retour à 62 ans d'abord, puis à 60 ans « le plus vite possible ».",
+          "sourceIds": [
+            "aec-8-8",
+            "capital-retraites-2026-09-24"
+          ]
+        }
+      ],
       "effets": [
         {
           "id": "lfi-retraite-60-effet",
@@ -413,7 +421,7 @@
               {
                 "champ": "revenuTranche",
                 "op": "lte",
-                "valeur": "r2"
+                "valeur": "r1"
               }
             ]
           },
@@ -637,14 +645,35 @@
       "contradictions": [],
       "effets": [
         {
-          "id": "lfi-quotient-effet",
+          "id": "lfi-quotient-couple",
           "cible": {
-            "any": [
+            "all": [
               {
                 "champ": "couple",
                 "op": "eq",
                 "valeur": true
-              },
+              }
+            ]
+          },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Impôt plus élevé pour ton couple si vos revenus sont inégaux (fin du quotient conjugal)",
+          "ampleur": null,
+          "hypotheses": [
+            "Revenus inégaux au sein du couple",
+            "Imposition séparée des conjoints"
+          ],
+          "perimetreSimulation": "Effet non chiffré : modalités non précisées.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-6-5"
+          ]
+        },
+        {
+          "id": "lfi-quotient-enfants",
+          "cible": {
+            "all": [
               {
                 "champ": "enfants",
                 "op": "gte",
@@ -654,7 +683,7 @@
           },
           "sens": "incertain",
           "type": "flou",
-          "libelle": "Imposition des couples et des familles modifiée",
+          "libelle": "Crédit d'impôt par enfant à la place du quotient familial",
           "ampleur": null,
           "hypotheses": [
             "Montant du crédit d’impôt par enfant non précisé"

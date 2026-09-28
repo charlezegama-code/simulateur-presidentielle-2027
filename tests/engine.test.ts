@@ -199,7 +199,7 @@ describe('chiffrage : jamais forcé', () => {
         for (const v of all(r)) {
           expect(v.hypotheses.length).toBeGreaterThan(0)
           expect(v.perimetre.length).toBeGreaterThan(0)
-          if (v.theme === 'salaires') expect(v.perimetre).toContain(PERIMETRE_SALAIRES)
+          if (v.mesureId === 'a-smic-5') expect(v.perimetre).toContain(PERIMETRE_SALAIRES)
           if (v.montant?.kind === 'consommation') expect(v.perimetre).toContain(PERIMETRE_CONSO)
           if (v.montant?.kind === 'castype') expect(v.montant.hypothesesCommunes.length).toBeGreaterThan(0)
         }

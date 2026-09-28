@@ -11,9 +11,7 @@ function Section({ titre, items, vide }: { titre: string; items: EffectView[]; v
   const shown = all ? items : items.slice(0, MAX_ITEMS_PAR_SENS)
   return (
     <section className="space-y-2">
-      <h4 className="font-semibold">
-        {titre} <span className="font-normal text-slate-600 dark:text-slate-400">({items.length})</span>
-      </h4>
+      <h4 className="font-semibold">{titre}</h4>
       {items.length === 0 ? (
         <p className="text-sm text-slate-600 dark:text-slate-400">{vide}</p>
       ) : (
@@ -32,7 +30,7 @@ function Section({ titre, items, vide }: { titre: string; items: EffectView[]; v
   )
 }
 
-export function CandidateCard({ r }: { r: CandidateResult }) {
+export function CandidateCard({ r, nbMesures }: { r: CandidateResult; nbMesures: number }) {
   const c = r.candidat
   const id = `cand-${c.id}`
   return (
@@ -45,7 +43,7 @@ export function CandidateCard({ r }: { r: CandidateResult }) {
           {c.parti} · {STATUT_LABELS[c.statut]} depuis le {dateFr(c.statutDate)}
         </p>
         <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
-          Effets pour ton profil : {r.compteurs.chiffre} chiffré(s) · {r.compteurs.qualitatif} qualitatif(s) · {r.compteurs.flou} flou(s)
+          {nbMesures} mesures analysées à ce jour, dont {r.autresMesures.length} sans effet identifié pour ton profil
         </p>
       </header>
       <Section titre="Avantages pour toi" items={r.positifs} vide="Aucun avantage identifié pour ton profil dans les mesures analysées." />

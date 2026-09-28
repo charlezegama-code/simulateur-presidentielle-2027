@@ -19,7 +19,7 @@
       "editeur": "franceinfo",
       "datePublication": "2026-09-24",
       "dateConsultation": "2026-09-27",
-      "type": "declaration",
+      "type": "chiffrage_tiers",
       "archiveUrl": null
     },
     {
@@ -118,15 +118,11 @@
       "candidatId": "le-pen",
       "theme": "retraites",
       "intitule": "Retraite à 62 ans, 60 ans pour les carrières commencées avant 20 ans",
-      "description": "La candidate propose un âge légal de 62 ans, et un départ à 60 ans avec 40 annuités pour les personnes ayant commencé à travailler avant 20 ans ; pour les autres, la durée de cotisation évoluerait progressivement vers 42 ans.",
+      "description": "La candidate propose un âge légal de 62 ans, et un départ à 60 ans avec 40 annuités pour les personnes ayant commencé à travailler avant 20 ans ; pour les autres, la durée de cotisation évoluerait progressivement vers 42 ans. Coût annoncé : environ 9 Md€ par an.",
       "type": "qualitatif",
       "parametres": null,
       "financement": {
-        "texte": "Coût annoncé : environ 9 Md€ par an (estimé à environ 35 Md€ par l’Institut Montaigne en 2024).",
-        "sourceIds": [
-          "jdn-retraite-2026-08-28",
-          "capital-retraites-2026-09-24"
-        ]
+        "nonPrecise": true
       },
       "sourceIds": [
         "jdn-retraite-2026-08-28",
@@ -205,12 +201,12 @@
               }
             ]
           },
-          "sens": "incertain",
+          "sens": "negatif",
           "type": "qualitatif",
           "libelle": "Si tu n'as pas la nationalité française : perte de l'accès aux APL et au logement social",
           "ampleur": null,
           "hypotheses": [
-            "Le questionnaire ne demande pas ta nationalité"
+            "Tu n’as pas la nationalité française (le questionnaire ne la demande pas)"
           ],
           "perimetreSimulation": "Sans effet pour les ressortissant·es français·es ; effet non chiffré.",
           "confiance": "haute",
@@ -273,7 +269,7 @@
       "candidatId": "le-pen",
       "theme": "logement",
       "intitule": "Diagnostic de performance énergétique rendu indicatif",
-      "description": "La candidate propose que le DPE devienne un simple élément indicatif, et d'abroger l'obligation de logements sociaux par commune (loi SRU).",
+      "description": "La candidate propose que le DPE devienne « un simple élément indicatif », et d'abroger l'obligation de logements sociaux par commune (loi SRU).",
       "type": "qualitatif",
       "parametres": null,
       "financement": {

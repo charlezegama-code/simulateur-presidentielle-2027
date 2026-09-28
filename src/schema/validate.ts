@@ -125,8 +125,8 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
   const checkNotFuture = (where: string, date: string) => {
     if (date > opts.today) errors.push(`${where} : date ${date} dans le futur`)
   }
-  const checkSource = (where: string, s: { id: string; datePublication: string; dateConsultation: string }) => {
-    checkNotFuture(`${where} › source ${s.id} › datePublication`, s.datePublication)
+  const checkSource = (where: string, s: { id: string; datePublication: string | null; dateConsultation: string }) => {
+    if (s.datePublication) checkNotFuture(`${where} › source ${s.id} › datePublication`, s.datePublication)
     checkNotFuture(`${where} › source ${s.id} › dateConsultation`, s.dateConsultation)
     const age = daysBetween(s.dateConsultation, opts.today)
     if (age > maxAge) warnings.push(`${where} › source ${s.id} : consultée il y a ${age} j (> ${maxAge} j), à revérifier`)
@@ -147,7 +147,7 @@ export function validateDataset(raw: RawDataset, opts: ValidationOptions): Valid
     for (const id of [...c.statutSourceIds, ...c.historiqueStatut.flatMap((h) => h.sourceIds)]) {
       if (!srcIds.has(id)) errors.push(`${where} : source "${id}" introuvable`)
     }
-    if (c.programme) checkNotFuture(`${where} › programme › datePublication`, c.programme.datePublication)
+    if (c.programme?.datePublication) checkNotFuture(`${where} › programme › datePublication`, c.programme.datePublication)
     for (const s of c.sources) checkSource(where, s)
     if (c.analyse && !(`${c.id}.json` in measures)) {
       errors.push(`${where} : fichier measures/${c.id}.json manquant (gabarit incomplet)`)

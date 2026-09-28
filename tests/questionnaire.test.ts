@@ -31,7 +31,7 @@ describe('questionnaire', () => {
     }
     expect(n).toBeGreaterThan(100000)
     expect(cells.size).toBe(24320) // toutes les cases sont atteignables
-  })
+  }, 60_000) // parcours exhaustif de plus de 100 000 combinaisons
 
   it('changer de statut efface les réponses devenues incohérentes', () => {
     const d = applyAnswer({ statutPro: 'etudiant', echelonBourse: '3', ageTranche: '18-24' }, 'statutPro', 'retraite')

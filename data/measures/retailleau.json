@@ -192,14 +192,15 @@
               }
             ]
           },
-          "sens": "negatif",
+          "sens": "incertain",
           "type": "qualitatif",
-          "libelle": "Allocation conditionnée à 15 heures d’activité par semaine",
+          "libelle": "RSA, prime d'activité et ASS fusionnés dans un revenu d'incitation à l'activité",
           "ampleur": null,
           "hypotheses": [
-            "Tu perçois ou pourrais percevoir le RSA"
+            "Tu perçois ou pourrais percevoir le RSA",
+            "La condition de 15 heures d'activité hebdomadaire s'applique déjà au RSA depuis le 1er janvier 2025"
           ],
-          "perimetreSimulation": "Nature des activités et sanctions non précisées.",
+          "perimetreSimulation": "Montant exact, nature des activités et sanctions non précisés.",
           "confiance": "moyenne",
           "horizon": "non précisé",
           "sourceIds": [
@@ -250,7 +251,7 @@
       "id": "retailleau-chomage",
       "candidatId": "retailleau",
       "theme": "emploi_chomage",
-      "intitule": "Durcissement de l'assurance chômage",
+      "intitule": "Arrêt de l'indemnisation après trois refus d'offre",
       "description": "Le candidat propose de relancer la réforme de l'assurance chômage, avec un arrêt de l'indemnisation après trois refus d'offre, et d'encadrer les ruptures conventionnelles.",
       "type": "qualitatif",
       "parametres": null,
@@ -276,14 +277,15 @@
               }
             ]
           },
-          "sens": "negatif",
+          "sens": "incertain",
           "type": "qualitatif",
           "libelle": "Indemnisation arrêtée après trois refus d'offre d'emploi",
           "ampleur": null,
           "hypotheses": [
-            "Tu es indemnisé·e par l’assurance chômage"
+            "Tu es indemnisé·e par l’assurance chômage",
+            "Le Code du travail prévoit déjà une radiation après deux refus d'offre raisonnable d'emploi"
           ],
-          "perimetreSimulation": "Durée et montant des allocations : évolutions non précisées.",
+          "perimetreSimulation": "L'écart avec les règles actuelles et l'évolution des montants et durées ne sont pas précisés.",
           "confiance": "moyenne",
           "horizon": "non précisé",
           "sourceIds": [

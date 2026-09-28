@@ -5,9 +5,9 @@
     {
       "id": "philippe-prospere",
       "url": "https://www.edouardphilippe.fr/priorites/pour-une-france-plus-prospere",
-      "titre": "Pour une France plus prospère (page non datée)",
+      "titre": "Pour une France plus prospère ",
       "editeur": "Avec Édouard 2027",
-      "datePublication": "2026-09-27",
+      "datePublication": null,
       "dateConsultation": "2026-09-27",
       "type": "programme",
       "archiveUrl": null
@@ -15,9 +15,9 @@
     {
       "id": "philippe-enfants",
       "url": "https://www.edouardphilippe.fr/priorites/pour-une-france-plus-attentive-a-ses-enfants",
-      "titre": "Pour une France plus attentive à ses enfants (page non datée)",
+      "titre": "Pour une France plus attentive à ses enfants ",
       "editeur": "Avec Édouard 2027",
-      "datePublication": "2026-09-27",
+      "datePublication": null,
       "dateConsultation": "2026-09-27",
       "type": "programme",
       "archiveUrl": null
@@ -25,9 +25,9 @@
     {
       "id": "philippe-conquerante",
       "url": "https://www.edouardphilippe.fr/priorites/pour-une-france-plus-conquerante",
-      "titre": "Pour une France plus conquérante (page non datée)",
+      "titre": "Pour une France plus conquérante ",
       "editeur": "Avec Édouard 2027",
-      "datePublication": "2026-09-27",
+      "datePublication": null,
       "dateConsultation": "2026-09-27",
       "type": "programme",
       "archiveUrl": null
@@ -228,11 +228,12 @@
               }
             ]
           },
-          "sens": "incertain",
+          "sens": "negatif",
           "type": "flou",
-          "libelle": "Départ à la retraite potentiellement plus tardif, part de capitalisation dans ta future pension",
+          "libelle": "Départ à la retraite plus tardif, part de capitalisation dans ta future pension",
           "ampleur": null,
           "hypotheses": [
+            "Par rapport à la législation actuelle",
             "Âge et durée de cotisation non précisés"
           ],
           "perimetreSimulation": "Effet non calculable.",
@@ -321,7 +322,7 @@
           },
           "sens": "neutre",
           "type": "qualitatif",
-          "libelle": "Pas de nouvel impôt pour ton foyer",
+          "libelle": "Engagement à ne pas créer de nouvel impôt",
           "ampleur": null,
           "hypotheses": [
             "Barèmes existants maintenus"
@@ -381,7 +382,7 @@
       "candidatId": "philippe",
       "theme": "energie_prix",
       "intitule": "Relance du nucléaire et électrification des usages",
-      "description": "Le candidat propose de relancer le nucléaire, de développer les renouvelables et d'électrifier massivement les usages.",
+      "description": "Le candidat propose de relancer le nucléaire, de développer les renouvelables et d'« électrifier massivement » les usages.",
       "type": "qualitatif",
       "parametres": null,
       "financement": {
