@@ -4,6 +4,9 @@ import { defineConfig } from 'vitest/config'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  // Les sous-ensembles de polices très légers seraient sinon encodés en data: URI dans le CSS,
+  // ce que bloque la CSP (font-src 'self', sans data:). On les garde en fichiers séparés.
+  build: { assetsInlineLimit: 0 },
   plugins: [
     react(),
     tailwindcss(),
