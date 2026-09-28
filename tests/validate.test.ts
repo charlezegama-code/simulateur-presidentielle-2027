@@ -37,7 +37,7 @@ describe('validateDataset', () => {
   })
 
   it('accepte un /data vide en prod avec un avertissement', () => {
-    const r = run({ candidates: { dateMaj: TODAY, candidats: [] }, measures: {}, castypes: null, conso: null }, 'prod')
+    const r = run({ candidates: { dateMaj: TODAY, critereAnalyse: 'Critère de test pour un jeu vide.', sources: [], candidats: [] }, measures: {}, castypes: null, conso: null }, 'prod')
     expect(r.errors).toEqual([])
     expect(r.warnings).toContain('candidates.json : aucun candidat')
   })

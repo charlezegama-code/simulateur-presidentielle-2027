@@ -206,13 +206,14 @@ def resolve_bruts(tbs, targets):
 # ---------------------------------------------------------------------------
 
 START = f'{ANNEE}-01-01'
+FIN = f'{ANNEE}-12-01'  # les réformes partent du barème en vigueur en fin d'année, appliqué à toute l'année
 
 
 def update_param(params, path, fn):
     node = params
     for k in path.split('.'):
         node = getattr(node, k)
-    node.update(start=START, value=fn(node(START)))
+    node.update(start=START, value=fn(node(FIN)))
 
 
 def param_reform(tbs, path, fn):
@@ -238,14 +239,75 @@ def reforme_smic_net(tbs, p, ctx):
     return param_reform(tbs, SMIC, lambda v: v * (1 + k)), k
 
 
+def reforme_smic_brut(tbs, p, ctx):
+    k = p['montantBrutMensuel'] / (ctx['smic_brut_annuel'] / 12) - 1
+    return param_reform(tbs, SMIC, lambda v: v * (1 + k)), k
+
+
+# Montant de référence (personne seule, €/mois) de chaque prestation : chemin du paramètre et conversion.
+PRESTATION_REF = {
+    'rsa': ('prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_m.montant_de_base_du_rsa', 1),
+    'aah': ('prestations_sociales.prestations_etat_de_sante.invalidite.aah.montant', 1),
+    'aspa': ('prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.personnes_seules', 12),
+}
+ASPA_COUPLES = 'prestations_sociales.solidarite_insertion.minimum_vieillesse.aspa.montant_maximum_annuel.couples'
+
+
+def montant_mensuel_actuel(tbs, prestation):
+    path, par_an = PRESTATION_REF[prestation]
+    node = tbs.parameters
+    for k in path.split('.'):
+        node = getattr(node, k)
+    return float(node(FIN)) / par_an
+
+
+def prestation_factor_reform(tbs, prestation, factor):
+    """Applique un même facteur au montant de référence (et au montant couple pour l'ASPA)."""
+    path, _ = PRESTATION_REF[prestation]
+
+    class R(Reform):
+        def apply(self):
+            def modify(params):
+                update_param(params, path, lambda v: v * factor)
+                if prestation == 'aspa':
+                    update_param(params, ASPA_COUPLES, lambda v: v * factor)
+                return params
+            self.modify_parameters(modifier_function=modify)
+    return R(tbs)
+
+
+def reforme_prestation_cible(tbs, p, ctx):
+    return prestation_factor_reform(tbs, p['prestation'], p['montantMensuel'] / montant_mensuel_actuel(tbs, p['prestation'])), 0.0
+
+
+def reforme_prestation_cible_smic(tbs, p, ctx):
+    cible = ctx['smic_net_mensuel'] * p['pctSmicNet'] / 100
+    return prestation_factor_reform(tbs, p['prestation'], cible / montant_mensuel_actuel(tbs, p['prestation'])), 0.0
+
+
+def reforme_prestation_ajout(tbs, p, ctx):
+    actuel = montant_mensuel_actuel(tbs, p['prestation'])
+    return prestation_factor_reform(tbs, p['prestation'], (actuel + p['montantMensuel']) / actuel), 0.0
+
+
+def reforme_rsa_age(tbs, p, ctx):
+    path = 'prestations_sociales.solidarite_insertion.minima_sociaux.rsa.rsa_cond.age_minimum_allocataire'
+    return param_reform(tbs, path, lambda v: p['ageMinimum']), 0.0
+
+
+def reforme_quotient_familial(tbs, p, ctx):
+    path = f"impot_revenu.calcul_impot_revenu.plaf_qf.quotient_familial.cas_general.{p['rang']}"
+    return param_reform(tbs, path, lambda v: p['parts']), 0.0
+
+
 def reforme_taux_csg(tbs, p, ctx):
     """Taux global de CSG sur les revenus d'activité porté à tauxPct ; l'écart porte sur la part déductible."""
     class R(Reform):
         def apply(self):
             def modify(params):
                 csg = params.prelevements_sociaux.contributions_sociales.csg.activite
-                ecart = csg.taux_global(START) - p['tauxPct'] / 100
-                csg.deductible.update(start=START, value=csg.deductible(START) - ecart)
+                ecart = csg.taux_global(FIN) - p['tauxPct'] / 100
+                csg.deductible.update(start=START, value=csg.deductible(FIN) - ecart)
                 csg.taux_global.update(start=START, value=p['tauxPct'] / 100)
                 return params
             self.modify_parameters(modifier_function=modify)
@@ -299,6 +361,12 @@ def reforme_bareme_ir(tbs, p, ctx):
 REFORMES = {
     'smic_pct': reforme_smic_pct,
     'smic_net': reforme_smic_net,
+    'smic_brut': reforme_smic_brut,
+    'prestation_cible': reforme_prestation_cible,
+    'prestation_cible_smic': reforme_prestation_cible_smic,
+    'prestation_ajout': reforme_prestation_ajout,
+    'rsa_age': reforme_rsa_age,
+    'quotient_familial': reforme_quotient_familial,
     'taux_csg': reforme_taux_csg,
     'montant_prestation': reforme_montant_prestation,
     'bareme_ir': reforme_bareme_ir,
@@ -408,7 +476,7 @@ def main():
     write(out_dir / 'bourse.json', {**meta, 'montantsAnnuels': bourses})
 
     # 4. Réformes par candidat
-    ctx = {'smic_net_mensuel': smic_net}
+    ctx = {'smic_net_mensuel': smic_net, 'smic_brut_annuel': smic_brut}
     for f in sorted((data_dir / 'measures').glob('*.json')):
         mf = json.loads(f.read_text())
         mesures = {}

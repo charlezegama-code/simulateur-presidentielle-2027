@@ -1,0 +1,426 @@
+{
+  "candidatId": "philippe",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    {
+      "id": "philippe-prospere",
+      "url": "https://www.edouardphilippe.fr/priorites/pour-une-france-plus-prospere",
+      "titre": "Pour une France plus prospère (page non datée)",
+      "editeur": "Avec Édouard 2027",
+      "datePublication": "2026-09-27",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": null
+    },
+    {
+      "id": "philippe-enfants",
+      "url": "https://www.edouardphilippe.fr/priorites/pour-une-france-plus-attentive-a-ses-enfants",
+      "titre": "Pour une France plus attentive à ses enfants (page non datée)",
+      "editeur": "Avec Édouard 2027",
+      "datePublication": "2026-09-27",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": null
+    },
+    {
+      "id": "philippe-conquerante",
+      "url": "https://www.edouardphilippe.fr/priorites/pour-une-france-plus-conquerante",
+      "titre": "Pour une France plus conquérante (page non datée)",
+      "editeur": "Avec Édouard 2027",
+      "datePublication": "2026-09-27",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": null
+    },
+    {
+      "id": "capital-retraites-2026-09-24",
+      "url": "https://fr.finance.yahoo.com/actualites/presidentielle-2027-proposent-candidats-retraite-120000835.html",
+      "titre": "Présidentielle 2027, ce que proposent les candidats pour votre retraite",
+      "editeur": "Capital (via Yahoo Finance)",
+      "datePublication": "2026-09-24",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "mesures": [
+    {
+      "id": "philippe-part-fiscale-2e-enfant",
+      "candidatId": "philippe",
+      "theme": "famille",
+      "intitule": "Une part fiscale entière dès le deuxième enfant",
+      "description": "Le candidat propose d'accorder une part fiscale dès le deuxième enfant, et non plus seulement à partir du troisième.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "quotient_familial",
+        "rang": "enf2",
+        "parts": 1
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-enfants"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "philippe-part-fiscale-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "enfants",
+                "op": "gte",
+                "valeur": "2"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Baisse de ton impôt sur le revenu si tu as au moins deux enfants",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Le deuxième enfant compte pour une part entière au lieu d'une demi-part",
+            "Plafonnement actuel du quotient familial maintenu"
+          ],
+          "perimetreSimulation": "Sans effet si ton foyer n'est pas imposable.",
+          "confiance": "haute",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "philippe-enfants"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe-aide-famille-unique",
+      "candidatId": "philippe",
+      "theme": "famille",
+      "intitule": "Aide financière unique et universelle pour les familles",
+      "description": "Le candidat propose de créer une aide financière unique, lisible et universelle pour les familles, en fusionnant les dispositifs existants.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-enfants"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "philippe-aide-unique-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "enfants",
+                "op": "gte",
+                "valeur": "1"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Prestations familiales regroupées en une seule aide",
+          "ampleur": null,
+          "hypotheses": [
+            "Montant et barème non précisés"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "philippe-enfants"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe-temps-partiel-parental",
+      "candidatId": "philippe",
+      "theme": "famille",
+      "intitule": "Temps partiel parental payé à 100 % pendant 2 mois",
+      "description": "Le candidat propose un temps partiel parental : travailler à 80 % payé 100 % pendant 2 mois après le congé parental, et un prêt à taux zéro pour chaque naissance afin de faciliter le déménagement.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-enfants"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "philippe-temps-partiel-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "enfants",
+                "op": "gte",
+                "valeur": "1"
+              },
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Reprise du travail à 80 % payé 100 % pendant 2 mois après une naissance",
+          "ampleur": null,
+          "hypotheses": [
+            "Naissance récente ou à venir"
+          ],
+          "perimetreSimulation": "Le questionnaire ne demande pas l'âge des enfants.",
+          "confiance": "faible",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "philippe-enfants"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe-retraites",
+      "candidatId": "philippe",
+      "theme": "retraites",
+      "intitule": "Travailler plus longtemps et pilier de capitalisation",
+      "description": "Le candidat propose de « travailler plus » en tenant compte de la diversité des carrières, de créer un pilier de capitalisation représentant 10 à 15 % des pensions d'ici quinze ans et de confier la gestion du régime aux partenaires sociaux.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-prospere",
+        "capital-retraites-2026-09-24"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "philippe-retraites-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "neq",
+                "valeur": "retraite"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Départ à la retraite potentiellement plus tardif, part de capitalisation dans ta future pension",
+          "ampleur": null,
+          "hypotheses": [
+            "Âge et durée de cotisation non précisés"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "philippe-prospere",
+            "capital-retraites-2026-09-24"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe-salaire-net",
+      "candidatId": "philippe",
+      "theme": "salaires",
+      "intitule": "Financement du modèle social moins assis sur le travail",
+      "description": "Le candidat propose de rééquilibrer le financement du modèle social pour qu'il ne repose plus uniquement sur le travail et d'augmenter le salaire net des actifs.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-prospere"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "philippe-salaire-net-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "flou",
+          "libelle": "Hausse de ton salaire net",
+          "ampleur": null,
+          "hypotheses": [
+            "Ampleur et prélèvements de remplacement non précisés"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "philippe-prospere"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe-moratoire-fiscal",
+      "candidatId": "philippe",
+      "theme": "fiscalite",
+      "intitule": "Aucun nouvel impôt pendant le quinquennat",
+      "description": "Le candidat propose un moratoire normatif et fiscal : pas de nouvelle norme ni de nouvel impôt pendant le quinquennat, et 50 Md€ de baisses d'impôts de production.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-prospere"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "philippe-moratoire-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "neutre",
+          "type": "qualitatif",
+          "libelle": "Pas de nouvel impôt pour ton foyer",
+          "ampleur": null,
+          "hypotheses": [
+            "Barèmes existants maintenus"
+          ],
+          "perimetreSimulation": "Les évolutions d'impôts existants ne sont pas couvertes par l'engagement.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "philippe-prospere"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe-sante",
+      "candidatId": "philippe",
+      "theme": "sante",
+      "intitule": "Stabilisation des dépenses de santé",
+      "description": "Le candidat propose de stabiliser les dépenses de santé en misant sur la prévention et les transformations technologiques.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-prospere"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "philippe-sante-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Évolution des remboursements non précisée",
+          "ampleur": null,
+          "hypotheses": [
+            "Leviers non précisés"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "philippe-prospere"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe-energie",
+      "candidatId": "philippe",
+      "theme": "energie_prix",
+      "intitule": "Relance du nucléaire et électrification des usages",
+      "description": "Le candidat propose de relancer le nucléaire, de développer les renouvelables et d'électrifier massivement les usages.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "philippe-conquerante"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": [
+    {
+      "theme": "aides_sociales",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "etudes",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "logement",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "emploi_chomage",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "service_national",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "handicap",
+      "dateRecherche": "2026-09-27"
+    }
+  ]
+}

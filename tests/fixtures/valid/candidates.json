@@ -1,5 +1,7 @@
 {
   "dateMaj": "2026-09-27",
+  "critereAnalyse": "Candidats fictifs utilisés pour tester la chaîne complète.",
+  "sources": [],
   "candidats": [
     {
       "id": "candidat-a",
@@ -45,6 +47,7 @@
           "archiveUrl": null
         }
       ],
+      "note": null,
       "dateMaj": "2026-09-27"
     },
     {
@@ -81,6 +84,7 @@
           "archiveUrl": null
         }
       ],
+      "note": null,
       "dateMaj": "2026-09-27"
     }
   ]

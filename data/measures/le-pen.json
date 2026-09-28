@@ -1,0 +1,357 @@
+{
+  "candidatId": "le-pen",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    {
+      "id": "orange-2026-09-21",
+      "url": "https://actu.orange.fr/question-du-jour-2026-09-21-CNT000002s0few.html",
+      "titre": "Carburants : selon vous, la baisse de la TVA réclamée par Marine Le Pen est-elle la solution ?",
+      "editeur": "Orange Actualités (6Medias)",
+      "datePublication": "2026-09-21",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "franceinfo-vf-tva-2026-09-24",
+      "url": "https://www.franceinfo.fr/replay-radio/le-vrai-du-faux/vrai-ou-faux-est-il-possible-d-abaisser-la-tva-sur-les-carburants-de-20-a-5-5-comme-le-defend-le-rassemblement-national_8185535.html",
+      "titre": "Vrai ou faux. Est-il possible d’abaisser la TVA sur les carburants de 20 % à 5,5 % comme le défend le Rassemblement national ?",
+      "editeur": "franceinfo",
+      "datePublication": "2026-09-24",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "jdn-retraite-2026-08-28",
+      "url": "https://www.journaldunet.com/business/action-publique/1554113-marine-le-pen-maintient-le-retour-a-la-retraite-a-62-ans/",
+      "titre": "Marine Le Pen maintient le retour à la retraite à 62 ans",
+      "editeur": "Journal du Net",
+      "datePublication": "2026-08-28",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "capital-retraites-2026-09-24",
+      "url": "https://fr.finance.yahoo.com/actualites/presidentielle-2027-proposent-candidats-retraite-120000835.html",
+      "titre": "Présidentielle 2027, ce que proposent les candidats pour votre retraite",
+      "editeur": "Capital (via Yahoo Finance)",
+      "datePublication": "2026-09-24",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "franceinfo-logement-2026-09-13",
+      "url": "https://www.franceinfo.fr/politique/marine-le-pen/video-marine-le-pen-candidate-du-rn-a-la-presidentielle-2027-detaille-une-serie-de-propositions-sur-le-logement-qui-sera-un-des-grands-chantiers-de-son-quinquennat-si-elle-est-elue_8190839.html",
+      "titre": "Marine Le Pen, candidate du RN à la présidentielle, détaille une série de propositions sur le logement",
+      "editeur": "franceinfo",
+      "datePublication": "2026-09-13",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "mesures": [
+    {
+      "id": "lepen-tva-energie",
+      "candidatId": "le-pen",
+      "theme": "energie_prix",
+      "intitule": "TVA à 5,5 % sur les carburants, le fioul, l'électricité et le gaz",
+      "description": "La candidate propose de ramener la TVA de 20 % à 5,5 % sur les carburants, le fioul domestique, l'électricité et le gaz, qu'elle qualifie de biens de première nécessité.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "conso_tva",
+        "postes": [
+          "0451",
+          "0452",
+          "0453",
+          "0722"
+        ],
+        "tauxAvantPct": 20,
+        "tauxApresPct": 5.5
+      },
+      "financement": {
+        "texte": "Coût annoncé par le RN : 12 Md€ par an, financé par la suppression de prestations versées aux résidents étrangers, la baisse de la contribution au budget de l'UE et la suppression de dispositifs comme le Fonds vert.",
+        "sourceIds": [
+          "orange-2026-09-21"
+        ]
+      },
+      "sourceIds": [
+        "orange-2026-09-21",
+        "franceinfo-vf-tva-2026-09-24"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lepen-tva-energie-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Baisse de tes dépenses de carburant et d'énergie",
+          "ampleur": {
+            "kind": "consommation"
+          },
+          "hypotheses": [
+            "Dépenses d'un ménage comparable (décile de niveau de vie, type de ménage) selon l'INSEE",
+            "Sans voiture : pas de dépense de carburant",
+            "Taux de TVA de 20 % avant la mesure"
+          ],
+          "perimetreSimulation": "Le taux de 5,5 % déjà appliqué à certains abonnements n'est pas distingué ; les règles européennes sur les taux de TVA ne sont pas modélisées.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "orange-2026-09-21",
+            "franceinfo-vf-tva-2026-09-24"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lepen-retraite-62",
+      "candidatId": "le-pen",
+      "theme": "retraites",
+      "intitule": "Retraite à 62 ans, 60 ans pour les carrières commencées avant 20 ans",
+      "description": "La candidate propose un âge légal de 62 ans, et un départ à 60 ans avec 40 annuités pour les personnes ayant commencé à travailler avant 20 ans ; pour les autres, la durée de cotisation évoluerait progressivement vers 42 ans.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "texte": "Coût annoncé : environ 9 Md€ par an (estimé à environ 35 Md€ par l’Institut Montaigne en 2024).",
+        "sourceIds": [
+          "jdn-retraite-2026-08-28",
+          "capital-retraites-2026-09-24"
+        ]
+      },
+      "sourceIds": [
+        "jdn-retraite-2026-08-28",
+        "capital-retraites-2026-09-24"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [
+        {
+          "description": "Jordan Bardella, président du RN, a défendu en juillet 2026 l'abandon d'un âge de départ au profit d'un pilier de capitalisation ; Marine Le Pen n'y a pas fait allusion lors du débat du 27 août 2026. Capital mentionne une capitalisation « volontaire ».",
+          "sourceIds": [
+            "jdn-retraite-2026-08-28",
+            "capital-retraites-2026-09-24"
+          ]
+        }
+      ],
+      "effets": [
+        {
+          "id": "lepen-retraite-62-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "neq",
+                "valeur": "retraite"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Départ à la retraite possible plus tôt (62 ans, ou 60 ans si tu as commencé à travailler avant 20 ans)",
+          "ampleur": null,
+          "hypotheses": [
+            "Par rapport à la législation actuelle (âge légal supérieur à 62 ans pour les générations concernées)"
+          ],
+          "perimetreSimulation": "OpenFisca ne simule pas les carrières : l'effet sur ta pension n'est pas chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "jdn-retraite-2026-08-28",
+            "capital-retraites-2026-09-24"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lepen-priorite-nationale-logement",
+      "candidatId": "le-pen",
+      "theme": "logement",
+      "intitule": "Logement social et APL réservés aux ressortissants français",
+      "description": "La candidate propose de réserver le logement social et les APL aux Français, et de donner la priorité aux jeunes Français pour l'accès aux résidences étudiantes.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "franceinfo-logement-2026-09-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lepen-priorite-nationale-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "logement",
+                "op": "in",
+                "valeur": [
+                  "locataire_prive",
+                  "locataire_social"
+                ]
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "qualitatif",
+          "libelle": "Si tu n'as pas la nationalité française : perte de l'accès aux APL et au logement social",
+          "ampleur": null,
+          "hypotheses": [
+            "Le questionnaire ne demande pas ta nationalité"
+          ],
+          "perimetreSimulation": "Sans effet pour les ressortissant·es français·es ; effet non chiffré.",
+          "confiance": "haute",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "franceinfo-logement-2026-09-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lepen-100-renov",
+      "candidatId": "le-pen",
+      "theme": "logement",
+      "intitule": "Prêt sans intérêts pour la rénovation (« 100 % Rénov »)",
+      "description": "La candidate propose un prêt sans intérêts pour financer rénovation, électrification du chauffage ou climatisation.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "franceinfo-logement-2026-09-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lepen-100-renov-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "logement",
+                "op": "eq",
+                "valeur": "proprietaire"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Prêt à taux zéro pour rénover ton logement",
+          "ampleur": null,
+          "hypotheses": [
+            "Propriétaire occupant"
+          ],
+          "perimetreSimulation": "Montant et conditions du prêt non précisés.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "franceinfo-logement-2026-09-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lepen-dpe",
+      "candidatId": "le-pen",
+      "theme": "logement",
+      "intitule": "Diagnostic de performance énergétique rendu indicatif",
+      "description": "La candidate propose que le DPE devienne un simple élément indicatif, et d'abroger l'obligation de logements sociaux par commune (loi SRU).",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "franceinfo-logement-2026-09-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lepen-dpe-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "logement",
+                "op": "eq",
+                "valeur": "locataire_prive"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "qualitatif",
+          "libelle": "Le DPE ne serait plus contraignant pour la location",
+          "ampleur": null,
+          "hypotheses": [
+            "Location dans le parc privé",
+            "Les obligations actuelles attachées au DPE (interdiction progressive de louer les logements les moins performants) ne s'appliqueraient plus"
+          ],
+          "perimetreSimulation": "Effets sur les loyers et les factures non modélisés.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "franceinfo-logement-2026-09-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": [
+    {
+      "theme": "fiscalite",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "salaires",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "aides_sociales",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "famille",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "etudes",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "emploi_chomage",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "sante",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "service_national",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "handicap",
+      "dateRecherche": "2026-09-27"
+    }
+  ]
+}

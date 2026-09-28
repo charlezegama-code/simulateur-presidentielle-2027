@@ -12,7 +12,8 @@ export const PERIMETRE_CONSO =
 
 export function perimetreStandard(theme: Theme, parametres: Parametres | null): string[] {
   const out: string[] = []
-  if (theme === 'salaires' || parametres?.kind === 'smic_pct' || parametres?.kind === 'smic_net') out.push(PERIMETRE_SALAIRES)
+  if (theme === 'salaires' || parametres?.kind === 'smic_pct' || parametres?.kind === 'smic_net' || parametres?.kind === 'smic_brut')
+    out.push(PERIMETRE_SALAIRES)
   if (parametres?.kind === 'conso_tva' || parametres?.kind === 'conso_prix') out.push(PERIMETRE_CONSO)
   return out
 }

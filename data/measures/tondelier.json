@@ -1,0 +1,812 @@
+{
+  "candidatId": "tondelier",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    {
+      "id": "eco-programme-2026-07-13",
+      "url": "https://lesecologistes.fr/document/6U1S2oqef5fsSsPej3SkeR/vf2-1307-programme.pdf",
+      "titre": "Pour une prospérité écologique — le nouveau programme des Écologistes",
+      "editeur": "Les Écologistes",
+      "datePublication": "2026-07-13",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260713135311/https://lesecologistes.fr/document/6U1S2oqef5fsSsPej3SkeR/vf2-1307-programme.pdf"
+    },
+    {
+      "id": "capital-retraites-2026-09-24",
+      "url": "https://fr.finance.yahoo.com/actualites/presidentielle-2027-proposent-candidats-retraite-120000835.html",
+      "titre": "Présidentielle 2027, ce que proposent les candidats pour votre retraite",
+      "editeur": "Capital (via Yahoo Finance)",
+      "datePublication": "2026-09-24",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "mesures": [
+    {
+      "id": "eco-smic-2000-brut",
+      "candidatId": "tondelier",
+      "theme": "salaires",
+      "intitule": "Salaire minimum à 2 000 € brut par mois dès 2027",
+      "description": "Le programme prévoit de porter le salaire minimum à 2 000 € brut par mois dès 2027, avec des dispositifs de soutien ciblés pour les TPE, PME et associations.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "smic_brut",
+        "montantBrutMensuel": 2000
+      },
+      "financement": {
+        "texte": "Le programme prévoit des dispositifs de soutien ciblés pour les TPE, PME et associations, dont une baisse du taux réduit de l'impôt sur les sociétés.",
+        "sourceIds": [
+          "eco-programme-2026-07-13"
+        ]
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-smic-smic",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "etudiant"
+                ]
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "in",
+                "valeur": [
+                  "r1",
+                  "r2"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse de ta rémunération si tu es payé·e au SMIC horaire",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Rémunération au SMIC horaire (temps plein ou partiel, job étudiant)",
+            "Appliqué dès 2027"
+          ],
+          "perimetreSimulation": "Ne modélise pas l'effet sur les cotisations patronales ni sur les salaires au-dessus du SMIC.",
+          "confiance": "moyenne",
+          "horizon": "dès 2027",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        },
+        {
+          "id": "eco-smic-apprenti",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "alternant"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse de ta rémunération d'apprenti·e (fixée en pourcentage du SMIC)",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Rémunération au minimum légal, exprimée en pourcentage du SMIC"
+          ],
+          "perimetreSimulation": "Autres évolutions de la rémunération des alternants non modélisées.",
+          "confiance": "moyenne",
+          "horizon": "dès 2027",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-garantie-autonomie",
+      "candidatId": "tondelier",
+      "theme": "aides_sociales",
+      "intitule": "Garantie d'autonomie à 50 % du SMIC net à la place du RSA",
+      "description": "Le programme prévoit de remplacer le RSA par une garantie d'autonomie d'un montant égal à 50 % du SMIC net, indexée sur son évolution, sans la contrepartie de 15 heures d'activité.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "prestation_cible_smic",
+        "prestation": "rsa",
+        "pctSmicNet": 50
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-garantie-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "sans_activite",
+                  "demandeur_emploi",
+                  "salarie_prive"
+                ]
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r1"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse du montant du RSA (garantie d’autonomie)",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Montant de base du RSA porté à 50 % du SMIC net actuel ; autres configurations familiales dans la même proportion"
+          ],
+          "perimetreSimulation": "L'ouverture dès 18 ans est chiffrée séparément ; les deux effets ne s'additionnent pas exactement.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-garantie-18-ans",
+      "candidatId": "tondelier",
+      "theme": "aides_sociales",
+      "intitule": "Garantie d'autonomie accessible dès 18 ans",
+      "description": "Le programme prévoit de rendre la garantie d'autonomie accessible dès 18 ans pour les personnes indépendantes fiscalement.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "rsa_age",
+        "ageMinimum": 18
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-garantie-18-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "ageTranche",
+                "op": "eq",
+                "valeur": "18-24"
+              },
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "sans_activite",
+                  "demandeur_emploi"
+                ]
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r1"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Accès au RSA (garantie d’autonomie) avant 25 ans",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Tu es fiscalement indépendant·e de tes parents",
+            "Montant actuel du RSA (la hausse à 50 % du SMIC est chiffrée à part)"
+          ],
+          "perimetreSimulation": "Le questionnaire ne demande pas si tu es rattaché·e au foyer fiscal de tes parents.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-apl-10",
+      "candidatId": "tondelier",
+      "theme": "logement",
+      "intitule": "APL revalorisées de 10 %",
+      "description": "Le programme prévoit de revaloriser les APL de 10 % avec un mécanisme empêchant la répercussion sur les loyers, et d'ouvrir les aides au logement aux étudiants extracommunautaires.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "montant_prestation",
+        "prestation": "apl",
+        "variationPct": 10
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-apl-10-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "logement",
+                "op": "in",
+                "valeur": [
+                  "locataire_prive",
+                  "locataire_social"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse de ton aide au logement",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Éligibilité selon les règles actuelles"
+          ],
+          "perimetreSimulation": "Le mécanisme anti-répercussion sur les loyers n'est pas modélisé.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-loyers",
+      "candidatId": "tondelier",
+      "theme": "logement",
+      "intitule": "Encadrement des loyers généralisé",
+      "description": "Le programme prévoit de généraliser et pérenniser l'encadrement des loyers, notamment dans toutes les villes universitaires, et de remplacer la garantie Visale par une garantie universelle des loyers.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-loyers-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "logement",
+                "op": "eq",
+                "valeur": "locataire_prive"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Loyer encadré dans ta ville",
+          "ampleur": null,
+          "hypotheses": [
+            "Location dans le parc privé"
+          ],
+          "perimetreSimulation": "Niveau des plafonds non précisé.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-aah-250",
+      "candidatId": "tondelier",
+      "theme": "handicap",
+      "intitule": "AAH augmentée de 250 € par mois",
+      "description": "Le programme prévoit d'augmenter l'allocation aux adultes handicapés (AAH) de 250 € et de l'intégrer à la branche autonomie de la Sécurité sociale.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "prestation_ajout",
+        "prestation": "aah",
+        "montantMensuel": 250
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-aah-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "handicapAAH",
+                "op": "eq",
+                "valeur": true
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse de ton AAH",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Hausse de 250 € par mois du montant maximal"
+          ],
+          "perimetreSimulation": "Délais d’instruction et autres mesures non modélisés.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-af-premier-enfant",
+      "candidatId": "tondelier",
+      "theme": "famille",
+      "intitule": "Allocations familiales dès le premier enfant",
+      "description": "Le programme prévoit d'attribuer un même montant d'allocations familiales dès le premier enfant et de rétablir la majoration dès 14 ans.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-af-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "enfants",
+                "op": "eq",
+                "valeur": "1"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Allocations familiales versées pour ton premier enfant",
+          "ampleur": null,
+          "hypotheses": [
+            "Montant non précisé"
+          ],
+          "perimetreSimulation": "Effet non chiffré faute de montant.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-retraite-62",
+      "candidatId": "tondelier",
+      "theme": "retraites",
+      "intitule": "Retour à 62 ans, puis 60 ans pour les carrières longues et pénibles",
+      "description": "Le programme prévoit d'abroger l'âge légal de 64 ans pour revenir immédiatement à 62 ans, et de viser 60 ans en priorité pour les personnes ayant travaillé tôt ou dans des conditions pénibles.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13",
+        "capital-retraites-2026-09-24"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-retraite-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "neq",
+                "valeur": "retraite"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Départ à la retraite possible à 62 ans",
+          "ampleur": null,
+          "hypotheses": [
+            "Par rapport à la législation actuelle (âge légal supérieur à 62 ans pour les générations concernées)"
+          ],
+          "perimetreSimulation": "OpenFisca ne simule pas les carrières : l'effet sur ta pension n'est pas chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-ir",
+      "candidatId": "tondelier",
+      "theme": "fiscalite",
+      "intitule": "Baisse de l’impôt sur le revenu pour les tranches les plus basses",
+      "description": "Le programme prévoit de diminuer l'impôt sur le revenu pour les tranches les plus basses et de créer une tranche à 60 % au-delà de 250 000 € annuels.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-ir-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "revenuTranche",
+                "op": "in",
+                "valeur": [
+                  "r2",
+                  "r3",
+                  "r4"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "flou",
+          "libelle": "Baisse possible de ton impôt sur le revenu",
+          "ampleur": null,
+          "hypotheses": [
+            "Barème non précisé"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-csg",
+      "candidatId": "tondelier",
+      "theme": "fiscalite",
+      "intitule": "CSG progressive et relevée d’un point",
+      "description": "Le programme prévoit de rendre la CSG progressive et de l'augmenter d'un point pour l'équilibre de l'assurance maladie.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-csg-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "CSG modifiée selon ton niveau de revenu",
+          "ampleur": null,
+          "hypotheses": [
+            "Barème non précisé"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-etudes",
+      "candidatId": "tondelier",
+      "theme": "etudes",
+      "intitule": "Suppression de la CVEC et bourses revalorisées",
+      "description": "Le programme prévoit de supprimer la contribution de vie étudiante et de campus (CVEC), de revaloriser et refonder les bourses et de rémunérer les stages quelle que soit leur durée.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-etudes-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "etudiant"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Plus de CVEC à payer, bourses revalorisées, stages rémunérés",
+          "ampleur": null,
+          "hypotheses": [
+            "Montants non précisés"
+          ],
+          "perimetreSimulation": "Effet non chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-electricite",
+      "candidatId": "tondelier",
+      "theme": "energie_prix",
+      "intitule": "Abonnement électrique allégé et tarification progressive",
+      "description": "Le programme prévoit de réduire la part fixe de l'abonnement à l'électricité et de développer une tarification progressive.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-electricite-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "incertain",
+          "type": "qualitatif",
+          "libelle": "Facture d'électricité dépendant davantage de ta consommation",
+          "ampleur": null,
+          "hypotheses": [
+            "Barème non précisé"
+          ],
+          "perimetreSimulation": "Effet non chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-depassements",
+      "candidatId": "tondelier",
+      "theme": "sante",
+      "intitule": "Dépassements d'honoraires interdits pour la moitié des ménages les moins aisés",
+      "description": "Le programme prévoit d'interdire les dépassements d'honoraires pour la moitié des ménages les moins aisés.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-depassements-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r3"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Plus de dépassements d'honoraires chez le médecin",
+          "ampleur": null,
+          "hypotheses": [
+            "Ton foyer fait partie de la moitié la moins aisée"
+          ],
+          "perimetreSimulation": "Seuil exact non précisé.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-32h",
+      "candidatId": "tondelier",
+      "theme": "emploi_chomage",
+      "intitule": "32 heures sans perte de salaire dans les métiers pénibles ou de nuit",
+      "description": "Le programme prévoit le passage aux 32 heures sans perte de salaire dans les métiers pénibles ou de nuit, en y conditionnant les aides aux entreprises.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-32h-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Temps de travail réduit à 32 heures sans perte de salaire",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu exerces un métier pénible ou de nuit"
+          ],
+          "perimetreSimulation": "Le questionnaire ne demande pas ton métier.",
+          "confiance": "faible",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "eco-service-civique",
+      "candidatId": "tondelier",
+      "theme": "service_national",
+      "intitule": "Plus de missions de service civique volontaire",
+      "description": "Le programme prévoit d'accroître le nombre de services civiques volontaires.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "eco-programme-2026-07-13"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "eco-service-civique-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "ageTranche",
+                "op": "eq",
+                "valeur": "18-24"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Plus de missions de service civique disponibles",
+          "ampleur": null,
+          "hypotheses": [
+            "Service civique volontaire"
+          ],
+          "perimetreSimulation": "Nombre de missions non précisé.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "eco-programme-2026-07-13"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": []
+}

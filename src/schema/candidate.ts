@@ -20,6 +20,8 @@ export const candidateSchema = z
     ),
     programme: z.object({ url: httpsUrl, datePublication: isoDate }).strict().nullable(),
     sources: z.array(sourceSchema).min(1),
+    /** Précision factuelle affichée telle quelle (ex. procédure en cours, écart entre sources). */
+    note: z.string().min(10).max(400).nullable(),
     dateMaj: isoDate,
   })
   .strict()
@@ -29,6 +31,9 @@ export type Candidate = z.infer<typeof candidateSchema>
 export const candidatesFileSchema = z
   .object({
     dateMaj: isoDate,
+    /** Règle objective (hors sondages) déterminant quels programmes sont analysés dans cette version. */
+    critereAnalyse: z.string().min(20),
+    sources: z.array(sourceSchema),
     candidats: z.array(candidateSchema),
   })
   .strict()

@@ -3,12 +3,23 @@ import { isoDate, slug, sourceSchema } from './common'
 import { conditionSchema } from './condition'
 import { THEMES } from '../domain/theme'
 
-const PRESTATIONS = ['rsa', 'apl', 'aah', 'allocations_familiales', 'prime_activite', 'bourse'] as const
+const PRESTATIONS = ['rsa', 'apl', 'aah', 'aspa', 'allocations_familiales', 'prime_activite', 'bourse'] as const
+/** Prestations dont le montant de référence (personne seule) est un paramètre OpenFisca. */
+const PRESTATIONS_MONTANT = ['rsa', 'aah', 'aspa'] as const
 
 /** Paramètres qu'un script OpenFisca (scripts/openfisca) sait traduire en réforme. */
 export const parametresSchema = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('smic_pct'), variationPct: z.number() }).strict(),
   z.object({ kind: z.literal('smic_net'), montantNetMensuel: z.number().positive() }).strict(),
+  z.object({ kind: z.literal('smic_brut'), montantBrutMensuel: z.number().positive() }).strict(),
+  // Montant mensuel visé pour une personne seule (les autres configurations suivent la même proportion).
+  z.object({ kind: z.literal('prestation_cible'), prestation: z.enum(PRESTATIONS_MONTANT), montantMensuel: z.number().positive() }).strict(),
+  z.object({ kind: z.literal('prestation_cible_smic'), prestation: z.enum(PRESTATIONS_MONTANT), pctSmicNet: z.number().positive() }).strict(),
+  z.object({ kind: z.literal('prestation_ajout'), prestation: z.enum(PRESTATIONS_MONTANT), montantMensuel: z.number() }).strict(),
+  z.object({ kind: z.literal('rsa_age'), ageMinimum: z.number().int().min(16).max(25) }).strict(),
+  z
+    .object({ kind: z.literal('quotient_familial'), rang: z.enum(['enf1', 'enf2', 'enf3_et_sup']), parts: z.number().min(0).max(2) })
+    .strict(),
   z.object({ kind: z.literal('montant_prestation'), prestation: z.enum(PRESTATIONS), variationPct: z.number() }).strict(),
   z.object({ kind: z.literal('taux_csg'), tauxPct: z.number().min(0).max(100) }).strict(),
   z
@@ -37,7 +48,19 @@ export const parametresSchema = z.discriminatedUnion('kind', [
 ])
 
 /** Paramètres qu'OpenFisca sait traduire en réforme (scripts/openfisca/run.py). */
-export const OPENFISCA_KINDS = ['smic_pct', 'smic_net', 'taux_csg', 'montant_prestation', 'bareme_ir'] as const
+export const OPENFISCA_KINDS = [
+  'smic_pct',
+  'smic_net',
+  'smic_brut',
+  'taux_csg',
+  'montant_prestation',
+  'prestation_cible',
+  'prestation_cible_smic',
+  'prestation_ajout',
+  'rsa_age',
+  'quotient_familial',
+  'bareme_ir',
+] as const
 export const CONSO_KINDS = ['conso_tva', 'conso_prix'] as const
 export type Parametres = z.infer<typeof parametresSchema>
 

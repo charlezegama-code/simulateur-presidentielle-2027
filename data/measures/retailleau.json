@@ -1,0 +1,378 @@
+{
+  "candidatId": "retailleau",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    {
+      "id": "publicsenat-2026-01-07",
+      "url": "https://www.publicsenat.fr/actualites/politique/la-fete-est-finie-bruno-retailleau-veut-supprimer-les-35-heures-inciter-a-la-reprise-dactivite-et-plafonner-les-aides-sociales-pour-relancer-lemploi",
+      "titre": "« La fête est finie » : Bruno Retailleau veut supprimer les 35 heures, inciter à la reprise d’activité et plafonner les aides sociales",
+      "editeur": "Public Sénat",
+      "datePublication": "2026-01-07",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "capital-retailleau-2026-01-07",
+      "url": "https://fr.finance.yahoo.com/actualites/travail-gagnant-propositions-chocs-bruno-182132757.html",
+      "titre": "« Travail gagnant » : les propositions chocs de Bruno Retailleau pour le pouvoir d’achat",
+      "editeur": "Capital (via Yahoo Finance)",
+      "datePublication": "2026-01-07",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "capital-retraites-2026-09-24",
+      "url": "https://fr.finance.yahoo.com/actualites/presidentielle-2027-proposent-candidats-retraite-120000835.html",
+      "titre": "Présidentielle 2027, ce que proposent les candidats pour votre retraite",
+      "editeur": "Capital (via Yahoo Finance)",
+      "datePublication": "2026-09-24",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "mesures": [
+    {
+      "id": "retailleau-heures",
+      "candidatId": "retailleau",
+      "theme": "salaires",
+      "intitule": "Heures au-delà du seuil annuel sans cotisations ni impôt",
+      "description": "Le candidat propose de prendre pour référence un volume annuel d'heures, au-delà duquel les heures travaillées seraient exonérées de cotisations sociales (hors CSG et CRDS) et d'impôt sur le revenu.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "publicsenat-2026-01-07",
+        "capital-retailleau-2026-01-07"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [
+        {
+          "description": "Public Sénat situe l'exonération au-delà de 1 607 heures par an (avec un passage de la durée annuelle à 1 623 heures), Capital la situe au-delà de 1 623 heures.",
+          "sourceIds": [
+            "publicsenat-2026-01-07",
+            "capital-retailleau-2026-01-07"
+          ]
+        }
+      ],
+      "effets": [
+        {
+          "id": "retailleau-heures-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Heures travaillées au-delà du seuil payées sans cotisations ni impôt",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu travailles au-delà du seuil annuel"
+          ],
+          "perimetreSimulation": "Gain dépendant du nombre d'heures : non chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "publicsenat-2026-01-07",
+            "capital-retailleau-2026-01-07"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "retailleau-plafond-aides",
+      "candidatId": "retailleau",
+      "theme": "aides_sociales",
+      "intitule": "Plafonnement des aides sociales à 70 % du SMIC",
+      "description": "Le candidat propose un « compte social unique » plafonnant l'ensemble des aides sociales perçues par un foyer à 70 % du SMIC.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "publicsenat-2026-01-07",
+        "capital-retailleau-2026-01-07"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "retailleau-plafond-effet",
+          "cible": {
+            "any": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "sans_activite",
+                  "demandeur_emploi"
+                ]
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r1"
+              },
+              {
+                "champ": "parentIsole",
+                "op": "eq",
+                "valeur": true
+              }
+            ]
+          },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Total de tes aides sociales plafonné si elles dépassent 70 % du SMIC",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu perçois plusieurs aides sociales"
+          ],
+          "perimetreSimulation": "Aides incluses, base (SMIC net ou brut) et prise en compte de la taille du foyer non précisées : effet non chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "publicsenat-2026-01-07",
+            "capital-retailleau-2026-01-07"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "retailleau-ria",
+      "candidatId": "retailleau",
+      "theme": "aides_sociales",
+      "intitule": "Revenu d'incitation à l'activité conditionné à 15 heures par semaine",
+      "description": "Le candidat propose un revenu d'incitation à l'activité (RIA) remplaçant le RSA, la prime d'activité et l'allocation de solidarité spécifique, d'un montant proche du RSA actuel, conditionné à 15 heures d'activité hebdomadaire.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "publicsenat-2026-01-07",
+        "capital-retailleau-2026-01-07"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "retailleau-ria-rsa",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "sans_activite",
+                  "demandeur_emploi"
+                ]
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r1"
+              }
+            ]
+          },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Allocation conditionnée à 15 heures d’activité par semaine",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu perçois ou pourrais percevoir le RSA"
+          ],
+          "perimetreSimulation": "Nature des activités et sanctions non précisées.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "publicsenat-2026-01-07",
+            "capital-retailleau-2026-01-07"
+          ]
+        },
+        {
+          "id": "retailleau-ria-ppa",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant"
+                ]
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "in",
+                "valeur": [
+                  "r1",
+                  "r2"
+                ]
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Prime d'activité remplacée par le RIA",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu perçois la prime d’activité"
+          ],
+          "perimetreSimulation": "Barème du RIA pour les personnes en emploi non précisé : effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "capital-retailleau-2026-01-07"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "retailleau-chomage",
+      "candidatId": "retailleau",
+      "theme": "emploi_chomage",
+      "intitule": "Durcissement de l'assurance chômage",
+      "description": "Le candidat propose de relancer la réforme de l'assurance chômage, avec un arrêt de l'indemnisation après trois refus d'offre, et d'encadrer les ruptures conventionnelles.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "publicsenat-2026-01-07",
+        "capital-retailleau-2026-01-07"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "retailleau-chomage-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "demandeur_emploi"
+              }
+            ]
+          },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Indemnisation arrêtée après trois refus d'offre d'emploi",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu es indemnisé·e par l’assurance chômage"
+          ],
+          "perimetreSimulation": "Durée et montant des allocations : évolutions non précisées.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "publicsenat-2026-01-07",
+            "capital-retailleau-2026-01-07"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "retailleau-retraites",
+      "candidatId": "retailleau",
+      "theme": "retraites",
+      "intitule": "Âge de départ lié à l'espérance de vie en bonne santé",
+      "description": "Le candidat défend un âge de départ évoluant avec l'espérance de vie en bonne santé, un départ « après 64 ans » et une « capitalisation populaire », sans effort demandé aux retraités actuels.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "capital-retraites-2026-09-24"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "retailleau-retraites-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "neq",
+                "valeur": "retraite"
+              }
+            ]
+          },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Départ à la retraite plus tardif, après 64 ans",
+          "ampleur": null,
+          "hypotheses": [
+            "Par rapport à la législation actuelle"
+          ],
+          "perimetreSimulation": "Calendrier non précisé ; OpenFisca ne simule pas les carrières.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "capital-retraites-2026-09-24"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": [
+    {
+      "theme": "fiscalite",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "famille",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "etudes",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "logement",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "sante",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "energie_prix",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "service_national",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "handicap",
+      "dateRecherche": "2026-09-27"
+    }
+  ]
+}

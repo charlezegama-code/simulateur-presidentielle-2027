@@ -35,6 +35,7 @@ HYPOTHESES_COMMUNES = [
     'Locataires : loyer supérieur au plafond des aides au logement mais sous le seuil de dégressivité (cas-type de la DREES)',
     'Enfants de 6, 10 et 14 ans ; conjoint·e salarié·e du privé',
     'Fonctionnaire : titulaire de l’État ; indépendant·e : micro-entrepreneur·e en prestations de services (BNC)',
+    'Mesure appliquée sur toute l’année au barème en vigueur fin {annee}',
     'Montants annuels pour l’ensemble du foyer, arrondis à 10 €',
     'Aucun effet sur l’emploi, les prix ou les comportements',
 ]

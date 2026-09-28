@@ -1,4 +1,1111 @@
 {
   "dateMaj": "2026-09-27",
-  "candidats": []
+  "critereAnalyse": "Sont analysés les candidats déclarés ou désignés soutenus par un parti disposant d'un groupe à l'Assemblée nationale (liste officielle des groupes). Les candidats du Parti socialiste et des autres partis seront ajoutés après leur désignation. Ce critère ne dépend d'aucun sondage.",
+  "sources": [
+    {
+      "id": "an-groupes",
+      "url": "https://www.assemblee-nationale.fr/dyn/les-groupes-politiques",
+      "titre": "Les groupes politiques (XVIIe législature)",
+      "editeur": "Assemblée nationale",
+      "datePublication": "2026-09-27",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "candidats": [
+    {
+      "id": "melenchon",
+      "prenom": "Jean-Luc",
+      "nom": "Mélenchon",
+      "parti": "La France insoumise",
+      "fictif": false,
+      "analyse": true,
+      "statut": "declare",
+      "statutDate": "2026-05-03",
+      "statutSourceIds": [
+        "touteleurope-2026-09-18",
+        "wikipedia-candidatures",
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-05-03",
+          "sourceIds": [
+            "touteleurope-2026-09-18",
+            "wikipedia-candidatures",
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": {
+        "url": "https://melenchon2027.fr/programme2025/livre/",
+        "datePublication": "2025-01-28"
+      },
+      "sources": [
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "wikipedia-candidatures",
+          "url": "https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027",
+          "titre": "Candidatures à l'élection présidentielle française de 2027",
+          "editeur": "Wikipédia",
+          "datePublication": "2026-09-27",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration : 3 mai 2026 selon Toute l'Europe et Wikipédia, « fin mai 2026 » selon LCP. Programme « L'Avenir en commun » (édition 2025) en cours de réactualisation ; pages consultées via leurs archives.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "le-pen",
+      "prenom": "Marine",
+      "nom": "Le Pen",
+      "parti": "Rassemblement national",
+      "fictif": false,
+      "analyse": true,
+      "statut": "declare",
+      "statutDate": "2026-07-07",
+      "statutSourceIds": [
+        "touteleurope-2026-09-18",
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-07-07",
+          "sourceIds": [
+            "touteleurope-2026-09-18",
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Condamnée en appel le 7 juillet 2026 dans l'affaire des assistants parlementaires, éligible à cette date selon Toute l'Europe ; elle a formé un pourvoi en cassation. Aucun programme présidentiel 2027 complet publié à cette date.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal",
+      "prenom": "Gabriel",
+      "nom": "Attal",
+      "parti": "Renaissance",
+      "fictif": false,
+      "analyse": true,
+      "statut": "declare",
+      "statutDate": "2026-05-22",
+      "statutSourceIds": [
+        "touteleurope-2026-09-18",
+        "wikipedia-candidatures"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-05-22",
+          "sourceIds": [
+            "touteleurope-2026-09-18",
+            "wikipedia-candidatures"
+          ]
+        }
+      ],
+      "programme": {
+        "url": "https://attalpresident.fr/programme",
+        "datePublication": "2026-09-27"
+      },
+      "sources": [
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "wikipedia-candidatures",
+          "url": "https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027",
+          "titre": "Candidatures à l'élection présidentielle française de 2027",
+          "editeur": "Wikipédia",
+          "datePublication": "2026-09-27",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Programme complet annoncé comme « à venir » sur le site de campagne.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippe",
+      "prenom": "Édouard",
+      "nom": "Philippe",
+      "parti": "Horizons",
+      "fictif": false,
+      "analyse": true,
+      "statut": "declare",
+      "statutDate": "2024-09-03",
+      "statutSourceIds": [
+        "wikipedia-candidatures",
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2024-09-03",
+          "sourceIds": [
+            "wikipedia-candidatures",
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": {
+        "url": "https://www.edouardphilippe.fr/",
+        "datePublication": "2026-09-27"
+      },
+      "sources": [
+        {
+          "id": "wikipedia-candidatures",
+          "url": "https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027",
+          "titre": "Candidatures à l'élection présidentielle française de 2027",
+          "editeur": "Wikipédia",
+          "datePublication": "2026-09-27",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": null,
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "retailleau",
+      "prenom": "Bruno",
+      "nom": "Retailleau",
+      "parti": "Les Républicains",
+      "fictif": false,
+      "analyse": true,
+      "statut": "declare",
+      "statutDate": "2026-04-19",
+      "statutSourceIds": [
+        "wikipedia-candidatures",
+        "touteleurope-2026-09-18"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-04-19",
+          "sourceIds": [
+            "wikipedia-candidatures",
+            "touteleurope-2026-09-18"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "wikipedia-candidatures",
+          "url": "https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027",
+          "titre": "Candidatures à l'élection présidentielle française de 2027",
+          "editeur": "Wikipédia",
+          "datePublication": "2026-09-27",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Désigné par les adhérents des Républicains (73,8 % selon Toute l'Europe). Plusieurs propositions datent de janvier 2026, avant sa désignation.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "tondelier",
+      "prenom": "Marine",
+      "nom": "Tondelier",
+      "parti": "Les Écologistes",
+      "fictif": false,
+      "analyse": true,
+      "statut": "declare",
+      "statutDate": "2025-10-22",
+      "statutSourceIds": [
+        "wikipedia-candidatures",
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2025-10-22",
+          "sourceIds": [
+            "wikipedia-candidatures",
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": {
+        "url": "https://lesecologistes.fr/document/6U1S2oqef5fsSsPej3SkeR/vf2-1307-programme.pdf",
+        "datePublication": "2026-07-13"
+      },
+      "sources": [
+        {
+          "id": "wikipedia-candidatures",
+          "url": "https://fr.wikipedia.org/wiki/Candidatures_%C3%A0_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027",
+          "titre": "Candidatures à l'élection présidentielle française de 2027",
+          "editeur": "Wikipédia",
+          "datePublication": "2026-09-27",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "LCP indique que la primaire ouverte de la gauche a été annulée ; Wikipédia mentionne une primaire de la gauche unitaire en 2026. Programme : celui des Écologistes (juillet 2026).",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "roussel",
+      "prenom": "Fabien",
+      "nom": "Roussel",
+      "parti": "Parti communiste français",
+      "fictif": false,
+      "analyse": true,
+      "statut": "declare",
+      "statutDate": "2026-09-06",
+      "statutSourceIds": [
+        "lcp-roussel-2026-09-06",
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-06",
+          "sourceIds": [
+            "lcp-roussel-2026-09-06",
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-roussel-2026-09-06",
+          "url": "https://lcp.fr/actualites/fabien-roussel-officiellement-candidat-du-pcf-a-l-election-presidentielle-de-2027-441389",
+          "titre": "Fabien Roussel officiellement candidat du PCF à l'élection présidentielle de 2027",
+          "editeur": "LCP",
+          "datePublication": "2026-09-06",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Candidature validée par les adhérents du PCF le 6 septembre 2026. Programme 2027 non détaillé à cette date.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lisnard",
+      "prenom": "David",
+      "nom": "Lisnard",
+      "parti": "Nouvelle Énergie",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-03-31",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-03-31",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": null,
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "bertrand",
+      "prenom": "Xavier",
+      "nom": "Bertrand",
+      "parti": "Nous France",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-08-26",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-08-26",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": null,
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "zemmour",
+      "prenom": "Éric",
+      "nom": "Zemmour",
+      "parti": "Reconquête",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-17",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-17",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": null,
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "becht",
+      "prenom": "Olivier",
+      "nom": "Becht",
+      "parti": "Ensemble pour la République",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": null,
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "batho",
+      "prenom": "Delphine",
+      "nom": "Batho",
+      "parti": "Génération écologie",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "bouamrane",
+      "prenom": "Karim",
+      "nom": "Bouamrane",
+      "parti": "Parti socialiste",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "arthaud",
+      "prenom": "Nathalie",
+      "nom": "Arthaud",
+      "parti": "Lutte ouvrière",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "dupont-aignan",
+      "prenom": "Nicolas",
+      "nom": "Dupont-Aignan",
+      "parti": "Debout la France",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "philippot",
+      "prenom": "Florian",
+      "nom": "Philippot",
+      "parti": "Les Patriotes",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "asselineau",
+      "prenom": "François",
+      "nom": "Asselineau",
+      "parti": "Union populaire républicaine",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "egger",
+      "prenom": "Clara",
+      "nom": "Egger",
+      "parti": "Solution démocratique",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "mikolajczak",
+      "prenom": "Antoine",
+      "nom": "Mikolajczak",
+      "parti": "Équinoxe",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lalanne",
+      "prenom": "Francis",
+      "nom": "Lalanne",
+      "parti": "France Libre",
+      "fictif": false,
+      "analyse": false,
+      "statut": "declare",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "declare",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "faure",
+      "prenom": "Olivier",
+      "nom": "Faure",
+      "parti": "Parti socialiste",
+      "fictif": false,
+      "analyse": false,
+      "statut": "pressenti",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24",
+        "touteleurope-2026-09-18"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "pressenti",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24",
+            "touteleurope-2026-09-18"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "glucksmann",
+      "prenom": "Raphaël",
+      "nom": "Glucksmann",
+      "parti": "Place publique",
+      "fictif": false,
+      "analyse": false,
+      "statut": "pressenti",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24",
+        "touteleurope-2026-09-18"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "pressenti",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24",
+            "touteleurope-2026-09-18"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "guedj",
+      "prenom": "Jérôme",
+      "nom": "Guedj",
+      "parti": "Parti socialiste",
+      "fictif": false,
+      "analyse": false,
+      "statut": "pressenti",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24",
+        "touteleurope-2026-09-18"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "pressenti",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24",
+            "touteleurope-2026-09-18"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "maurel",
+      "prenom": "Emmanuel",
+      "nom": "Maurel",
+      "parti": "Gauche républicaine et socialiste",
+      "fictif": false,
+      "analyse": false,
+      "statut": "pressenti",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24",
+        "touteleurope-2026-09-18"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "pressenti",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24",
+            "touteleurope-2026-09-18"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "royal",
+      "prenom": "Ségolène",
+      "nom": "Royal",
+      "parti": "Parti socialiste",
+      "fictif": false,
+      "analyse": false,
+      "statut": "pressenti",
+      "statutDate": "2026-09-24",
+      "statutSourceIds": [
+        "lcp-2026-09-24",
+        "touteleurope-2026-09-18"
+      ],
+      "historiqueStatut": [
+        {
+          "statut": "pressenti",
+          "date": "2026-09-24",
+          "sourceIds": [
+            "lcp-2026-09-24",
+            "touteleurope-2026-09-18"
+          ]
+        }
+      ],
+      "programme": null,
+      "sources": [
+        {
+          "id": "lcp-2026-09-24",
+          "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+          "titre": "Présidentielle 2027 : la liste des candidats déjà en lice et des prétendants",
+          "editeur": "LCP",
+          "datePublication": "2026-09-24",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        },
+        {
+          "id": "touteleurope-2026-09-18",
+          "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/",
+          "titre": "Présidentielle 2027 : qui sont les principaux candidats déjà déclarés ?",
+          "editeur": "Toute l’Europe",
+          "datePublication": "2026-09-18",
+          "dateConsultation": "2026-09-27",
+          "type": "declaration",
+          "archiveUrl": null
+        }
+      ],
+      "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
+      "dateMaj": "2026-09-27"
+    }
+  ]
 }

@@ -1,0 +1,1030 @@
+{
+  "candidatId": "melenchon",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    {
+      "id": "aec-5-2",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre5/s2/",
+      "titre": "L'Avenir en commun, édition 2025 — Faire le service public de la petite enfance",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260829203336/https://melenchon2027.fr/programme2025/livre/chapitre5/s2/"
+    },
+    {
+      "id": "aec-5-6",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre5/s6/",
+      "titre": "L'Avenir en commun, édition 2025 — Refonder l'enseignement supérieur",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260608125104/https://melenchon2027.fr/programme2025/livre/chapitre5/s6/"
+    },
+    {
+      "id": "aec-6-5",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre6/s5/",
+      "titre": "L'Avenir en commun, édition 2025 — Faire la révolution fiscale",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260829203005/https://melenchon2027.fr/programme2025/livre/chapitre6/s5/"
+    },
+    {
+      "id": "aec-7-4",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre7/s4/",
+      "titre": "L'Avenir en commun, édition 2025 — Éradiquer la pauvreté",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260608122507/https://melenchon2027.fr/programme2025/livre/chapitre7/s4/"
+    },
+    {
+      "id": "aec-7-5",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre7/s5/",
+      "titre": "L'Avenir en commun, édition 2025 — Garantir le droit au logement",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260504115058/https://melenchon2027.fr/programme2025/livre/chapitre7/s5/"
+    },
+    {
+      "id": "aec-8-1",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre8/s1/",
+      "titre": "L'Avenir en commun, édition 2025 — Établir la garantie d'emploi",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260829202703/https://melenchon2027.fr/programme2025/livre/chapitre8/s1/"
+    },
+    {
+      "id": "aec-8-4",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre8/s4/",
+      "titre": "L'Avenir en commun, édition 2025 — Augmenter les salaires et réduire les inégalités salariales dans l'entreprise",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260829202700/https://melenchon2027.fr/programme2025/livre/chapitre8/s4/"
+    },
+    {
+      "id": "aec-8-8",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre8/s8/",
+      "titre": "L'Avenir en commun, édition 2025 — Garantir une retraite digne",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260829202700/https://melenchon2027.fr/programme2025/livre/chapitre8/s8/"
+    },
+    {
+      "id": "aec-10-3",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre10/s3/",
+      "titre": "L'Avenir en commun, édition 2025 — Construire l'autonomie des jeunes",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260829203254/https://melenchon2027.fr/programme2025/livre/chapitre10/s3/"
+    },
+    {
+      "id": "aec-10-5",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre10/s5/",
+      "titre": "L'Avenir en commun, édition 2025 — Lever les obstacles à l'autonomie des personnes en situation de handicap",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260829203316/https://melenchon2027.fr/programme2025/livre/chapitre10/s5/"
+    },
+    {
+      "id": "aec-13-3",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre13/s3/",
+      "titre": "L'Avenir en commun, édition 2025 — Organiser le 100 % d'énergies renouvelables en 2050 et la rénovation énergétique",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260821172237/https://melenchon2027.fr/programme2025/livre/chapitre13/s3/"
+    },
+    {
+      "id": "aec-15-2",
+      "url": "https://melenchon2027.fr/programme2025/livre/chapitre15/s2/",
+      "titre": "L'Avenir en commun, édition 2025 — Faire passer la santé d'abord et reconstruire les établissements de santé publics",
+      "editeur": "La France insoumise",
+      "datePublication": "2025-01-28",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": "https://web.archive.org/web/20260606164304/https://melenchon2027.fr/programme2025/livre/chapitre15/s2/"
+    },
+    {
+      "id": "capital-retraites-2026-09-24",
+      "url": "https://fr.finance.yahoo.com/actualites/presidentielle-2027-proposent-candidats-retraite-120000835.html",
+      "titre": "Présidentielle 2027, ce que proposent les candidats pour votre retraite",
+      "editeur": "Capital (via Yahoo Finance)",
+      "datePublication": "2026-09-24",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "mesures": [
+    {
+      "id": "lfi-smic-1600",
+      "candidatId": "melenchon",
+      "theme": "salaires",
+      "intitule": "SMIC porté à 1 600 € net par mois",
+      "description": "Le programme prévoit de porter immédiatement le SMIC mensuel à 1 600 € net.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "smic_net",
+        "montantNetMensuel": 1600
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-8-4"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-smic-1600-smic",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "etudiant"
+                ]
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "in",
+                "valeur": [
+                  "r1",
+                  "r2"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse de ta rémunération si tu es payé·e au SMIC horaire",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Rémunération au SMIC horaire (temps plein ou partiel, job étudiant)",
+            "Appliqué dès la première année du mandat"
+          ],
+          "perimetreSimulation": "Ne modélise pas l'effet sur les cotisations patronales ni sur les salaires au-dessus du SMIC.",
+          "confiance": "moyenne",
+          "horizon": "dès 2027",
+          "sourceIds": [
+            "aec-8-4"
+          ]
+        },
+        {
+          "id": "lfi-smic-1600-apprenti",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "alternant"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse de ta rémunération d'apprenti·e (fixée en pourcentage du SMIC)",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Rémunération au minimum légal, exprimée en pourcentage du SMIC"
+          ],
+          "perimetreSimulation": "Le programme prévoit aussi de revaloriser la rémunération des apprentis, sans montant : non modélisé.",
+          "confiance": "moyenne",
+          "horizon": "dès 2027",
+          "sourceIds": [
+            "aec-8-4"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-indexation-salaires",
+      "candidatId": "melenchon",
+      "theme": "salaires",
+      "intitule": "Indexation des salaires sur l'inflation",
+      "description": "Le programme prévoit d'indexer les salaires sur l'inflation dans le privé et la fonction publique.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-8-4"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-indexation-salaires-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Salaire revalorisé chaque année au moins au niveau de l'inflation",
+          "ampleur": null,
+          "hypotheses": [
+            "Mécanisme d’indexation (fréquence, indice) non précisé"
+          ],
+          "perimetreSimulation": "Le gain dépend de l'inflation future, inconnue.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-8-4"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-retraite-60",
+      "candidatId": "melenchon",
+      "theme": "retraites",
+      "intitule": "Retraite à 60 ans à taux plein avec 40 annuités",
+      "description": "Le programme prévoit d'abroger le passage à 64 ans et de restaurer le droit à la retraite à 60 ans à taux plein pour 40 annuités. Le 27 août 2026, le candidat a évoqué un retour à 62 ans d'abord, puis à 60 ans.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-8-8",
+        "capital-retraites-2026-09-24"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-retraite-60-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "neq",
+                "valeur": "retraite"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Départ à la retraite possible plus tôt, à 60 ans avec 40 années de cotisation",
+          "ampleur": null,
+          "hypotheses": [
+            "Par rapport à la législation actuelle (âge légal supérieur à 62 ans pour les générations concernées)"
+          ],
+          "perimetreSimulation": "OpenFisca ne simule pas les carrières : l'effet sur ta pension n'est pas chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-8-8",
+            "capital-retraites-2026-09-24"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-pensions-smic",
+      "candidatId": "melenchon",
+      "theme": "retraites",
+      "intitule": "Pensions au moins au niveau du SMIC pour une carrière complète",
+      "description": "Le programme prévoit de porter a minima au niveau du SMIC revalorisé toutes les pensions pour une carrière complète et d'indexer les retraites sur les salaires.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-8-8"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-pensions-smic-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "retraite"
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r2"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Pension relevée au niveau du SMIC si ta carrière est complète",
+          "ampleur": null,
+          "hypotheses": [
+            "Carrière complète (non demandée dans le questionnaire)"
+          ],
+          "perimetreSimulation": "Le nombre de trimestres validés n’est pas connu : effet non chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-8-8"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-aspa-seuil-pauvrete",
+      "candidatId": "melenchon",
+      "theme": "retraites",
+      "intitule": "Minimum vieillesse au niveau du seuil de pauvreté",
+      "description": "Le programme prévoit de porter le minimum vieillesse au niveau du seuil de pauvreté, chiffré ailleurs dans le programme à 1 216 € par mois pour une personne seule.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "prestation_cible",
+        "prestation": "aspa",
+        "montantMensuel": 1216
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-8-8",
+        "aec-7-4"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-aspa-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "retraite"
+              },
+              {
+                "champ": "ageTranche",
+                "op": "eq",
+                "valeur": "62+"
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r2"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse du minimum vieillesse (ASPA) si tu y as droit",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Montant cible de 1 216 € par mois pour une personne seule ; même proportion pour un couple",
+            "ASPA versée à partir de 65 ans selon les règles actuelles"
+          ],
+          "perimetreSimulation": "Ne modélise pas la récupération sur succession de l'ASPA.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-8-8",
+            "aec-7-4"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-aah-smic",
+      "candidatId": "melenchon",
+      "theme": "handicap",
+      "intitule": "AAH portée au niveau du SMIC",
+      "description": "Le programme prévoit de revaloriser l'allocation aux adultes handicapés (AAH) au niveau du SMIC.",
+      "type": "chiffrable",
+      "parametres": {
+        "kind": "prestation_cible_smic",
+        "prestation": "aah",
+        "pctSmicNet": 100
+      },
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-10-5"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-aah-smic-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "handicapAAH",
+                "op": "eq",
+                "valeur": true
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "chiffre",
+          "libelle": "Hausse de ton AAH",
+          "ampleur": {
+            "kind": "castype"
+          },
+          "hypotheses": [
+            "Niveau du SMIC entendu comme le SMIC net actuel (le programme ne précise pas net ou brut)"
+          ],
+          "perimetreSimulation": "La hausse du SMIC à 1 600 € prévue par ailleurs n'est pas cumulée ici.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-10-5"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-garantie-autonomie",
+      "candidatId": "melenchon",
+      "theme": "aides_sociales",
+      "intitule": "Garantie d'autonomie au niveau du seuil de pauvreté",
+      "description": "Le programme prévoit une garantie d'autonomie portant le revenu mensuel de chaque personne au seuil de pauvreté (1 216 € pour une personne seule), y compris pour les jeunes détachés du foyer fiscal parental.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-7-4",
+        "aec-10-3"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-garantie-autonomie-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r1"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Revenu complété jusqu’à 1 216 € par mois si tu vis seul·e sous ce seuil",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu vis seul·e ou tu es détaché·e du foyer fiscal de tes parents"
+          ],
+          "perimetreSimulation": "Modalités non précisées (calcul différentiel, prise en compte des autres aides, montant pour un couple) : effet non chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-7-4",
+            "aec-10-3"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-ir-14-tranches",
+      "candidatId": "melenchon",
+      "theme": "fiscalite",
+      "intitule": "Impôt sur le revenu à 14 tranches",
+      "description": "Le programme prévoit un barème de l'impôt sur le revenu à 14 tranches, contre 5 aujourd'hui.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-6-5"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-ir-14-tranches-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Impôt sur le revenu modifié selon ton niveau de revenu",
+          "ampleur": null,
+          "hypotheses": [
+            "Barème non publié"
+          ],
+          "perimetreSimulation": "Seuils et taux des 14 tranches non précisés : effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-6-5"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-csg-progressive",
+      "candidatId": "melenchon",
+      "theme": "fiscalite",
+      "intitule": "CSG progressive à 14 tranches",
+      "description": "Le programme prévoit de rendre la CSG progressive avec 14 tranches.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-6-5"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-csg-progressive-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "CSG modifiée selon ton niveau de revenu",
+          "ampleur": null,
+          "hypotheses": [
+            "Barème non publié"
+          ],
+          "perimetreSimulation": "Seuils et taux non précisés : effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-6-5"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-quotient",
+      "candidatId": "melenchon",
+      "theme": "famille",
+      "intitule": "Crédit d’impôt par enfant à la place du quotient familial",
+      "description": "Le programme prévoit de mettre fin au quotient conjugal et de remplacer le quotient familial par un crédit d'impôt par enfant versé à toutes les familles.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-6-5"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-quotient-effet",
+          "cible": {
+            "any": [
+              {
+                "champ": "couple",
+                "op": "eq",
+                "valeur": true
+              },
+              {
+                "champ": "enfants",
+                "op": "gte",
+                "valeur": "1"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Imposition des couples et des familles modifiée",
+          "ampleur": null,
+          "hypotheses": [
+            "Montant du crédit d’impôt par enfant non précisé"
+          ],
+          "perimetreSimulation": "Effet non calculable sans montant.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-6-5"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-tva-premiere-necessite",
+      "candidatId": "melenchon",
+      "theme": "fiscalite",
+      "intitule": "Baisse de la TVA sur les produits de première nécessité",
+      "description": "Le programme prévoit de réduire la TVA sur les produits de première nécessité, financée par une « TVA grand luxe ».",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "texte": "Le programme prévoit de financer la mesure par le rétablissement d'une « TVA grand luxe ».",
+        "sourceIds": [
+          "aec-6-5"
+        ]
+      },
+      "sourceIds": [
+        "aec-6-5"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-tva-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "positif",
+          "type": "flou",
+          "libelle": "Baisse des prix de certains produits de première nécessité",
+          "ampleur": null,
+          "hypotheses": [
+            "Produits et taux non précisés"
+          ],
+          "perimetreSimulation": "Liste des produits et taux visés non précisés : effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-6-5"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-energie",
+      "candidatId": "melenchon",
+      "theme": "energie_prix",
+      "intitule": "Première tranche gratuite d'électricité, de gaz et d'eau",
+      "description": "Le programme prévoit une première tranche gratuite de consommation d'électricité, de chaleur, d'eau et de gaz, et le retour à des tarifs réglementés de l'énergie calculés à partir des coûts de production.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-7-4",
+        "aec-13-3"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-energie-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Baisse de ta facture d'énergie sur les premières quantités consommées",
+          "ampleur": null,
+          "hypotheses": [
+            "Volume de la tranche gratuite non précisé"
+          ],
+          "perimetreSimulation": "Effet non chiffré faute de volume défini.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-7-4",
+            "aec-13-3"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-etudes-gratuites",
+      "candidatId": "melenchon",
+      "theme": "etudes",
+      "intitule": "Gratuité de l'enseignement supérieur et suppression de la CVEC",
+      "description": "Le programme prévoit la gratuité de l'enseignement supérieur, de la licence au doctorat, et la suppression de la contribution à la vie étudiante et de campus (CVEC).",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-5-6"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-etudes-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "etudiant"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Plus de frais d'inscription ni de CVEC à l'université",
+          "ampleur": null,
+          "hypotheses": [
+            "Étudiant·e non boursier·e (les boursiers sont déjà exonérés)"
+          ],
+          "perimetreSimulation": "Montant des frais non chiffré ici.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-5-6"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-creches",
+      "candidatId": "melenchon",
+      "theme": "famille",
+      "intitule": "Crèches publiques gratuites",
+      "description": "Le programme prévoit de garantir la gratuité des crèches publiques.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-5-2"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-creches-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "enfants",
+                "op": "gte",
+                "valeur": "1"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Garde en crèche publique gratuite pour un enfant de moins de 3 ans",
+          "ampleur": null,
+          "hypotheses": [
+            "Enfant de moins de 3 ans accueilli en crèche publique"
+          ],
+          "perimetreSimulation": "Le questionnaire ne demande pas l'âge des enfants.",
+          "confiance": "faible",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-5-2"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-loyers",
+      "candidatId": "melenchon",
+      "theme": "logement",
+      "intitule": "Encadrement des loyers sur tout le territoire",
+      "description": "Le programme prévoit d'encadrer les loyers partout sur le territoire, à la baisse dans les grandes villes, et une garantie universelle des loyers.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-7-5"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-loyers-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "logement",
+                "op": "eq",
+                "valeur": "locataire_prive"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Loyer encadré, à la baisse dans les grandes villes",
+          "ampleur": null,
+          "hypotheses": [
+            "Location dans le parc privé"
+          ],
+          "perimetreSimulation": "Niveau des plafonds de loyer non précisé.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-7-5"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-sante-100",
+      "candidatId": "melenchon",
+      "theme": "sante",
+      "intitule": "Remboursement à 100 % des soins prescrits",
+      "description": "Le programme prévoit d'instaurer le « 100 % Sécu » en remboursant à 100 % les soins de santé prescrits et en intégrant les mutuelles dans la Sécurité sociale.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-15-2"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-sante-100-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Plus de reste à charge sur les soins prescrits, plus besoin de mutuelle",
+          "ampleur": null,
+          "hypotheses": [
+            "Soins prescrits"
+          ],
+          "perimetreSimulation": "Le financement de la mesure (cotisations) et son effet sur ton budget ne sont pas chiffrés.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-15-2"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-garantie-emploi",
+      "candidatId": "melenchon",
+      "theme": "emploi_chomage",
+      "intitule": "Garantie d'emploi pour les chômeurs de longue durée",
+      "description": "Le programme prévoit que tout chômeur de longue durée puisse se voir proposer un emploi au moins au SMIC revalorisé, et un « emploi spécifique jeune » de cinq ans dans le secteur non marchand et public.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-8-1",
+        "aec-10-3"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-garantie-emploi-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "demandeur_emploi"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Proposition d'un emploi au SMIC si tu es au chômage de longue durée",
+          "ampleur": null,
+          "hypotheses": [
+            "Chômage de longue durée"
+          ],
+          "perimetreSimulation": "Le questionnaire ne demande pas l'ancienneté au chômage.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-8-1"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "lfi-service-citoyen",
+      "candidatId": "melenchon",
+      "theme": "service_national",
+      "intitule": "Service citoyen obligatoire",
+      "description": "Le programme mentionne un service citoyen obligatoire, dans le cadre duquel chaque jeune bénéficierait d'un bilan de santé et d'une formation gratuite au permis de conduire.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "aec-10-3"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "lfi-service-citoyen-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "ageTranche",
+                "op": "eq",
+                "valeur": "18-24"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Service citoyen obligatoire à effectuer, avec permis de conduire gratuit",
+          "ampleur": null,
+          "hypotheses": [
+            "Tranche d’âge concernée non précisée"
+          ],
+          "perimetreSimulation": "Durée, rémunération et calendrier non précisés dans les sections consultées.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "aec-10-3"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": []
+}

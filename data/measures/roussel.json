@@ -1,0 +1,222 @@
+{
+  "candidatId": "roussel",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    {
+      "id": "pcf-huma-2026",
+      "url": "https://www.pcf.fr/fete_de_lhumanite_2026_discours_de_fabien_roussel",
+      "titre": "Fête de l'Humanité 2026 — discours de Fabien Roussel",
+      "editeur": "Parti communiste français",
+      "datePublication": "2026-09-15",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "mesures": [
+    {
+      "id": "roussel-taxes-essence",
+      "candidatId": "roussel",
+      "theme": "energie_prix",
+      "intitule": "Baisse des taxes sur l'essence",
+      "description": "Le candidat appelle à la baisse des taxes sur l'essence et à la confiscation des profits de TotalEnergies.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "pcf-huma-2026"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "roussel-essence-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "vehicule",
+                "op": "eq",
+                "valeur": true
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "flou",
+          "libelle": "Baisse du prix du carburant",
+          "ampleur": null,
+          "hypotheses": [
+            "Taxes et ampleur de la baisse non précisées"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "pcf-huma-2026"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "roussel-salaires-pensions",
+      "candidatId": "roussel",
+      "theme": "salaires",
+      "intitule": "Hausse des salaires et des pensions",
+      "description": "Le candidat demande des hausses de salaires et de pensions, sans montant précisé dans le discours consulté.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "pcf-huma-2026"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "roussel-salaires-effet",
+          "cible": {
+            "any": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              },
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "retraite"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "flou",
+          "libelle": "Hausse de ton salaire ou de ta pension",
+          "ampleur": null,
+          "hypotheses": [
+            "Montant non précisé"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "pcf-huma-2026"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "roussel-fiscalite",
+      "candidatId": "roussel",
+      "theme": "fiscalite",
+      "intitule": "Rétablissement de l'ISF et exonération des héritages sous 200 000 €",
+      "description": "Le candidat propose de rétablir l'impôt de solidarité sur la fortune, de taxer les revenus financiers et les dividendes, et d'exonérer les héritages inférieurs à 200 000 €.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "pcf-huma-2026"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "roussel-loi-travail",
+      "candidatId": "roussel",
+      "theme": "emploi_chomage",
+      "intitule": "Abrogation de la loi Travail",
+      "description": "Le candidat propose d'abroger la loi Travail et de rétablir les CHSCT et les délégués du personnel.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "pcf-huma-2026"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "roussel-loi-travail-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant"
+                ]
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "qualitatif",
+          "libelle": "Représentation du personnel renforcée dans ton entreprise",
+          "ampleur": null,
+          "hypotheses": [
+            "Entreprise concernée par les instances rétablies"
+          ],
+          "perimetreSimulation": "Effet non monétaire.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "pcf-huma-2026"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": [
+    {
+      "theme": "retraites",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "aides_sociales",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "famille",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "etudes",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "logement",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "sante",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "service_national",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "handicap",
+      "dateRecherche": "2026-09-27"
+    }
+  ]
+}

@@ -1,0 +1,532 @@
+{
+  "candidatId": "attal",
+  "dateMaj": "2026-09-27",
+  "sources": [
+    {
+      "id": "attal-travail-salaires",
+      "url": "https://attalpresident.fr/programme/travail-salaires",
+      "titre": "Chantier capital « Travail & salaires » (page non datée)",
+      "editeur": "Campagne Gabriel Attal",
+      "datePublication": "2026-09-27",
+      "dateConsultation": "2026-09-27",
+      "type": "programme",
+      "archiveUrl": null
+    },
+    {
+      "id": "attal-france2-2026-09-20",
+      "url": "https://attalpresident.fr/actualites/gabriel-attal-sur-france-2-gerer-l-urgence-et-preparer-l-avenir",
+      "titre": "Gabriel Attal sur France 2 : « Gérer l’urgence et préparer l’avenir »",
+      "editeur": "Campagne Gabriel Attal",
+      "datePublication": "2026-09-20",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "attal-plan-2026-09-23",
+      "url": "https://attalpresident.fr/actualites/gabriel-attal-presente-un-plan-de-desendettement-et-un-messmer-ii-pour-sortir-des-dependances-francaises",
+      "titre": "Gabriel Attal présente un plan de désendettement et un « Messmer II »",
+      "editeur": "Campagne Gabriel Attal",
+      "datePublication": "2026-09-23",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "attal-bfm-2026-09-21",
+      "url": "https://attalpresident.fr/actualites/gabriel-attal-sur-bfm-tv-le-plus-juste-c-est-d-accompagner-ceux-qui-travaillent",
+      "titre": "Gabriel Attal sur BFM TV : « Le plus juste, c’est d’accompagner ceux qui travaillent »",
+      "editeur": "Campagne Gabriel Attal",
+      "datePublication": "2026-09-21",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    },
+    {
+      "id": "capital-retraites-2026-09-24",
+      "url": "https://fr.finance.yahoo.com/actualites/presidentielle-2027-proposent-candidats-retraite-120000835.html",
+      "titre": "Présidentielle 2027, ce que proposent les candidats pour votre retraite",
+      "editeur": "Capital (via Yahoo Finance)",
+      "datePublication": "2026-09-24",
+      "dateConsultation": "2026-09-27",
+      "type": "declaration",
+      "archiveUrl": null
+    }
+  ],
+  "mesures": [
+    {
+      "id": "attal-salaire-net",
+      "candidatId": "attal",
+      "theme": "salaires",
+      "intitule": "Baisse des cotisations salariales pour augmenter le salaire net",
+      "description": "Le candidat propose de réduire les charges salariales pour « rapprocher le salaire net du salaire brut », priorité annoncée des 100 premiers jours.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-travail-salaires",
+        "attal-france2-2026-09-20"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-salaire-net-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "flou",
+          "libelle": "Hausse de ton salaire net",
+          "ampleur": null,
+          "hypotheses": [
+            "Ampleur et cotisations visées non précisées"
+          ],
+          "perimetreSimulation": "Effet non calculable sans taux ; le financement de la baisse n'est pas précisé.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-travail-salaires",
+            "attal-france2-2026-09-20"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-heures-sup",
+      "candidatId": "attal",
+      "theme": "emploi_chomage",
+      "intitule": "Suppression du plafond légal d’heures supplémentaires",
+      "description": "Le candidat propose de supprimer le plafond d'heures supplémentaires fixé par le Code du travail (220 heures par an à défaut d'accord collectif).",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-travail-salaires"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-heures-sup-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "qualitatif",
+          "libelle": "Possibilité de faire plus de 220 heures supplémentaires par an",
+          "ampleur": null,
+          "hypotheses": [
+            "Dépend de ton employeur et de ton accord collectif"
+          ],
+          "perimetreSimulation": "Effet sur la rémunération non chiffrable sans volume d’heures.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-travail-salaires"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-assurance-chomage",
+      "candidatId": "attal",
+      "theme": "emploi_chomage",
+      "intitule": "Réforme de l'assurance chômage « qui incite au travail »",
+      "description": "Le candidat porte une réforme de l'assurance chômage présentée comme incitant au travail, dont il attend 100 000 emplois supplémentaires.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-travail-salaires"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-assurance-chomage-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "demandeur_emploi"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Règles d'indemnisation du chômage modifiées",
+          "ampleur": null,
+          "hypotheses": [
+            "Paramètres (durée, montant, conditions) non précisés"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-travail-salaires"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-retraites-duree",
+      "candidatId": "attal",
+      "theme": "retraites",
+      "intitule": "Fin de l'âge légal au profit de la durée de cotisation",
+      "description": "Le candidat propose que l'enjeu ne soit plus l'âge de départ mais la durée de cotisation, dans un système universel avec décote et surcote, et l'introduction d'une part de capitalisation.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-travail-salaires",
+        "capital-retraites-2026-09-24"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-retraites-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "neq",
+                "valeur": "retraite"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Âge de départ fixé par ta durée de cotisation plutôt que par un âge légal",
+          "ampleur": null,
+          "hypotheses": [
+            "Paramètres (durée requise, décote, surcote) non déterminés"
+          ],
+          "perimetreSimulation": "Effet non calculable ; OpenFisca ne simule pas les carrières.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-travail-salaires",
+            "capital-retraites-2026-09-24"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-annee-blanche",
+      "candidatId": "attal",
+      "theme": "aides_sociales",
+      "intitule": "« Frein d’urgence » et année blanche sur les dépenses sociales",
+      "description": "Le candidat propose un « frein d'urgence » sur l'ensemble des dépenses sociales avec une « année blanche », dans un plan de 150 Md€ d'économies dont deux tiers sur les dépenses sociales.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-france2-2026-09-20",
+        "attal-plan-2026-09-23"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-annee-blanche-effet",
+          "cible": {
+            "any": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "retraite",
+                  "sans_activite",
+                  "demandeur_emploi"
+                ]
+              },
+              {
+                "champ": "enfants",
+                "op": "gte",
+                "valeur": "1"
+              },
+              {
+                "champ": "handicapAAH",
+                "op": "eq",
+                "valeur": true
+              },
+              {
+                "champ": "revenuTranche",
+                "op": "lte",
+                "valeur": "r2"
+              }
+            ]
+          },
+          "sens": "negatif",
+          "type": "qualitatif",
+          "libelle": "Tes prestations ou ta pension pourraient ne pas être revalorisées pendant un an",
+          "ampleur": null,
+          "hypotheses": [
+            "« Année blanche » entendue au sens habituel du débat budgétaire : pas de revalorisation annuelle",
+            "Tu perçois une pension ou une prestation sociale"
+          ],
+          "perimetreSimulation": "Prestations concernées et éventuelles exceptions non précisées dans les sources consultées.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-france2-2026-09-20",
+            "attal-plan-2026-09-23"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-carburant",
+      "candidatId": "attal",
+      "theme": "energie_prix",
+      "intitule": "Prime carburant employeur jusqu’à 1 000 € et barème kilométrique revalorisé",
+      "description": "Le candidat propose de relever à 1 000 € la prime carburant que les employeurs peuvent verser sans charges ni impôts, de revaloriser le barème kilométrique et d'élargir les aides aux gros rouleurs.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-plan-2026-09-23",
+        "attal-bfm-2026-09-21"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-carburant-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "in",
+                "valeur": [
+                  "salarie_prive",
+                  "alternant",
+                  "fonctionnaire"
+                ]
+              },
+              {
+                "champ": "vehicule",
+                "op": "eq",
+                "valeur": true
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Aide possible de ton employeur pour le carburant, sans impôt ni cotisation",
+          "ampleur": null,
+          "hypotheses": [
+            "Versement facultatif, à l'initiative de l'employeur"
+          ],
+          "perimetreSimulation": "Montant dépendant de l'employeur : non chiffré.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-plan-2026-09-23"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-electricite",
+      "candidatId": "attal",
+      "theme": "energie_prix",
+      "intitule": "Prix de l'électricité autour de 75 €/MWh",
+      "description": "Le candidat vise un prix de l'électricité autour de 75 €/MWh, et des contrats inférieurs à 50 €/MWh pour les industriels exposés.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-plan-2026-09-23"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-electricite-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Prix de l'électricité visé autour de 75 €/MWh",
+          "ampleur": null,
+          "hypotheses": [
+            "Lien avec le tarif payé par les ménages non précisé"
+          ],
+          "perimetreSimulation": "Effet sur ta facture non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-plan-2026-09-23"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-creches",
+      "candidatId": "attal",
+      "theme": "famille",
+      "intitule": "Livret d’épargne pour financer des places en crèche",
+      "description": "Le candidat propose un livret d'épargne, sur le modèle du livret A, pour financer de nouvelles places en crèche, et la formation de 200 000 professionnels de la petite enfance d'ici 2030.",
+      "type": "qualitatif",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-travail-salaires"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-creches-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "enfants",
+                "op": "gte",
+                "valeur": "1"
+              }
+            ]
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Plus de places en crèche",
+          "ampleur": null,
+          "hypotheses": [
+            "Enfant de moins de 3 ans"
+          ],
+          "perimetreSimulation": "Le questionnaire ne demande pas l'âge des enfants.",
+          "confiance": "faible",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-travail-salaires"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    },
+    {
+      "id": "attal-etudes",
+      "candidatId": "attal",
+      "theme": "etudes",
+      "intitule": "Démassification de l'enseignement supérieur",
+      "description": "Le candidat propose de démassifier l'enseignement supérieur, de valoriser les métiers manuels, techniques et industriels et de réduire la durée initiale des études.",
+      "type": "flou",
+      "parametres": null,
+      "financement": {
+        "nonPrecise": true
+      },
+      "sourceIds": [
+        "attal-travail-salaires"
+      ],
+      "statut": "active",
+      "historique": [],
+      "contradictions": [],
+      "effets": [
+        {
+          "id": "attal-etudes-effet",
+          "cible": {
+            "all": [
+              {
+                "champ": "statutPro",
+                "op": "eq",
+                "valeur": "etudiant"
+              }
+            ]
+          },
+          "sens": "incertain",
+          "type": "flou",
+          "libelle": "Organisation de l'enseignement supérieur modifiée",
+          "ampleur": null,
+          "hypotheses": [
+            "Modalités non précisées"
+          ],
+          "perimetreSimulation": "Effet non calculable.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "attal-travail-salaires"
+          ]
+        }
+      ],
+      "dateMaj": "2026-09-27"
+    }
+  ],
+  "sansPosition": [
+    {
+      "theme": "fiscalite",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "logement",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "sante",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "service_national",
+      "dateRecherche": "2026-09-27"
+    },
+    {
+      "theme": "handicap",
+      "dateRecherche": "2026-09-27"
+    }
+  ]
+}
