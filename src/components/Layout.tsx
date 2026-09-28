@@ -14,40 +14,53 @@ export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation()
   return (
     <div className="flex min-h-dvh flex-col">
-      <a href="#contenu" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-10 focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-slate-900">
+      <a
+        href="#contenu"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-20 focus:rounded-full focus:bg-[var(--ink)] focus:px-4 focus:py-2 focus:text-[var(--paper)]"
+      >
         Aller au contenu
       </a>
-      <header className="sticky top-0 z-[1] border-b border-slate-200 bg-white/95 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95">
-        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2">
-          <Link href="/" className="font-bold tracking-tight">
-            Présidentielle 2027 <span className="font-normal text-slate-500 dark:text-slate-400">· ce qui change pour toi</span>
+      <header className="sticky top-0 z-10 border-b border-[var(--line)] bg-[var(--paper)]/92 backdrop-blur-md">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-3">
+          <Link href="/" className="font-display text-[1.05rem] font-semibold tracking-tight text-[var(--ink)]">
+            Présidentielle 2027 <span className="font-sans text-sm font-normal text-[var(--ink-faint)]">· ce qui change pour toi</span>
           </Link>
           <nav aria-label="Navigation principale" className="-mx-2 flex overflow-x-auto text-sm">
-            {NAV.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                aria-current={location.startsWith(n.href) ? 'page' : undefined}
-                className="whitespace-nowrap rounded px-2 py-2 text-slate-600 hover:text-slate-900 aria-[current=page]:font-semibold aria-[current=page]:text-indigo-700 dark:text-slate-300 dark:hover:text-white dark:aria-[current=page]:text-indigo-300"
-              >
-                {n.label}
-              </Link>
-            ))}
+            {NAV.map((n) => {
+              const active = location.startsWith(n.href)
+              return (
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`relative whitespace-nowrap rounded-full px-3 py-2 font-medium transition-colors hover:text-[var(--ink)] ${active ? 'text-[var(--accent-strong)]' : 'text-[var(--ink-soft)]'}`}
+                >
+                  {n.label}
+                  {active && <span aria-hidden="true" className="absolute inset-x-3 -bottom-[1px] h-0.5 rounded-full bg-[var(--accent)]" />}
+                </Link>
+              )
+            })}
           </nav>
         </div>
       </header>
-      <main id="contenu" className="mx-auto w-full max-w-3xl flex-1 px-4 py-6">
+      <main id="contenu" className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
         {children}
       </main>
-      <footer className="border-t border-slate-200 text-sm text-slate-600 dark:border-slate-800 dark:text-slate-400">
-        <div className="mx-auto max-w-3xl space-y-2 px-4 py-6">
+      <footer className="border-t border-[var(--line)] text-sm text-[var(--ink-soft)]">
+        <div className="mx-auto max-w-3xl space-y-2 px-4 py-8">
           <p>
             Simulation indicative, pas une consigne de vote. Données mises à jour le {dateFr(meta.dateMaj)} (version {meta.versionDonnees}).
           </p>
           <p className="flex flex-wrap gap-x-4 gap-y-1">
-            <Link href="/neutralite" className="underline">Neutralité et vie privée</Link>
-            <Link href="/methodologie" className="underline">Méthodologie</Link>
-            <a href={ISSUE_URL} className="underline" target="_blank" rel="noopener noreferrer">Signaler une erreur</a>
+            <Link href="/neutralite" className="underline decoration-[var(--line-strong)] underline-offset-3 hover:text-[var(--ink)]">
+              Neutralité et vie privée
+            </Link>
+            <Link href="/methodologie" className="underline decoration-[var(--line-strong)] underline-offset-3 hover:text-[var(--ink)]">
+              Méthodologie
+            </Link>
+            <a href={ISSUE_URL} className="underline decoration-[var(--line-strong)] underline-offset-3 hover:text-[var(--ink)]" target="_blank" rel="noopener noreferrer">
+              Signaler une erreur
+            </a>
           </p>
           <p>Tes réponses restent sur ton appareil : aucune n’est envoyée.</p>
         </div>

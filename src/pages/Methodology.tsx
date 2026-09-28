@@ -1,6 +1,6 @@
 import gridJson from '../../data/castypes/grid.json'
 import consoJson from '../../data/conso/bdf2017.json'
-import { H1, H2, SourceLinks } from '../components/ui'
+import { H1, H2, SourceLinks, TypeBadge } from '../components/ui'
 import { candidates } from '../data/loader'
 import { enumerateCells } from '../domain/grid'
 import { dateFr, ISSUE_URL, REPO_URL } from '../lib/format'
@@ -11,6 +11,8 @@ const grid = gridJson as unknown as GridFile
 const consoSources = (consoJson as { sources: Source[] }).sources
 const nCells = enumerateCells().length
 
+const LINK = 'font-medium text-[var(--accent-strong)] underline decoration-[var(--line-strong)] underline-offset-3 hover:decoration-[var(--accent)]'
+
 export function Methodology() {
   return (
     <div className="space-y-4">
@@ -18,13 +20,13 @@ export function Methodology() {
 
       <H2>1. Quels candidat·es ?</H2>
       <p>{candidates.critereAnalyse}</p>
-      <p>
+      <p className="text-[var(--ink-soft)]">
         Les statuts (déclaré, pressenti, officiel, retiré) sont datés et sourcés. La liste officielle du Conseil constitutionnel les remplacera
         lorsqu’elle sera publiée.
       </p>
 
       <H2>2. Quelles mesures ?</H2>
-      <ul className="list-disc space-y-1 pl-5">
+      <ul className="list-disc space-y-1.5 pl-5 text-[var(--ink)]">
         <li>Programme officiel quand il existe ; sinon déclarations publiques datées, rapportées par des médias identifiés.</li>
         <li>Chaque mesure a au moins une source (lien, date de publication, date de consultation). Sans source, elle n’apparaît pas.</li>
         <li>Les mesures sont paraphrasées, jamais recopiées ; le lien renvoie au texte exact.</li>
@@ -36,36 +38,40 @@ export function Methodology() {
       </ul>
 
       <H2>3. Trois types d’effets</H2>
-      <ul className="list-disc space-y-1 pl-5">
-        <li>
-          <strong>Chiffré</strong> : la mesure est assez précise (montant, taux) pour être calculée pour ton profil.
-        </li>
-        <li>
-          <strong>Qualitatif</strong> : l’effet est clair (par exemple « départ possible plus tôt ») mais ne peut pas être converti en euros.
-        </li>
-        <li>
-          <strong>Flou</strong> : la mesure n’est pas assez précise pour être simulée (par exemple « baisser les impôts des classes moyennes » sans
-          barème).
-        </li>
-      </ul>
-      <p>Dans le doute, une mesure est classée qualitative ou floue : aucun chiffre n’est inventé.</p>
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="card space-y-1.5 p-4">
+          <TypeBadge type="chiffre" />
+          <p className="text-sm text-[var(--ink-soft)]">La mesure est assez précise (montant, taux) pour être calculée pour ton profil.</p>
+        </div>
+        <div className="card space-y-1.5 p-4">
+          <TypeBadge type="qualitatif" />
+          <p className="text-sm text-[var(--ink-soft)]">L’effet est clair (par exemple « départ possible plus tôt ») mais ne peut pas être converti en euros.</p>
+        </div>
+        <div className="card space-y-1.5 p-4">
+          <TypeBadge type="flou" />
+          <p className="text-sm text-[var(--ink-soft)]">La mesure n’est pas assez précise pour être simulée (par exemple « baisser les impôts des classes moyennes » sans barème).</p>
+        </div>
+      </div>
+      <p className="text-[var(--ink-soft)]">Dans le doute, une mesure est classée qualitative ou floue : aucun chiffre n’est inventé.</p>
 
       <H2>4. Comment sont calculés les montants ?</H2>
       <p>
         Impôts, cotisations et prestations sont calculés avec{' '}
-        <a href="https://openfisca.org/fr/" className="underline" target="_blank" rel="noopener noreferrer">
+        <a href="https://openfisca.org/fr/" className={LINK} target="_blank" rel="noopener noreferrer">
           OpenFisca-France
         </a>{' '}
         (version {grid.openfiscaFrance}, législation {grid.legislation}), le moteur de calcul socio-fiscal libre maintenu par l’administration.
         Le calcul est fait à l’avance pour {nCells.toLocaleString('fr-FR')} situations types, une par combinaison de réponses au questionnaire.
         Ton navigateur choisit simplement la situation qui correspond à tes réponses : rien n’est calculé sur un serveur.
       </p>
-      <p className="font-medium">Hypothèses communes à tous les montants calculés :</p>
-      <ul className="list-disc space-y-1 pl-5">
-        {grid.hypothesesCommunes.map((h) => (
-          <li key={h}>{h}</li>
-        ))}
-      </ul>
+      <div className="card space-y-2 p-4">
+        <p className="font-medium text-[var(--ink)]">Hypothèses communes à tous les montants calculés</p>
+        <ul className="list-disc space-y-1 pl-5 text-[var(--ink-soft)]">
+          {grid.hypothesesCommunes.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+      </div>
       <SourceLinks sources={grid.sources} />
 
       <H2>5. TVA, carburants, énergie</H2>
@@ -78,7 +84,7 @@ export function Methodology() {
       <SourceLinks sources={consoSources} />
 
       <H2>6. Limites connues</H2>
-      <ul className="list-disc space-y-1 pl-5">
+      <ul className="list-disc space-y-1.5 pl-5 text-[var(--ink)]">
         <li>Les effets sur l’emploi, les prix ou les comportements ne sont pas modélisés.</li>
         <li>Les retraites futures ne sont pas chiffrées : OpenFisca ne simule pas une carrière.</li>
         <li>Les indépendant·es (micro-entrepreneur·es) n’obtiennent pas de montant OpenFisca : leur revenu n’est pas encore calculé de façon fiable.</li>
@@ -91,11 +97,11 @@ export function Methodology() {
       <H2>7. Signaler une erreur</H2>
       <p>
         Une mesure mal résumée, une source morte, une mesure manquante ?{' '}
-        <a href={ISSUE_URL} className="underline" target="_blank" rel="noopener noreferrer">
+        <a href={ISSUE_URL} className={LINK} target="_blank" rel="noopener noreferrer">
           Ouvre un signalement
         </a>{' '}
         avec la source correcte. Le code et les données sont publics :{' '}
-        <a href={REPO_URL} className="underline" target="_blank" rel="noopener noreferrer">
+        <a href={REPO_URL} className={LINK} target="_blank" rel="noopener noreferrer">
           dépôt GitHub
         </a>
         . Précalcul généré le {dateFr(grid.genereLe)}.

@@ -1,21 +1,193 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/fraunces/wght.css';
+@import '@fontsource-variable/hanken-grotesk/wght.css';
+
+@theme {
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-sans: 'Hanken Grotesk Variable', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --paper: #f5efe1;
+  --paper-raised: #fffcf5;
+  --ink: #211c12;
+  --ink-soft: #5c563f;
+  --ink-faint: #6b6349;
+  --line: #e2d6b8;
+  --line-strong: #cdbd91;
+  --accent: #a85a17;
+  --accent-strong: #7c410e;
+  --accent-soft: #f0dfba;
+  --on-accent: #fff9ec;
+  --positive: #2e6a4e;
+  --positive-strong: #1f4d38;
+  --positive-soft: #dcead9;
+  --negative: #9c4326;
+  --negative-strong: #7a3119;
+  --negative-soft: #f2ddca;
+  --flou: #8a6d1e;
+  --flou-soft: #ece0bd;
+  --shadow-rgb: 61 46 15;
+  --radius-card: 1.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #18150f;
+    --paper-raised: #221d14;
+    --ink: #f3ecd9;
+    --ink-soft: #c2b696;
+    --ink-faint: #8f8567;
+    --line: #3a3221;
+    --line-strong: #4d4329;
+    --accent: #eeab54;
+    --accent-strong: #f6c07d;
+    --accent-soft: #3d2f14;
+    --on-accent: #241705;
+    --positive: #86caa4;
+    --positive-strong: #aee0c1;
+    --positive-soft: #1e3327;
+    --negative: #e6987a;
+    --negative-strong: #eeb59d;
+    --negative-soft: #3a2417;
+    --flou: #e2c25f;
+    --flou-soft: #34290f;
+    --shadow-rgb: 0 0 0;
+  }
+}
 
 @layer base {
   html {
-    @apply bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
     -webkit-text-size-adjust: 100%;
+    accent-color: var(--accent);
   }
+
+  body {
+    min-height: 100dvh;
+    background-image: radial-gradient(circle at 1.5px 1.5px, rgb(var(--shadow-rgb) / 0.14) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-indigo-700 dark:outline-indigo-300;
+    outline: 2.5px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  progress {
+    appearance: none;
+    border: none;
   }
   progress::-webkit-progress-bar {
-    @apply bg-slate-200 dark:bg-slate-800;
+    background: var(--line);
+    border-radius: 999px;
   }
   progress::-webkit-progress-value {
-    @apply bg-indigo-700 dark:bg-indigo-300;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.35s ease;
   }
   progress::-moz-progress-bar {
-    @apply bg-indigo-700 dark:bg-indigo-300;
+    background: var(--accent);
+    border-radius: 999px;
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+}
+
+@layer components {
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    box-shadow: 0 1px 2px rgb(var(--shadow-rgb) / 0.05);
+  }
+
+  .card-lift {
+    box-shadow:
+      0 1px 2px rgb(var(--shadow-rgb) / 0.06),
+      0 10px 24px -14px rgb(var(--shadow-rgb) / 0.28);
+  }
+
+  .stagger > * {
+    animation: rise-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .stagger > *:nth-child(1) {
+    animation-delay: 0.02s;
+  }
+  .stagger > *:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+  .stagger > *:nth-child(3) {
+    animation-delay: 0.14s;
+  }
+  .stagger > *:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+  .stagger > *:nth-child(5) {
+    animation-delay: 0.26s;
+  }
+  .stagger > *:nth-child(n + 6) {
+    animation-delay: 0.32s;
+  }
+
+  .q-enter {
+    animation: rise-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .pop-check {
+    animation: pop-check 0.25s ease;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop-check {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

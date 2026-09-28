@@ -10,16 +10,19 @@ export function SeedBar() {
   const [copied, setCopied] = useState(false)
   const url = `${window.location.origin}${location}?seed=${seed}`
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-600 dark:text-slate-400">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-2 text-sm text-[var(--ink-soft)]">
       <span>
-        Ordre d’affichage tiré au hasard (n° <span className="font-mono">{seed}</span>).
+        Ordre aléatoire n° <span className="font-mono text-[var(--ink)]">{seed}</span>
       </span>
-      <button type="button" className="underline" onClick={() => navigate(`${location}?seed=${randomSeed()}`)}>
+      <span aria-hidden="true" className="text-[var(--line-strong)]">
+        ·
+      </span>
+      <button type="button" className="font-medium text-[var(--accent-strong)] underline decoration-[var(--line-strong)] underline-offset-3 hover:decoration-[var(--accent)]" onClick={() => navigate(`${location}?seed=${randomSeed()}`)}>
         Nouvel ordre
       </button>
       <button
         type="button"
-        className="underline"
+        className="font-medium text-[var(--accent-strong)] underline decoration-[var(--line-strong)] underline-offset-3 hover:decoration-[var(--accent)]"
         onClick={() => {
           navigator.clipboard?.writeText(url).then(() => setCopied(true), () => setCopied(false))
         }}

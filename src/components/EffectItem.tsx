@@ -3,10 +3,10 @@ import { euros } from '../lib/format'
 import { SourceLinks, TypeBadge } from './ui'
 
 const SENS = {
-  positif: { symbol: '+', label: 'Avantage', cls: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/60 dark:text-emerald-100' },
-  negatif: { symbol: '−', label: 'Inconvénient', cls: 'bg-rose-100 text-rose-900 dark:bg-rose-900/60 dark:text-rose-100' },
-  neutre: { symbol: '=', label: 'Sans effet calculé', cls: 'bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-100' },
-  incertain: { symbol: '?', label: 'Effet incertain', cls: 'bg-amber-100 text-amber-900 dark:bg-amber-900/60 dark:text-amber-100' },
+  positif: { symbol: '↑', label: 'Avantage', cls: 'bg-[var(--positive-soft)] text-[var(--positive-strong)]' },
+  negatif: { symbol: '↓', label: 'Inconvénient', cls: 'bg-[var(--negative-soft)] text-[var(--negative-strong)]' },
+  neutre: { symbol: '=', label: 'Sans effet calculé', cls: 'bg-[var(--line)]/70 text-[var(--ink-soft)]' },
+  incertain: { symbol: '?', label: 'Effet incertain', cls: 'bg-[var(--flou-soft)] text-[var(--flou)]' },
 } as const
 
 const CONFIANCE = { haute: 'élevée', moyenne: 'moyenne', faible: 'faible' } as const
@@ -17,17 +17,17 @@ function MontantLine({ v }: { v: EffectView }) {
   if (m.kind === 'fourchette') {
     const u = m.unite === 'pct' ? ' %' : m.unite === 'eur_mois' ? ' par mois' : ' par an'
     return (
-      <p className="font-semibold">
+      <p className="font-display text-lg font-semibold tabular-nums text-[var(--ink)]">
         {m.unite === 'pct' ? `${m.min} à ${m.max}` : `${euros(m.min)} à ${euros(m.max)}`}
-        {u} <span className="font-normal text-slate-600 dark:text-slate-400">(chiffrage tiers)</span>
+        {u} <span className="font-sans text-sm font-normal text-[var(--ink-soft)]">(chiffrage tiers)</span>
       </p>
     )
   }
   const perMonth = Math.round(m.annuel / 12)
   return (
-    <p className="font-semibold tabular-nums">
-      {euros(m.annuel, true)} par an{' '}
-      <span className="font-normal text-slate-600 dark:text-slate-400">
+    <p className="font-display text-lg font-semibold tabular-nums text-[var(--ink)]">
+      {euros(m.annuel, true)} <span className="text-sm font-sans font-normal text-[var(--ink-soft)]">par an</span>{' '}
+      <span className="font-sans text-sm font-normal text-[var(--ink-soft)]">
         (≈ {euros(perMonth, true)} par mois{m.kind === 'consommation' ? ', estimation' : ''})
       </span>
     </p>
@@ -38,39 +38,42 @@ export function EffectItem({ v }: { v: EffectView }) {
   const s = SENS[v.sens]
   const m = v.montant
   return (
-    <li className="rounded-lg border border-slate-200 p-3 dark:border-slate-700">
-      <div className="flex items-start gap-2">
-        <span aria-hidden="true" className={`mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full text-sm font-bold ${s.cls}`}>
+    <li className="rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4">
+      <div className="flex items-start gap-3">
+        <span aria-hidden="true" className={`mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full text-base font-bold ${s.cls}`}>
           {s.symbol}
         </span>
-        <div className="min-w-0 flex-1 space-y-1">
-          <p>
+        <div className="min-w-0 flex-1 space-y-1.5">
+          <p className="leading-snug text-[var(--ink)]">
             <span className="sr-only">{s.label} : </span>
             {v.libelle}
           </p>
           <MontantLine v={v} />
-          <p className="flex flex-wrap items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400">
+          <p className="flex flex-wrap items-center gap-1.5 pt-0.5 text-xs text-[var(--ink-faint)]">
             <TypeBadge type={v.type} />
             <span>{v.intituleMesure}</span>
           </p>
-          {v.nonChiffreCar && <p className="text-sm text-slate-600 dark:text-slate-400">{v.nonChiffreCar}</p>}
+          {v.nonChiffreCar && <p className="text-sm text-[var(--ink-soft)]">{v.nonChiffreCar}</p>}
           {v.sensDeclare && (
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-[var(--ink-soft)]">
               Le calcul pour ton profil donne un effet {v.sens === 'neutre' ? 'nul' : v.sens === 'positif' ? 'positif' : 'négatif'}, alors que la mesure
               vise un effet {v.sensDeclare === 'positif' ? 'positif' : v.sensDeclare === 'negatif' ? 'négatif' : 'différent'}.
             </p>
           )}
-          <details className="group text-sm">
-            <summary className="cursor-pointer py-1 text-indigo-700 underline underline-offset-2 dark:text-indigo-300">
+          <details className="group/d text-sm">
+            <summary className="flex cursor-pointer select-none items-center gap-1.5 py-1.5 font-medium text-[var(--accent-strong)] marker:content-none">
+              <span aria-hidden="true" className="inline-block text-[var(--accent)] transition-transform duration-200 group-open/d:rotate-90">
+                ▸
+              </span>
               Hypothèses, limites et sources
             </summary>
-            <div className="mt-2 space-y-2 text-slate-700 dark:text-slate-300">
+            <div className="mt-2 space-y-3 rounded-xl bg-[var(--paper)] p-3 text-[var(--ink-soft)]">
               {m?.kind === 'castype' && (
                 <div>
                   {m.detail.length > 0 && (
                     <>
-                      <p className="font-medium">Détail du calcul</p>
-                      <ul className="list-disc pl-5 tabular-nums">
+                      <p className="font-medium text-[var(--ink)]">Détail du calcul</p>
+                      <ul className="list-disc space-y-0.5 pl-5 tabular-nums">
                         {m.detail.map((d) => (
                           <li key={d.libelle}>
                             {d.libelle} : {euros(d.montant, true)} par an
@@ -93,8 +96,8 @@ export function EffectItem({ v }: { v: EffectView }) {
                 </p>
               )}
               <div>
-                <p className="font-medium">Hypothèses</p>
-                <ul className="list-disc pl-5">
+                <p className="font-medium text-[var(--ink)]">Hypothèses</p>
+                <ul className="list-disc space-y-0.5 pl-5">
                   {v.hypotheses.map((h) => (
                     <li key={h}>{h}</li>
                   ))}
@@ -102,23 +105,30 @@ export function EffectItem({ v }: { v: EffectView }) {
                 </ul>
               </div>
               <div>
-                <p className="font-medium">Ce que le calcul ne prend pas en compte</p>
-                <ul className="list-disc pl-5">
+                <p className="font-medium text-[var(--ink)]">Ce que le calcul ne prend pas en compte</p>
+                <ul className="list-disc space-y-0.5 pl-5">
                   {v.perimetre.map((h) => (
                     <li key={h}>{h}</li>
                   ))}
                 </ul>
               </div>
               <p>
-                <span className="font-medium">Financement annoncé :</span>{' '}
+                <span className="font-medium text-[var(--ink)]">Financement annoncé :</span>{' '}
                 {'nonPrecise' in v.financement ? 'non précisé par le candidat.' : v.financement.texte}
               </p>
               <p>
-                <span className="font-medium">Échéance :</span> {v.horizon} · <span className="font-medium">Confiance :</span> {CONFIANCE[v.confiance]}
+                <span className="font-medium text-[var(--ink)]">Échéance :</span> {v.horizon} ·{' '}
+                <span className="font-medium text-[var(--ink)]">Confiance :</span> {CONFIANCE[v.confiance]}
               </p>
               <div>
-                <p className="font-medium">Sources</p>
-                <SourceLinks sources={[...v.sources, ...('sources' in v.financement ? v.financement.sources : []), ...(m && 'sources' in m ? m.sources : [])].filter((s, i, a) => a.findIndex((x) => x.id === s.id) === i)} />
+                <p className="font-medium text-[var(--ink)]">Sources</p>
+                <SourceLinks
+                  sources={[
+                    ...v.sources,
+                    ...('sources' in v.financement ? v.financement.sources : []),
+                    ...(m && 'sources' in m ? m.sources : []),
+                  ].filter((s, i, a) => a.findIndex((x) => x.id === s.id) === i)}
+                />
               </div>
             </div>
           </details>

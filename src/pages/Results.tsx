@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Link, Redirect } from 'wouter'
 import { CandidateCard } from '../components/CandidateCard'
 import { SeedBar } from '../components/SeedBar'
-import { BUTTON_SECONDARY, H1, Notice } from '../components/ui'
+import { BUTTON_GHOST, BUTTON_SECONDARY, H1, Notice } from '../components/ui'
 import { QUESTIONS } from '../domain/questionnaire'
 import type { Profile } from '../domain/profile'
 import { ecartChiffrage } from '../engine/compare'
@@ -25,7 +25,11 @@ export function ProfileSummary({ profile }: { profile: Profile }) {
     const o = q.options(profile).find((x) => x.value === v)
     return o ? [o.label] : []
   })
-  return <p className="text-sm text-slate-600 dark:text-slate-400">Ton profil : {parts.map(lowerFirst).join(' · ')}</p>
+  return (
+    <p className="rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-2 text-sm text-[var(--ink-soft)]">
+      Ton profil : <span className="text-[var(--ink)]">{parts.map(lowerFirst).join(' · ')}</span>
+    </p>
+  )
 }
 
 export function Results() {
@@ -54,7 +58,7 @@ export function Results() {
           Comparer par thème
         </Link>
       </div>
-      <p className="text-sm">
+      <p className="text-sm text-[var(--ink-soft)]">
         Montants par an pour ton foyer. Pas de total : les mesures ne s’additionnent pas simplement. Sous chaque ligne, « Hypothèses, limites
         et sources » explique le calcul.
       </p>
@@ -68,7 +72,11 @@ export function Results() {
       {ordered.length > 0 && (
         <nav aria-label="Candidat·es" className="flex flex-wrap gap-2 text-sm">
           {ordered.map((r) => (
-            <a key={r.candidat.id} href={`#cand-${r.candidat.id}`} className="rounded-full border border-slate-300 px-3 py-1 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800">
+            <a
+              key={r.candidat.id}
+              href={`#cand-${r.candidat.id}`}
+              className="rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-3 py-1.5 text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-strong)]"
+            >
               {r.candidat.prenom} {r.candidat.nom}
             </a>
           ))}
@@ -76,14 +84,14 @@ export function Results() {
       )}
       {error && <Notice tone="warn">Impossible de charger les calculs ({error}). Recharge la page.</Notice>}
       {!dataset && !error && <p aria-live="polite">Calcul en cours…</p>}
-      <div className="space-y-6">
+      <div className="stagger space-y-6">
         {ordered.map((r) => (
           <CandidateCard key={r.candidat.id} r={r} nbMesures={measures[`${r.candidat.id}.json`].mesures.filter((m) => m.statut !== 'abandonnee').length} />
         ))}
       </div>
-      <p className="text-sm text-slate-600 dark:text-slate-400">
+      <p className="text-sm text-[var(--ink-soft)]">
         {nonAnalyses} autres candidat·es déclaré·es ou pressenti·es ne sont pas encore analysé·es.{' '}
-        <Link href="/candidats" className="underline">
+        <Link href="/candidats" className={BUTTON_GHOST}>
           Voir la liste et le critère retenu
         </Link>
       </p>

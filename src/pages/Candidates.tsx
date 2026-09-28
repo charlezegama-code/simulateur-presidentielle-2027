@@ -9,17 +9,17 @@ export function Candidates() {
   return (
     <div className="space-y-5">
       <H1>Les candidat·es</H1>
-      <p>Liste par ordre alphabétique des candidatures déclarées ou pressenties, avec leur statut et sa source.</p>
+      <p className="text-[var(--ink-soft)]">Liste par ordre alphabétique des candidatures déclarées ou pressenties, avec leur statut et sa source.</p>
       <Notice>
         <p className="font-semibold">Quels programmes sont analysés ?</p>
         <p>{candidates.critereAnalyse}</p>
       </Notice>
-      <ul className="divide-y divide-slate-200 dark:divide-slate-800">
+      <ul className="stagger grid gap-3 sm:grid-cols-2">
         {sorted.map((c) => (
-          <li key={c.id} className="py-3">
-            <p className="font-semibold">
+          <li key={c.id} className="card space-y-1.5 p-4">
+            <p className="font-display font-semibold text-[var(--ink)]">
               {c.analyse ? (
-                <Link href={`/candidat/${c.id}`} className="underline decoration-slate-400 underline-offset-2">
+                <Link href={`/candidat/${c.id}`} className="underline decoration-[var(--line-strong)] decoration-2 underline-offset-3 hover:decoration-[var(--accent)]">
                   {c.prenom} {c.nom}
                 </Link>
               ) : (
@@ -27,20 +27,26 @@ export function Candidates() {
                   {c.prenom} {c.nom}
                 </>
               )}{' '}
-              <span className="font-normal text-slate-600 dark:text-slate-400">— {c.parti}</span>
+              <span className="font-sans font-normal text-[var(--ink-faint)]">— {c.parti}</span>
             </p>
             <p className="text-sm">
-              {STATUT_LABELS[c.statut]} · {dateFr(c.statutDate)} · {c.analyse ? 'programme analysé' : 'programme non encore analysé'}
+              <span className={c.analyse ? 'font-medium text-[var(--accent-strong)]' : 'text-[var(--ink-soft)]'}>
+                {c.analyse ? 'Programme analysé' : 'Programme non encore analysé'}
+              </span>
+              <span className="text-[var(--ink-faint)]">
+                {' '}
+                · {STATUT_LABELS[c.statut]} · {dateFr(c.statutDate)}
+              </span>
             </p>
-            {c.note && <p className="text-sm text-slate-600 dark:text-slate-400">{c.note}</p>}
-            <p className="text-xs text-slate-600 dark:text-slate-400">
+            {c.note && <p className="text-sm text-[var(--ink-soft)]">{c.note}</p>}
+            <p className="text-xs text-[var(--ink-faint)]">
               Source :{' '}
               {c.sources
                 .filter((s) => c.statutSourceIds.includes(s.id))
                 .map((s, i) => (
                   <span key={s.id}>
                     {i > 0 && ', '}
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline">
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline decoration-[var(--line-strong)]">
                       {s.editeur}
                     </a>
                   </span>
@@ -49,7 +55,7 @@ export function Candidates() {
           </li>
         ))}
       </ul>
-      <p className="text-sm text-slate-600 dark:text-slate-400">
+      <p className="text-sm text-[var(--ink-faint)]">
         La liste officielle des candidat·es sera publiée par le Conseil constitutionnel après le dépôt des parrainages ; les statuts seront alors
         mis à jour.
       </p>
