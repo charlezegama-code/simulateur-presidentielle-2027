@@ -7,12 +7,15 @@
     "dev": "vite",
     "validate-data": "tsx scripts/validate-data.ts data",
     "validate-fixtures": "tsx scripts/validate-data.ts tests/fixtures/valid --fixtures",
-    "prebuild": "npm run validate-data",
+    "prebuild": "npm run validate-data && tsx scripts/copy-data.ts",
     "build": "tsc -b && vite build",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predev": "tsx scripts/copy-data.ts",
+    "check-bundle": "tsx scripts/check-bundle.ts",
+    "postbuild": "npm run check-bundle"
   },
   "dependencies": {
     "react": "^19.2.8",

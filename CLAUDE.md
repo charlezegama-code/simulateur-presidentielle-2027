@@ -38,3 +38,14 @@ Ce n'est PAS un outil de recommandation de vote : pas de score global, pas de «
 - Commits petits et descriptifs.
 - Avant de dire « terminé » : `npm run validate-data`, `npm test`, `npm run build` au vert. Jamais de commit si le build échoue.
 - Déroulé par étapes avec points d'arrêt : attendre la validation de l'utilisateur à chaque ⏸.
+
+## Audit de neutralité (avant chaque mise à jour publiée)
+- Asymétries entre candidats : nombre de mesures, ton, financement présent, effets positifs vs négatifs.
+- **Part d'effets chiffrés par candidat** (`partChiffree`, src/engine/compare.ts) : au-delà de 25 points d'écart, le validateur avertit et l'app affiche un bandeau.
+- Vocabulaire évaluatif, sources mortes (utiliser archiveUrl), dates anciennes, chiffres sans hypothèse.
+- `npm run build` exécute aussi `check-bundle` : aucune requête hors du site.
+
+## Mise à jour des données
+1. Modifier `data/` (sources datées, ne rien supprimer : statut `modifiee`/`abandonnee` + historique).
+2. Mesure chiffrable modifiée : `npx tsx scripts/export-grid.ts` puis `cd scripts/openfisca && uv run python run.py --data ../../data`.
+3. `npm run validate-data && npm test && npm run build`.

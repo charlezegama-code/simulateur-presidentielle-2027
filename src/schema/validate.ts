@@ -15,6 +15,9 @@ import {
 import { consoFileSchema, type ConsoFile } from './conso'
 import { measuresFileSchema, type MeasuresFile } from './measure'
 import { findForbiddenWord } from './vocabulary'
+import { partChiffree } from '../engine/compare'
+
+export { partChiffree }
 
 export interface RawDataset {
   candidates: unknown
@@ -63,16 +66,6 @@ function zodErrors(prefix: string, err: z.ZodError): string[] {
 
 function daysBetween(a: string, b: string): number {
   return Math.round((Date.parse(b) - Date.parse(a)) / 86_400_000)
-}
-
-/** Part d'effets chiffrés (type "chiffre") par candidat, sur l'ensemble des effets des mesures non abandonnées. */
-export function partChiffree(measures: Record<string, MeasuresFile>): Record<string, number> {
-  const out: Record<string, number> = {}
-  for (const mf of Object.values(measures)) {
-    const effets = mf.mesures.filter((m) => m.statut !== 'abandonnee').flatMap((m) => m.effets)
-    out[mf.candidatId] = effets.length === 0 ? 0 : effets.filter((e) => e.type === 'chiffre').length / effets.length
-  }
-  return out
 }
 
 export function validateDataset(raw: RawDataset, opts: ValidationOptions): ValidationReport {

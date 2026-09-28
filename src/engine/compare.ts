@@ -1,5 +1,5 @@
 import { THEMES, type Theme } from '../domain/theme'
-import type { Measure } from '../schema/measure'
+import type { Measure, MeasuresFile } from '../schema/measure'
 import type { Dataset } from '../schema/validate'
 
 export type ThemeCell = { kind: 'mesures'; mesures: Measure[] } | { kind: 'sansPosition'; dateRecherche: string }
@@ -18,4 +18,20 @@ export function compareByTheme(dataset: Dataset): Map<string, Record<Theme, Them
     out.set(c.id, row)
   }
   return out
+}
+
+/** Part d'effets chiffrés (type "chiffre") par candidat, sur l'ensemble des effets des mesures non abandonnées. */
+export function partChiffree(measures: Record<string, MeasuresFile>): Record<string, number> {
+  const out: Record<string, number> = {}
+  for (const mf of Object.values(measures)) {
+    const effets = mf.mesures.filter((m) => m.statut !== 'abandonnee').flatMap((m) => m.effets)
+    out[mf.candidatId] = effets.length === 0 ? 0 : effets.filter((e) => e.type === 'chiffre').length / effets.length
+  }
+  return out
+}
+
+/** Écart (0–1) de part d'effets chiffrés entre les candidats analysés. */
+export function ecartChiffrage(measures: Record<string, MeasuresFile>): number {
+  const parts = Object.values(partChiffree(measures))
+  return parts.length < 2 ? 0 : Math.max(...parts) - Math.min(...parts)
 }

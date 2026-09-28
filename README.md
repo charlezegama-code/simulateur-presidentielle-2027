@@ -1,5 +1,7 @@
 # Simulateur Présidentielle 2027
 
+**En ligne : https://simulateur-presidentielle-2027.pages.dev**
+
 PWA qui montre, pour un profil (étudiant, salarié, retraité, parent, locataire…), ce que les programmes des candidats
 à la présidentielle 2027 changeraient concrètement : avantages **et** inconvénients, chiffrés quand c'est possible.
 
@@ -23,14 +25,20 @@ npm run preview          # sert dist/
 data/                    données publiées (JSON), validées par Zod
   candidates.json        candidats, statut daté et sourcé
   measures/<id>.json     mesures + effets d'un candidat (un fichier par candidat)
-  castypes/              résultats OpenFisca précalculés (étape 3)
+  castypes/              précalcul OpenFisca : 24 320 cas-types (une case par combinaison de réponses)
+  conso/                 dépenses des ménages INSEE (estimation TVA / accises)
   meta.json              version et date de mise à jour des données
 scripts/
   validate-data.ts       validateur (prebuild + CI)
-  openfisca/             précalcul des cas-types en Python (étape 3)
+  openfisca/             précalcul des cas-types en Python (uv run python run.py)
+  conso/build_bdf.py     reconstruit data/conso depuis les fichiers INSEE
+  export-grid.ts         exporte la grille (src/domain/grid.ts) pour le précalcul
+  check-bundle.ts        vérifie qu'aucun envoi de données n'est possible (postbuild)
 src/
   schema/                schémas Zod + validateur (fonctions pures)
+  domain/                profil, questionnaire, grille (sans dépendance)
   engine/                moteur de simulation (fonctions pures, sans UI)
+  pages/, components/    interface
   data/loader.ts         chargement des JSON dans le bundle
 tests/
   fixtures/valid/        candidats FICTIFS A et B (jamais publiés)
@@ -71,6 +79,12 @@ Chaque modification de `/data` doit respecter ces règles, vérifiées par `npm 
 10. Les candidats `fictif: true` sont refusés dans `/data`.
 
 Exemple complet : `tests/fixtures/valid/measures/candidat-a.json`.
+
+## Déploiement
+
+Cloudflare Pages (site statique) : `npm run build && npx wrangler pages deploy dist --project-name=simulateur-presidentielle-2027`.
+La GitHub Action (`.github/workflows/ci.yml`) valide les données, lance les tests et le build sur chaque PR ; elle déploie
+(preview sur PR, production sur `main`) dès que les secrets `CLOUDFLARE_API_TOKEN` et `CLOUDFLARE_ACCOUNT_ID` sont définis.
 
 ## Licences
 

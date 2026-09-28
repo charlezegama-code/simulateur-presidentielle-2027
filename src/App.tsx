@@ -1,13 +1,34 @@
-import { data } from './data/loader'
+import { Route, Switch } from 'wouter'
+import { Layout } from './components/Layout'
+import { H1 } from './components/ui'
+import { CandidatePage } from './pages/CandidatePage'
+import { Candidates } from './pages/Candidates'
+import { Compare } from './pages/Compare'
+import { Home } from './pages/Home'
+import { Methodology } from './pages/Methodology'
+import { Neutrality } from './pages/Neutrality'
+import { Questionnaire } from './pages/Questionnaire'
+import { Results } from './pages/Results'
+import { ProfileProvider } from './state/profile'
 
-// Écran provisoire : l'UI est construite à l'étape 5.
 export default function App() {
   return (
-    <main className="mx-auto max-w-xl px-4 py-8 text-slate-900 dark:text-slate-100">
-      <h1 className="text-2xl font-bold">Simulateur Présidentielle 2027</h1>
-      <p className="mt-2 text-sm">
-        En construction. Données : {data.candidates.candidats.length} candidat(s), mise à jour du {data.meta.dateMaj}.
-      </p>
-    </main>
+    <ProfileProvider>
+      <Layout>
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/questionnaire" component={Questionnaire} />
+          <Route path="/resultats" component={Results} />
+          <Route path="/comparer" component={Compare} />
+          <Route path="/candidats" component={Candidates} />
+          <Route path="/candidat/:id">{(p) => <CandidatePage id={p.id} />}</Route>
+          <Route path="/methodologie" component={Methodology} />
+          <Route path="/neutralite" component={Neutrality} />
+          <Route>
+            <H1>Page introuvable</H1>
+          </Route>
+        </Switch>
+      </Layout>
+    </ProfileProvider>
   )
 }
