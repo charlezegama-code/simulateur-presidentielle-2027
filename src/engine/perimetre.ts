@@ -6,10 +6,10 @@ import type { Parametres } from '../schema/measure'
  * (neutralité : même mise en garde pour des mesures comparables).
  */
 export const PERIMETRE_SALAIRES =
-  "L'effet de la mesure sur l'emploi n'est pas modélisé. La diffusion de la hausse aux salaires proches du SMIC n'est pas modélisée."
-export const PERIMETRE_EMPLOI = "L'effet de la mesure sur l'emploi n'est pas modélisé."
+  "On ne sait pas si cette mesure changerait aussi le nombre d'emplois, ni si elle ferait aussi monter les salaires un peu au-dessus du SMIC."
+export const PERIMETRE_EMPLOI = "On ne sait pas si cette mesure changerait aussi le nombre d'emplois disponibles."
 export const PERIMETRE_CONSO =
-  "Estimation à quantités consommées constantes, en supposant la baisse ou la hausse de taxe intégralement répercutée sur les prix."
+  "On suppose que tu achètes autant qu'avant, et que la baisse ou la hausse de taxe se retrouve entièrement dans le prix final."
 
 export function perimetreStandard(theme: Theme, parametres: Parametres | null): string[] {
   const out: string[] = []

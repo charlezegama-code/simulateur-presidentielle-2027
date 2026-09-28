@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'wouter'
+import { CandidateAvatar } from './CandidateAvatar'
 import { THEME_LABELS } from '../domain/theme'
 import { MAX_ITEMS_PAR_SENS, type CandidateResult, type EffectView } from '../engine/simulate'
 import { dateFr, STATUT_LABELS } from '../lib/format'
@@ -31,24 +32,31 @@ function Section({ titre, tone, items, vide }: { titre: string; tone: 'positive'
   )
 }
 
+/**
+ * Carte candidat·e : même gabarit strict pour tout le monde, sur le modèle des professions de foi officielles —
+ * photo au même format, puis nom, parti, statut ; « ce qui change pour toi » en premier ; détails et sources repliables.
+ */
 export function CandidateCard({ r, nbMesures }: { r: CandidateResult; nbMesures: number }) {
   const c = r.candidat
   const id = `cand-${c.id}`
   return (
     <article id={id} aria-labelledby={`${id}-titre`} className="card card-lift scroll-mt-24 space-y-5 p-5 sm:p-6">
-      <header className="space-y-1 border-b border-[var(--line)] pb-4">
-        <h3 id={`${id}-titre`} className="font-display text-xl font-semibold tracking-tight text-[var(--ink)]">
-          {c.prenom} {c.nom}
-        </h3>
-        <p className="text-sm text-[var(--ink-soft)]">
-          {c.parti} · {STATUT_LABELS[c.statut]} depuis le {dateFr(c.statutDate)}
-        </p>
-        <p className="text-xs text-[var(--ink-faint)]">
-          {nbMesures} mesures analysées à ce jour, dont {r.autresMesures.length} sans effet identifié pour ton profil
-        </p>
+      <header className="flex items-start gap-4 border-b border-[var(--line)] pb-4">
+        <CandidateAvatar candidat={c} size="md" />
+        <div className="min-w-0 space-y-1 pt-0.5">
+          <h3 id={`${id}-titre`} className="font-display text-xl font-semibold tracking-tight text-[var(--ink)]">
+            {c.prenom} {c.nom}
+          </h3>
+          <p className="text-sm text-[var(--ink-soft)]">
+            {c.parti} · {STATUT_LABELS[c.statut]} depuis le {dateFr(c.statutDate)}
+          </p>
+          <p className="text-xs text-[var(--ink-faint)]">
+            {nbMesures} mesures analysées à ce jour, dont {r.autresMesures.length} sans effet identifié pour ton profil
+          </p>
+        </div>
       </header>
-      <Section titre="Avantages pour toi" tone="positive" items={r.positifs} vide="Aucun avantage identifié pour ton profil dans les mesures analysées." />
-      <Section titre="Inconvénients pour toi" tone="negative" items={r.negatifs} vide="Aucun inconvénient identifié pour ton profil dans les mesures analysées." />
+      <Section titre="Ce qui t’avantagerait" tone="positive" items={r.positifs} vide="Aucun avantage identifié pour ton profil dans les mesures analysées." />
+      <Section titre="Ce qui te désavantagerait" tone="negative" items={r.negatifs} vide="Aucun inconvénient identifié pour ton profil dans les mesures analysées." />
       {r.autres.length > 0 && <Section titre="Effets incertains ou nuls" tone="neutral" items={r.autres} vide="" />}
       {r.autresMesures.length > 0 && (
         <details className="group/m text-sm">

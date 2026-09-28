@@ -319,7 +319,7 @@
           "hypotheses": [
             "Par rapport à la législation actuelle (âge légal supérieur à 62 ans pour les générations concernées)"
           ],
-          "perimetreSimulation": "OpenFisca ne simule pas les carrières : l'effet sur ta pension n'est pas chiffré.",
+          "perimetreSimulation": "On ne simule pas de carrière complète : l'effet sur ta pension n'est pas chiffré.",
           "confiance": "moyenne",
           "horizon": "non précisé",
           "sourceIds": [

@@ -1,7 +1,9 @@
 import { Link } from 'wouter'
+import { CandidateAvatar, PhotoCredit } from '../components/CandidateAvatar'
 import { H1, H2, Notice, SourceLinks, TypeBadge } from '../components/ui'
 import { candidates, measures } from '../data/loader'
 import { THEMES, THEME_LABELS } from '../domain/theme'
+import { withGlossary } from '../lib/glossary'
 import { dateFr, ISSUE_URL, STATUT_LABELS } from '../lib/format'
 
 export function CandidatePage({ id }: { id: string }) {
@@ -21,13 +23,17 @@ export function CandidatePage({ id }: { id: string }) {
   const resolve = (ids: string[]) => ids.map((i) => src.get(i)!).filter(Boolean)
   return (
     <div className="space-y-5">
-      <div className="space-y-1.5">
-        <H1>
-          {c.prenom} {c.nom}
-        </H1>
-        <p className="text-[var(--ink-soft)]">
-          {c.parti} · {STATUT_LABELS[c.statut]} depuis le {dateFr(c.statutDate)} · données mises à jour le {dateFr(mf.dateMaj)}
-        </p>
+      <div className="flex items-start gap-4">
+        <CandidateAvatar candidat={c} size="lg" />
+        <div className="min-w-0 space-y-1.5 pt-0.5">
+          <H1>
+            {c.prenom} {c.nom}
+          </H1>
+          <p className="text-[var(--ink-soft)]">
+            {c.parti} · {STATUT_LABELS[c.statut]} depuis le {dateFr(c.statutDate)} · données mises à jour le {dateFr(mf.dateMaj)}
+          </p>
+          <PhotoCredit candidat={c} />
+        </div>
       </div>
       {c.note && <Notice>{c.note}</Notice>}
       {c.programme && (
@@ -54,7 +60,7 @@ export function CandidatePage({ id }: { id: string }) {
                     <TypeBadge type={m.type} /> {m.intitule}
                     {m.statut !== 'active' && <span className="text-sm font-normal text-[var(--ink-faint)]">({m.statut === 'modifiee' ? 'modifiée' : 'abandonnée'})</span>}
                   </p>
-                  <p className="text-[var(--ink)]">{m.description}</p>
+                  <p className="text-[var(--ink)]">{withGlossary(m.description)}</p>
                   <p className="text-sm text-[var(--ink-soft)]">
                     <span className="font-medium text-[var(--ink)]">Financement annoncé :</span>{' '}
                     {'nonPrecise' in m.financement ? 'non précisé par le candidat.' : m.financement.texte}

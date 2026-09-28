@@ -49,3 +49,15 @@ Ce n'est PAS un outil de recommandation de vote : pas de score global, pas de «
 1. Modifier `data/` (sources datées, ne rien supprimer : statut `modifiee`/`abandonnee` + historique).
 2. Mesure chiffrable modifiée : `npx tsx scripts/export-grid.ts` puis `cd scripts/openfisca && uv run python run.py --data ../../data`.
 3. `npm run validate-data && npm test && npm run build`.
+
+## Photos des candidat·es
+- Un seul portrait par candidat·e analysé·e, recadré au même format (7:9, ~480×617) que tous les autres — voir
+  `src/components/CandidateAvatar.tsx`. Fichiers dans `public/candidats/<id>.jpg`.
+- Uniquement des photos sous licence libre vérifiée (Wikimedia Commons de préférence : CC0, CC BY, CC BY-SA, ou
+  Licence Ouverte/Etalab pour une source officielle). Jamais une photo de presse sans licence claire.
+- Éviter les photos où un vêtement, un logo ou un fond trahit la couleur d'un parti (neutralité) ; préférer un visage
+  face caméra, sans micro devant la bouche.
+- Métadonnées obligatoires dans `candidates.json` (`photo.credit`, `photo.licence`, `photo.sourceUrl`,
+  `photo.dateAcces`) — affichées sous le portrait sur la fiche candidat·e.
+- Si aucune photo libre n'est trouvée pour un·e candidat·e analysé·e : `photo: null`, jamais une photo de moins bonne
+  qualité juste pour en avoir une. L'avatar générique s'affiche alors à la place, identique pour tout le monde.

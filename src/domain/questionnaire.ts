@@ -140,8 +140,8 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: 'zoneApl',
-    titre: 'Dans quel type d’endroit ?',
-    aide: 'C’est le découpage utilisé pour calculer les aides au logement. Tu peux vérifier ta commune sur service-public.fr.',
+    titre: 'Où se trouve ton logement ?',
+    aide: 'Ça sert à calculer les aides au logement (APL). En cas de doute, tu peux vérifier ta commune sur service-public.fr.',
     applies: () => true,
     options: () => ZONES_APL.map((z) => ({ value: z, label: ZONE_APL_LABELS[z].titre, detail: ZONE_APL_LABELS[z].detail })),
   },
@@ -164,6 +164,27 @@ export const QUESTIONS: Question[] = [
 
 export function questionsFor(d: Draft): Question[] {
   return QUESTIONS.filter((q) => q.applies(d))
+}
+
+export interface AnswerSummary {
+  id: keyof Profile
+  question: string
+  reponse: string
+  /** Position de cette question dans le parcours courant, pour y revenir directement. */
+  step: number
+}
+
+/** Résumé lisible des réponses déjà données, dans l'ordre du parcours, chacune reliée à son numéro d'étape. */
+export function summarize(d: Draft): AnswerSummary[] {
+  const questions = questionsFor(d)
+  const out: AnswerSummary[] = []
+  questions.forEach((q, step) => {
+    const v = d[q.id]
+    if (v === null || v === undefined) return
+    const label = q.resume ? q.resume(v) : (q.options(d).find((o) => o.value === v)?.label ?? String(v))
+    out.push({ id: q.id, question: q.titreSelon ? q.titreSelon(d) : q.titre, reponse: label, step })
+  })
+  return out
 }
 
 /** Réponse qui n'a plus de sens après un changement en amont : on l'efface. */

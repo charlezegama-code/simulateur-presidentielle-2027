@@ -48,7 +48,8 @@
         }
       ],
       "note": null,
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "candidat-b",
@@ -85,7 +86,8 @@
         }
       ],
       "note": null,
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     }
   ]
 }

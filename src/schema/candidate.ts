@@ -22,6 +22,17 @@ export const candidateSchema = z
     sources: z.array(sourceSchema).min(1),
     /** Précision factuelle affichée telle quelle (ex. procédure en cours, écart entre sources). */
     note: z.string().min(10).max(400).nullable(),
+    /** Portrait sous licence libre, recadré au même format pour tous les candidats. null si aucun n'a été trouvé (avatar générique affiché). */
+    photo: z
+      .object({
+        fichier: z.string().min(1),
+        credit: z.string().min(1),
+        licence: z.string().min(1),
+        sourceUrl: httpsUrl,
+        dateAcces: isoDate,
+      })
+      .strict()
+      .nullable(),
     dateMaj: isoDate,
   })
   .strict()

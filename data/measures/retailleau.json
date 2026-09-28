@@ -332,7 +332,7 @@
           "hypotheses": [
             "Par rapport à la législation actuelle"
           ],
-          "perimetreSimulation": "Calendrier non précisé ; OpenFisca ne simule pas les carrières.",
+          "perimetreSimulation": "Calendrier non précisé ; on ne simule pas de carrière complète.",
           "confiance": "moyenne",
           "horizon": "non précisé",
           "sourceIds": [

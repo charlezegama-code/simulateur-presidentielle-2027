@@ -37,7 +37,11 @@ export function Neutrality() {
       <ul className="list-disc space-y-1.5 pl-5 text-[var(--ink)]">
         <li>pas de compte, pas de serveur de calcul, pas de mesure d’audience, pas de cookie ;</li>
         <li>le calcul se fait dans ton navigateur à partir de fichiers identiques pour tous les visiteurs ;</li>
-        <li>tes réponses ne sont enregistrées sur ton appareil que si tu coches « se souvenir » ; tu peux les effacer ci-dessous ;</li>
+        <li>
+          pendant que tu remplis le questionnaire, tes réponses sont gardées le temps que l’onglet reste ouvert (pour survivre à un
+          rechargement accidentel) ; elles disparaissent à la fermeture de l’onglet ;
+        </li>
+        <li>une fois le questionnaire terminé, tes réponses ne sont enregistrées durablement sur ton appareil que si tu coches « se souvenir » ; tu peux les effacer ci-dessous ;</li>
         <li>le lien de partage ne contient que le numéro de tirage de l’ordre, jamais tes réponses ;</li>
         <li>la politique de sécurité du site interdit toute connexion vers un autre domaine.</li>
       </ul>

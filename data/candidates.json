@@ -76,7 +76,14 @@
         }
       ],
       "note": "Date de déclaration : 3 mai 2026 selon Toute l'Europe et Wikipédia, « fin mai 2026 » selon LCP. Programme « L'Avenir en commun » (édition 2025) en cours de réactualisation ; pages consultées via leurs archives.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": {
+        "fichier": "melenchon.jpg",
+        "credit": "jlm2017.fr",
+        "licence": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:M%C3%A9lenchon_2027_-_55261894422_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "le-pen",
@@ -125,7 +132,14 @@
         }
       ],
       "note": "Condamnée en appel le 7 juillet 2026 dans l'affaire des assistants parlementaires, éligible à cette date selon Toute l'Europe ; elle a formé un pourvoi en cassation. Aucun programme présidentiel 2027 complet publié à cette date.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": {
+        "fichier": "le-pen.jpg",
+        "credit": "Vox España",
+        "licence": "CC0 1.0 (domaine public)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marine_Le_Pen_2025_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "attal",
@@ -177,7 +191,14 @@
         }
       ],
       "note": "Programme complet annoncé comme « à venir » sur le site de campagne.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": {
+        "fichier": "attal.jpg",
+        "credit": "Ismail Aissoub",
+        "licence": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal_2025_(close_crop).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "philippe",
@@ -229,7 +250,14 @@
         }
       ],
       "note": null,
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": {
+        "fichier": "philippe.jpg",
+        "credit": "Jacques Paquier",
+        "licence": "CC BY 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C3%89douard_Philippe_2019_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "retailleau",
@@ -278,7 +306,14 @@
         }
       ],
       "note": "Désigné par les adhérents des Républicains (73,8 % selon Toute l'Europe). Plusieurs propositions datent de janvier 2026, avant sa désignation.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": {
+        "fichier": "retailleau.jpg",
+        "credit": "Anthony Montardy",
+        "licence": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bruno_Retailleau_-_Ministre_de_l%27Int%C3%A9rieur_fran%C3%A7ais_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "tondelier",
@@ -330,7 +365,14 @@
         }
       ],
       "note": "LCP indique que la primaire ouverte de la gauche a été annulée ; Wikipédia mentionne une primaire de la gauche unitaire en 2026. Programme : celui des Écologistes (juillet 2026).",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": {
+        "fichier": "tondelier.jpg",
+        "credit": "Greenbox",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:20210819_tondelier.m-cr3.jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "roussel",
@@ -379,7 +421,14 @@
         }
       ],
       "note": "Candidature validée par les adhérents du PCF le 6 septembre 2026. Programme 2027 non détaillé à cette date.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": {
+        "fichier": "roussel.jpg",
+        "credit": "Zouhair NAKARA",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fabien_Roussel_2022_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "lisnard",
@@ -416,7 +465,8 @@
         }
       ],
       "note": null,
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "bertrand",
@@ -453,7 +503,8 @@
         }
       ],
       "note": null,
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "zemmour",
@@ -490,7 +541,8 @@
         }
       ],
       "note": null,
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "becht",
@@ -527,7 +579,8 @@
         }
       ],
       "note": null,
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "batho",
@@ -564,7 +617,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "bouamrane",
@@ -601,7 +655,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "arthaud",
@@ -638,7 +693,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "dupont-aignan",
@@ -675,7 +731,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "philippot",
@@ -712,7 +769,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "asselineau",
@@ -749,7 +807,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "egger",
@@ -786,7 +845,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "mikolajczak",
@@ -823,7 +883,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "lalanne",
@@ -860,7 +921,8 @@
         }
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "faure",
@@ -909,7 +971,8 @@
         }
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "glucksmann",
@@ -958,7 +1021,8 @@
         }
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "guedj",
@@ -1007,7 +1071,8 @@
         }
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "maurel",
@@ -1056,7 +1121,8 @@
         }
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     },
     {
       "id": "royal",
@@ -1105,7 +1171,8 @@
         }
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "photo": null
     }
   ]
 }

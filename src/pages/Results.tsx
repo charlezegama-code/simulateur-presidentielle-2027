@@ -3,7 +3,7 @@ import { Link, Redirect } from 'wouter'
 import { CandidateCard } from '../components/CandidateCard'
 import { SeedBar } from '../components/SeedBar'
 import { BUTTON_GHOST, BUTTON_SECONDARY, H1, Notice } from '../components/ui'
-import { QUESTIONS } from '../domain/questionnaire'
+import { summarize } from '../domain/questionnaire'
 import type { Profile } from '../domain/profile'
 import { ecartChiffrage } from '../engine/compare'
 import { simulate, type CandidateResult } from '../engine/simulate'
@@ -18,13 +18,7 @@ const byCandidateId = (r: CandidateResult) => r.candidat.id
 const lowerFirst = (t: string) => (t.length > 1 && t[1] === t[1].toLowerCase() ? t[0].toLowerCase() + t.slice(1) : t)
 
 export function ProfileSummary({ profile }: { profile: Profile }) {
-  const parts = QUESTIONS.flatMap((q) => {
-    const v = profile[q.id]
-    if (v === null || v === undefined) return []
-    if (q.resume) return [q.resume(v)]
-    const o = q.options(profile).find((x) => x.value === v)
-    return o ? [o.label] : []
-  })
+  const parts = summarize(profile).map((s) => s.reponse)
   return (
     <p className="rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-2 text-sm text-[var(--ink-soft)]">
       Ton profil : <span className="text-[var(--ink)]">{parts.map(lowerFirst).join(' · ')}</span>

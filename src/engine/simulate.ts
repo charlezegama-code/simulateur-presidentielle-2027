@@ -197,6 +197,12 @@ export function simulate(profile: Profile, dataset: Dataset): CandidateResult[] 
             }
           }
 
+          if (view.type !== 'chiffre' && !view.nonChiffreCar) {
+            view.nonChiffreCar =
+              view.type === 'flou'
+                ? "Le candidat n'a pas donné assez de détails (montant, taux, barème...) pour dire précisément ce que ça changerait pour toi."
+                : "Cet effet est réel, mais rien ne permet de le traduire en euros avec ce que le candidat a publié."
+          }
           if (e.ampleur?.kind === 'fourchette') {
             view.montant = { kind: 'fourchette', min: e.ampleur.min, max: e.ampleur.max, unite: e.ampleur.unite, sources: resolve(e.ampleur.sourceIds) }
           } else if (e.ampleur?.kind === 'castype') {
@@ -206,12 +212,12 @@ export function simulate(profile: Profile, dataset: Dataset): CandidateResult[] 
             } else if ('parEchelon' in pre) {
               const ech = profile.echelonBourse
               if (!ech || ech === 'non_boursier') nonChiffre('Tu n’as pas indiqué d’échelon de bourse.')
-              else if (ech === 'inconnu') nonChiffre('Échelon de bourse non renseigné : montant non calculable.')
+              else if (ech === 'inconnu') nonChiffre('Comme tu ne connais pas ton échelon de bourse, on ne peut pas calculer ce montant précisément.')
               else setMontant({ kind: 'bourse', annuel: pre.parEchelon[ech] ?? 0, echelon: ech })
             } else {
               const total = pre.total[ctx.index]
               if (total === null || statutNonSimule) {
-                nonChiffre('Ton statut n’est pas encore modélisé de façon fiable par OpenFisca : effet non chiffré.')
+                nonChiffre('On ne sait pas encore calculer ce montant de façon fiable pour ton profil (souvent le cas pour les indépendant·es) : cet effet reste non chiffré.')
               } else {
                 const grid = dataset.castypes.grid
                 setMontant({
@@ -228,7 +234,7 @@ export function simulate(profile: Profile, dataset: Dataset): CandidateResult[] 
           } else if (e.ampleur?.kind === 'consommation') {
             const p = m.parametres
             if (!ctx || !dataset.conso || !p || (p.kind !== 'conso_tva' && p.kind !== 'conso_prix')) {
-              nonChiffre('Estimation de consommation non disponible.')
+              nonChiffre('On ne peut pas estimer ce montant pour ton profil.')
             } else {
               const est = estimateConso(p, ctx.cell, profile.vehicule, ctx.revenuPourDecile, dataset.conso)
               setMontant({ kind: 'consommation', ...est, revenuApproche: ctx.revenuApproche, sources: dataset.conso.sources })

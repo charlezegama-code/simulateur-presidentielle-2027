@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useId, useState, type ReactNode } from 'react'
 import type { Source } from '../schema/common'
 import { dateFr } from '../lib/format'
 
@@ -46,18 +46,38 @@ const TYPE_BADGE = {
 } as const
 
 export const TYPE_HELP = {
-  chiffre: 'montant calculé pour ton profil',
-  qualitatif: 'effet décrit mais non chiffrable',
-  flou: 'mesure trop imprécise pour être simulée',
-  chiffrable: 'mesure assez précise pour être chiffrée',
+  chiffre: 'Un montant a pu être calculé pour ton profil.',
+  qualitatif: 'Ça change quelque chose pour toi, mais ça ne se traduit pas en euros.',
+  flou: "Pas assez de détails dans le programme pour dire précisément ce que ça changerait.",
+  chiffrable: 'Cette mesure est assez précise pour qu’un montant puisse être calculé.',
 } as const
 
+/** Badge de type : le sens exact est accessible au tap/clic (pas seulement au survol, invisible sur mobile). */
 export function TypeBadge({ type }: { type: keyof typeof TYPE_BADGE }) {
   const b = TYPE_BADGE[type]
+  const [open, setOpen] = useState(false)
+  const id = useId()
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${b.cls}`} title={TYPE_HELP[type]}>
-      {b.dot && <span aria-hidden="true" className={`size-1.5 rounded-full ${b.dot}`} />}
-      {b.label}
+    <span className="inline-flex flex-wrap items-center gap-1.5">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-describedby={open ? id : undefined}
+        title={TYPE_HELP[type]}
+        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${b.cls}`}
+      >
+        {b.dot && <span aria-hidden="true" className={`size-1.5 rounded-full ${b.dot}`} />}
+        {b.label}
+        <span aria-hidden="true" className="opacity-60">
+          {open ? '−' : '?'}
+        </span>
+      </button>
+      {open && (
+        <span id={id} role="note" className="rounded-md bg-[var(--paper)] px-2 py-0.5 text-xs font-normal text-[var(--ink-soft)]">
+          {TYPE_HELP[type]}
+        </span>
+      )}
     </span>
   )
 }

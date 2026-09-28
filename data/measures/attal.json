@@ -239,7 +239,7 @@
           "hypotheses": [
             "Paramètres (durée requise, décote, surcote) non déterminés"
           ],
-          "perimetreSimulation": "Effet non calculable ; OpenFisca ne simule pas les carrières.",
+          "perimetreSimulation": "Effet non calculable : on ne simule pas de carrière complète.",
           "confiance": "moyenne",
           "horizon": "non précisé",
           "sourceIds": [
@@ -378,8 +378,8 @@
       "id": "attal-electricite",
       "candidatId": "attal",
       "theme": "energie_prix",
-      "intitule": "Prix de l'électricité autour de 75 €/MWh",
-      "description": "Le candidat vise un prix de l'électricité autour de 75 €/MWh, et des contrats inférieurs à 50 €/MWh pour les industriels exposés.",
+      "intitule": "Un prix de l'électricité plus bas pour les fournisseurs",
+      "description": "Le candidat vise un prix de l'électricité autour de 75 € pour 1 000 kWh consommés — un repère utilisé entre fournisseurs d'énergie, pas le prix affiché sur une facture — et des tarifs encore plus bas pour les usines qui consomment beaucoup d'électricité.",
       "type": "flou",
       "parametres": null,
       "financement": {
@@ -399,12 +399,12 @@
           },
           "sens": "incertain",
           "type": "flou",
-          "libelle": "Prix de l'électricité visé autour de 75 €/MWh",
+          "libelle": "Le candidat vise un prix de l'électricité moins cher pour les fournisseurs, sans préciser de combien cela ferait baisser ta facture",
           "ampleur": null,
           "hypotheses": [
             "Lien avec le tarif payé par les ménages non précisé"
           ],
-          "perimetreSimulation": "Effet sur ta facture non calculable.",
+          "perimetreSimulation": "On ne sait pas traduire ce prix « de gros » (entre fournisseurs) en économie sur ta facture personnelle.",
           "confiance": "moyenne",
           "horizon": "non précisé",
           "sourceIds": [

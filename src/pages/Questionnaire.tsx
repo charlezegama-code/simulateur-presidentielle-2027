@@ -1,20 +1,52 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation } from 'wouter'
-import { BUTTON, BUTTON_SECONDARY } from '../components/ui'
-import { applyAnswer, finalize, questionsFor, type Draft, type Value } from '../domain/questionnaire'
+import { BUTTON, BUTTON_GHOST, BUTTON_SECONDARY } from '../components/ui'
+import { applyAnswer, finalize, questionsFor, summarize, type Draft, type Value } from '../domain/questionnaire'
 import { useProfile } from '../state/profile'
+
+const DRAFT_KEY = 'simulateur-2027:brouillon'
+
+/**
+ * Brouillon conservé le temps de l'onglet ouvert (sessionStorage), pour survivre à un rechargement accidentel en
+ * plein questionnaire. Différent du profil « dont on se souvient » (case à cocher, localStorage) : celui-ci
+ * disparaît à la fermeture de l'onglet, sans action de ta part.
+ */
+function readDraft(): { draft: Draft; step: number } | null {
+  try {
+    const raw = sessionStorage.getItem(DRAFT_KEY)
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
+function writeDraft(draft: Draft, step: number) {
+  try {
+    sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ draft, step }))
+  } catch {
+    /* stockage indisponible : le formulaire reste utilisable, juste sans protection contre le rechargement */
+  }
+}
+function clearDraft() {
+  try {
+    sessionStorage.removeItem(DRAFT_KEY)
+  } catch {
+    /* rien à faire */
+  }
+}
 
 export function Questionnaire() {
   const { profile, setProfile, remember, setRemember } = useProfile()
   const [, navigate] = useLocation()
-  const [draft, setDraft] = useState<Draft>(profile ?? {})
-  const [step, setStep] = useState(0)
+  const initial = useMemo(() => readDraft(), [])
+  const [draft, setDraft] = useState<Draft>(initial?.draft ?? profile ?? {})
+  const [step, setStep] = useState(initial?.step ?? 0)
   const questions = useMemo(() => questionsFor(draft), [draft])
   const done = step >= questions.length
   const q = questions[Math.min(step, questions.length - 1)]
   const heading = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => heading.current?.focus(), [step])
+  useEffect(() => writeDraft(draft, step), [draft, step])
 
   const answer = (value: Value) => {
     setDraft((d) => applyAnswer(d, q.id, value))
@@ -22,13 +54,30 @@ export function Questionnaire() {
   }
 
   const finished = finalize(draft)
+  const summary = summarize(draft)
 
   if (done) {
     return (
       <div className="stagger max-w-lg space-y-6">
-        <h1 ref={heading} tabIndex={-1} className="font-display text-3xl font-semibold tracking-tight text-[var(--ink)] outline-none">
-          C’est tout !
-        </h1>
+        <div className="space-y-1">
+          <h1 ref={heading} tabIndex={-1} className="font-display text-3xl font-semibold tracking-tight text-[var(--ink)] outline-none">
+            On récapitule ?
+          </h1>
+          <p className="text-[var(--ink-soft)]">Vérifie tes réponses, ou modifie-en une avant de voir les résultats.</p>
+        </div>
+        <ul className="divide-y divide-[var(--line)] overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)]">
+          {summary.map((s) => (
+            <li key={s.id} className="flex items-center justify-between gap-3 p-3.5">
+              <div className="min-w-0">
+                <p className="text-xs text-[var(--ink-faint)]">{s.question}</p>
+                <p className="truncate font-medium text-[var(--ink)]">{s.reponse}</p>
+              </div>
+              <button type="button" onClick={() => setStep(s.step)} className={`${BUTTON_GHOST} shrink-0`}>
+                Modifier
+              </button>
+            </li>
+          ))}
+        </ul>
         <label className="flex items-start gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4">
           <input type="checkbox" className="mt-1 size-5 accent-[var(--accent)]" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
           <span className="text-[var(--ink)]">
@@ -43,13 +92,14 @@ export function Questionnaire() {
             disabled={!finished}
             onClick={() => {
               if (finished) setProfile(finished)
+              clearDraft()
               navigate('/resultats')
             }}
           >
             Voir ce qui change pour moi
           </button>
           <button type="button" className={BUTTON_SECONDARY} onClick={() => setStep(0)}>
-            Revoir mes réponses
+            Revoir depuis le début
           </button>
         </div>
       </div>

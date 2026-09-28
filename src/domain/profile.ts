@@ -67,12 +67,12 @@ export const CONJOINT_LABELS: Record<ConjointTranche, string> = {
 }
 
 export const ZONE_APL_LABELS: Record<ZoneApl, { titre: string; detail: string }> = {
-  zone_1: { titre: 'Paris et sa proche banlieue', detail: 'Agglomération parisienne' },
+  zone_1: { titre: 'Paris et sa proche banlieue', detail: 'Par exemple Paris, Boulogne-Billancourt, Saint-Denis, Créteil, Nanterre' },
   zone_2: {
-    titre: 'Une grande ville ou ailleurs en Île-de-France',
-    detail: 'Agglomération de plus de 100 000 habitants, reste de l’Île-de-France, îles non reliées au continent',
+    titre: 'Une grande ville',
+    detail: 'Par exemple Lyon, Marseille, Toulouse, Lille, Bordeaux, Nantes, Strasbourg… ou le reste de la région parisienne',
   },
-  zone_3: { titre: 'Ailleurs', detail: 'Ville moyenne, petite ville, campagne, outre-mer' },
+  zone_3: { titre: 'Ailleurs', detail: 'Ville moyenne, petite ville, village, campagne, outre-mer' },
 }
 
 // ---------------------------------------------------------------------------

@@ -206,7 +206,7 @@ describe('chiffrage : jamais forcé', () => {
       }
     }
     expect(PERIMETRE_SALAIRES).toMatch(/emploi/)
-    expect(PERIMETRE_SALAIRES).toMatch(/salaires proches du SMIC/)
+    expect(PERIMETRE_SALAIRES).toMatch(/SMIC/)
   })
 })
 
