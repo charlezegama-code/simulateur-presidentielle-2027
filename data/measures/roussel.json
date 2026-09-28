@@ -10,7 +10,7 @@
       "datePublication": "2026-09-15",
       "dateConsultation": "2026-09-27",
       "type": "declaration",
-      "archiveUrl": null
+      "archiveUrl": "https://web.archive.org/web/20260928132450/https://www.pcf.fr/fete_de_lhumanite_2026_discours_de_fabien_roussel"
     }
   ],
   "mesures": [
@@ -132,7 +132,27 @@
       "statut": "active",
       "historique": [],
       "contradictions": [],
-      "effets": [],
+      "effets": [
+        {
+          "id": "roussel-heritage-effet",
+          "cible": {
+            "tous": true
+          },
+          "sens": "positif",
+          "type": "qualitatif",
+          "libelle": "Pas de droits de succession sur un héritage inférieur à 200 000 €",
+          "ampleur": null,
+          "hypotheses": [
+            "Tu reçois un héritage inférieur à 200 000 € (le questionnaire ne le demande pas)"
+          ],
+          "perimetreSimulation": "Effet non chiffré : dépend du montant et du lien de parenté.",
+          "confiance": "moyenne",
+          "horizon": "non précisé",
+          "sourceIds": [
+            "pcf-huma-2026"
+          ]
+        }
+      ],
       "dateMaj": "2026-09-27"
     },
     {
