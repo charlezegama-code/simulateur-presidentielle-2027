@@ -466,7 +466,13 @@
       ],
       "note": null,
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "lisnard.jpg",
+        "credit": "Frantogian, Wikimedia Commons",
+        "licence": "CC BY-SA 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:David_Lisnard_-_2013.jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "bertrand",
@@ -504,7 +510,13 @@
       ],
       "note": null,
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "bertrand.jpg",
+        "credit": "Mathieu Drean / European Union, 2023, Wikimedia Commons",
+        "licence": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Xavier_Bertrand_-_2023_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "zemmour",
@@ -542,7 +554,13 @@
       ],
       "note": null,
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "zemmour.jpg",
+        "credit": "Anh De France, Wikimedia Commons",
+        "licence": "CC0 1.0 (domaine public)",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Portrait_d%27%C3%89ric_Zemmour,_avril_2022_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "becht",
@@ -580,7 +598,13 @@
       ],
       "note": null,
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "becht.jpg",
+        "credit": "Jean-Luc Hauser, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Olivier_Becht_(cropped).jpg",
+        "dateAcces": "2026-09-28"
+      }
     },
     {
       "id": "batho",
@@ -618,7 +642,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "batho.jpg",
+        "credit": "DeuxSevres79, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Delphine_Batho_(cropped-2).png",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "bouamrane",
@@ -656,7 +686,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "bouamrane.jpg",
+        "credit": "Oumma, Wikimedia Commons",
+        "licence": "CC BY 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Karim_Bouamrane_en_2026_(cropped).jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "arthaud",
@@ -694,7 +730,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "arthaud.jpg",
+        "credit": "Kokluts, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nathalie_Arthaud_(LO)_19-05-2024.jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "dupont-aignan",
@@ -732,7 +774,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "dupont-aignan.jpg",
+        "credit": "Debout la France, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nicolas_Dupont-Aignan,_homme_politique_fran%C3%A7ais.jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "philippot",
@@ -770,7 +818,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "philippot.jpg",
+        "credit": "Jérémy-Günther-Heinz Jähnick, Wikimedia Commons",
+        "licence": "CC BY 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Florian_Philippot_(B).jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "asselineau",
@@ -808,7 +862,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "asselineau.jpg",
+        "credit": "Union Populaire Républicaine, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_ASSELINEAU.jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "egger",
@@ -846,7 +906,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "egger.jpg",
+        "credit": "Thomas Binet, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Clara_Egger.jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "mikolajczak",
@@ -922,7 +988,13 @@
       ],
       "note": "Date de déclaration non précisée par la source ; date indiquée = mise à jour de la liste LCP.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "lalanne.jpg",
+        "credit": "Nicolas Richoffer, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne_2017.jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "faure",
@@ -972,7 +1044,13 @@
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "faure.jpg",
+        "credit": "Olivier Faure, Wikimedia Commons",
+        "licence": "CC BY-SA 2.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Olivier_Faure.jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "glucksmann",
@@ -1022,7 +1100,13 @@
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "glucksmann.jpg",
+        "credit": "Harald Krichel, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rapha%C3%ABl_Glucksmann-1040795_(cropped).jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "guedj",
@@ -1122,7 +1206,13 @@
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "maurel.jpg",
+        "credit": "Echwander, Wikimedia Commons",
+        "licence": "CC BY-SA 4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Emmanuel_Maurel_en_2016.jpg",
+        "dateAcces": "2026-09-29"
+      }
     },
     {
       "id": "royal",
@@ -1172,7 +1262,13 @@
       ],
       "note": "Candidat·e à la primaire du Parti socialiste : les 9 et 10 octobre 2026 selon LCP, du 9 au 17 octobre selon Toute l'Europe.",
       "dateMaj": "2026-09-27",
-      "photo": null
+      "photo": {
+        "fichier": "royal.jpg",
+        "credit": "Matthieu Riegler, Wikimedia Commons",
+        "licence": "CC BY 3.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%C3%A9gol%C3%A8ne_Royal_-_Janvier_2012.jpg",
+        "dateAcces": "2026-09-29"
+      }
     }
   ]
 }
