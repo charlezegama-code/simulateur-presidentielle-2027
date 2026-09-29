@@ -27,12 +27,18 @@ export function CandidateAvatar({ candidat, size = 'md' }: { candidat: Candidate
       </div>
     )
   }
+  const initiales = `${candidat.prenom[0]}${candidat.nom[0]}`.toUpperCase()
   return (
-    <div className={`${cls} flex items-center justify-center`} role="img" aria-label={`Aucune photo disponible pour ${candidat.prenom} ${candidat.nom}`}>
-      <svg viewBox="0 0 24 24" className="size-2/3 text-[var(--line-strong)]" fill="currentColor" aria-hidden="true">
-        <circle cx="12" cy="8" r="4.2" />
-        <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
-      </svg>
+    <div
+      className={`${cls} flex items-center justify-center bg-[var(--accent-soft)]`}
+      role="img"
+      aria-label={`Aucune photo disponible pour ${candidat.prenom} ${candidat.nom}`}
+    >
+      {/* Même traitement pour tous·tes les candidat·es sans photo (une seule teinte, celle de l'app) : jamais de
+          couleur différenciée par candidat, qui pourrait se lire comme un code de parti. */}
+      <span aria-hidden="true" className="font-display text-lg font-bold text-[var(--accent-strong)] sm:text-xl">
+        {initiales}
+      </span>
     </div>
   )
 }

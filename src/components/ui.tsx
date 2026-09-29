@@ -32,9 +32,9 @@ export function Notice({ children, tone = 'info' }: { children: ReactNode; tone?
 }
 
 export const BUTTON =
-  'inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 font-semibold text-[var(--on-accent)] shadow-[0_10px_24px_-12px_rgb(var(--shadow-rgb)/0.5)] transition-all duration-150 hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-40'
+  'inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 font-semibold text-[var(--on-accent)] shadow-[0_10px_24px_-12px_rgb(var(--shadow-rgb)/0.5)] transition-all duration-150 hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] active:translate-y-0 active:scale-[0.97] active:brightness-95 disabled:pointer-events-none disabled:opacity-40'
 export const BUTTON_SECONDARY =
-  'inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--line-strong)] bg-[var(--paper-raised)] px-5 py-2.5 font-semibold text-[var(--ink)] transition-colors duration-150 hover:border-[var(--accent)] hover:text-[var(--accent-strong)] disabled:pointer-events-none disabled:opacity-40'
+  'inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--line-strong)] bg-[var(--paper-raised)] px-5 py-2.5 font-semibold text-[var(--ink)] transition-all duration-150 hover:border-[var(--accent)] hover:text-[var(--accent-strong)] active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40'
 export const BUTTON_GHOST =
   'inline-flex min-h-9 items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-[var(--ink-soft)] underline decoration-[var(--line-strong)] decoration-2 underline-offset-4 transition-colors hover:text-[var(--accent-strong)] hover:decoration-[var(--accent)]'
 

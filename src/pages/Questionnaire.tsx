@@ -113,7 +113,15 @@ export function Questionnaire() {
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)]" aria-live="polite">
           Question {step + 1} / {questions.length}
         </p>
-        <progress className="h-2 w-full overflow-hidden rounded-full" max={questions.length} value={step} aria-hidden="true" />
+        <div className="flex gap-1" role="progressbar" aria-valuenow={step + 1} aria-valuemin={1} aria-valuemax={questions.length}>
+          {questions.map((qq, i) => (
+            <span
+              key={qq.id}
+              aria-hidden="true"
+              className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${i <= step ? 'bg-[var(--accent)]' : 'bg-[var(--line)]'}`}
+            />
+          ))}
+        </div>
       </div>
       <fieldset className="space-y-3">
         <legend className="mb-4">
@@ -127,7 +135,7 @@ export function Questionnaire() {
           return (
             <label
               key={String(o.value)}
-              className="group flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4 shadow-[0_1px_2px_rgb(var(--shadow-rgb)/0.03)] transition-all duration-150 has-[:checked]:border-[var(--accent)] has-[:checked]:bg-[var(--accent-soft)] has-[:checked]:shadow-[0_4px_14px_-6px_rgb(var(--shadow-rgb)/0.35)] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--accent)] hover:-translate-y-0.5 hover:border-[var(--line-strong)] hover:shadow-[0_6px_16px_-8px_rgb(var(--shadow-rgb)/0.25)]"
+              className="group flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4 shadow-[0_1px_2px_rgb(var(--shadow-rgb)/0.03)] transition-all duration-150 has-[:checked]:border-[var(--accent)] has-[:checked]:bg-[var(--accent-soft)] has-[:checked]:shadow-[0_4px_14px_-6px_rgb(var(--shadow-rgb)/0.35)] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--accent)] hover:-translate-y-0.5 hover:border-[var(--line-strong)] hover:shadow-[0_6px_16px_-8px_rgb(var(--shadow-rgb)/0.25)] active:scale-[0.98] active:bg-[var(--accent-soft)]"
             >
               <input
                 type="radio"

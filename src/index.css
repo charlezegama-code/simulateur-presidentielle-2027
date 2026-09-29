@@ -120,24 +120,6 @@
     background-clip: padding-box;
   }
 
-  progress {
-    appearance: none;
-    border: none;
-  }
-  progress::-webkit-progress-bar {
-    background: var(--line);
-    border-radius: 999px;
-  }
-  progress::-webkit-progress-value {
-    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
-    border-radius: 999px;
-    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  progress::-moz-progress-bar {
-    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
-    border-radius: 999px;
-  }
-
   a {
     text-underline-offset: 3px;
     transition: color 0.15s ease, text-decoration-color 0.15s ease;
