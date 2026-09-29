@@ -41,7 +41,7 @@ export function Home() {
 
       <ol className="grid gap-3 sm:grid-cols-3">
         {STEPS.map((s) => (
-          <li key={s.n} className="card space-y-1.5 p-4">
+          <li key={s.n} className="card card-hover space-y-1.5 p-4">
             <span
               aria-hidden="true"
               className="inline-flex size-8 items-center justify-center rounded-full bg-[var(--accent-soft)] font-display text-base font-semibold text-[var(--accent-strong)]"

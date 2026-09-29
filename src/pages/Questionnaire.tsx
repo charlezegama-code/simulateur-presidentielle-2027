@@ -127,7 +127,7 @@ export function Questionnaire() {
           return (
             <label
               key={String(o.value)}
-              className="group flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4 transition-colors has-[:checked]:border-[var(--accent)] has-[:checked]:bg-[var(--accent-soft)] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--accent)] hover:border-[var(--line-strong)]"
+              className="group flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border border-[var(--line)] bg-[var(--paper-raised)] p-4 shadow-[0_1px_2px_rgb(var(--shadow-rgb)/0.03)] transition-all duration-150 has-[:checked]:border-[var(--accent)] has-[:checked]:bg-[var(--accent-soft)] has-[:checked]:shadow-[0_4px_14px_-6px_rgb(var(--shadow-rgb)/0.35)] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--accent)] hover:-translate-y-0.5 hover:border-[var(--line-strong)] hover:shadow-[0_6px_16px_-8px_rgb(var(--shadow-rgb)/0.25)]"
             >
               <input
                 type="radio"

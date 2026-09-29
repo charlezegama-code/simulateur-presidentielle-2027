@@ -1,11 +1,13 @@
 import gridJson from '../../data/castypes/grid.json'
 import consoJson from '../../data/conso/bdf2017.json'
-import { H1, H2, SourceLinks, TypeBadge } from '../components/ui'
+import { Faq } from '../components/Faq'
+import { BUTTON_GHOST, H1, H2, Kicker, SourceLinks, TypeBadge } from '../components/ui'
 import { candidates } from '../data/loader'
 import { enumerateCells } from '../domain/grid'
 import { dateFr, ISSUE_URL, REPO_URL } from '../lib/format'
 import type { GridFile } from '../schema/castype'
 import type { Source } from '../schema/common'
+import { useOnboarding } from '../state/onboarding'
 
 const grid = gridJson as unknown as GridFile
 const consoSources = (consoJson as { sources: Source[] }).sources
@@ -14,9 +16,18 @@ const nCells = enumerateCells().length
 const LINK = 'font-medium text-[var(--accent-strong)] underline decoration-[var(--line-strong)] underline-offset-3 hover:decoration-[var(--accent)]'
 
 export function Methodology() {
+  const { open } = useOnboarding()
   return (
     <div className="space-y-4">
-      <H1>Méthodologie</H1>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <H1>Méthodologie</H1>
+        <button type="button" onClick={open} className={`${BUTTON_GHOST} mt-2`}>
+          ↻ Revoir l'introduction
+        </button>
+      </div>
+
+      <Kicker>Questions fréquentes</Kicker>
+      <Faq />
 
       <H2>1. Quels candidat·es ?</H2>
       <p>{candidates.critereAnalyse}</p>

@@ -1,57 +1,65 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/fraunces/wght.css';
 @import '@fontsource-variable/hanken-grotesk/wght.css';
 
+/*
+ * Système typographique unique : une seule famille (Hanken Grotesk Variable), sans-serif,
+ * cohérente avec boutons/badges. La hiérarchie (titres vs texte) vient du poids et de la taille,
+ * pas d'une deuxième police serif. Voir CLAUDE.md « Typographie ».
+ */
 @theme {
-  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --font-display: 'Hanken Grotesk Variable', system-ui, -apple-system, sans-serif;
   --font-sans: 'Hanken Grotesk Variable', system-ui, -apple-system, sans-serif;
 }
 
+/*
+ * Palette « violet neutre » : fond gris-neutre (pas de beige), un seul accent (violet, non associé
+ * à un parti), vert/corail réservés au sens positif/négatif des effets. Voir CLAUDE.md « Couleurs ».
+ */
 :root {
-  --paper: #f5efe1;
-  --paper-raised: #fffcf5;
-  --ink: #211c12;
-  --ink-soft: #5c563f;
-  --ink-faint: #6b6349;
-  --line: #e2d6b8;
-  --line-strong: #cdbd91;
-  --accent: #a85a17;
-  --accent-strong: #7c410e;
-  --accent-soft: #f0dfba;
-  --on-accent: #fff9ec;
-  --positive: #2e6a4e;
-  --positive-strong: #1f4d38;
-  --positive-soft: #dcead9;
-  --negative: #9c4326;
-  --negative-strong: #7a3119;
-  --negative-soft: #f2ddca;
-  --flou: #8a6d1e;
-  --flou-soft: #ece0bd;
-  --shadow-rgb: 61 46 15;
+  --paper: #f7f6fb;
+  --paper-raised: #ffffff;
+  --ink: #18171f;
+  --ink-soft: #57555f;
+  --ink-faint: #6e6a77;
+  --line: #e5e2ee;
+  --line-strong: #d2cee0;
+  --accent: #6d28d9;
+  --accent-strong: #5b21b6;
+  --accent-soft: #f1e9fe;
+  --on-accent: #ffffff;
+  --positive: #10b981;
+  --positive-strong: #047857;
+  --positive-soft: #d1fae5;
+  --negative: #e4572e;
+  --negative-strong: #b8391b;
+  --negative-soft: #fbe3d9;
+  --flou: #b45309;
+  --flou-soft: #fef3c7;
+  --shadow-rgb: 40 20 70;
   --radius-card: 1.25rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #18150f;
-    --paper-raised: #221d14;
-    --ink: #f3ecd9;
-    --ink-soft: #c2b696;
-    --ink-faint: #8f8567;
-    --line: #3a3221;
-    --line-strong: #4d4329;
-    --accent: #eeab54;
-    --accent-strong: #f6c07d;
-    --accent-soft: #3d2f14;
-    --on-accent: #241705;
-    --positive: #86caa4;
-    --positive-strong: #aee0c1;
-    --positive-soft: #1e3327;
-    --negative: #e6987a;
-    --negative-strong: #eeb59d;
-    --negative-soft: #3a2417;
-    --flou: #e2c25f;
-    --flou-soft: #34290f;
+    --paper: #121317;
+    --paper-raised: #1b1c22;
+    --ink: #f2f1f7;
+    --ink-soft: #b7b5c3;
+    --ink-faint: #86849b;
+    --line: #2c2c35;
+    --line-strong: #3b3a46;
+    --accent: #a78bfa;
+    --accent-strong: #c4b5fd;
+    --accent-soft: #2e1f4d;
+    --on-accent: #241539;
+    --positive: #34d399;
+    --positive-strong: #6ee7b7;
+    --positive-soft: #0b3b2e;
+    --negative: #ff8b6b;
+    --negative-strong: #ffb199;
+    --negative-soft: #3d1f12;
+    --flou: #fbbf24;
+    --flou-soft: #3d2d08;
     --shadow-rgb: 0 0 0;
   }
 }
@@ -63,11 +71,14 @@
     font-family: var(--font-sans);
     -webkit-text-size-adjust: 100%;
     accent-color: var(--accent);
+    color-scheme: light dark;
+    scrollbar-color: var(--line-strong) transparent;
+    scrollbar-width: thin;
   }
 
   body {
     min-height: 100dvh;
-    background-image: radial-gradient(circle at 1.5px 1.5px, rgb(var(--shadow-rgb) / 0.14) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1.5px 1.5px, rgb(var(--shadow-rgb) / 0.08) 1px, transparent 0);
     background-size: 22px 22px;
   }
 
@@ -75,7 +86,8 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 
   ::selection {
@@ -89,6 +101,25 @@
     border-radius: 2px;
   }
 
+  /* Scrollbar personnalisée (Chromium/Safari) : fine, discrète, teinte de l'accent au survol. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 999px;
+    border: 2px solid var(--paper);
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+    background-clip: padding-box;
+  }
+
   progress {
     appearance: none;
     border: none;
@@ -98,17 +129,18 @@
     border-radius: 999px;
   }
   progress::-webkit-progress-value {
-    background: var(--accent);
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
     border-radius: 999px;
-    transition: width 0.35s ease;
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
   progress::-moz-progress-bar {
-    background: var(--accent);
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
     border-radius: 999px;
   }
 
   a {
     text-underline-offset: 3px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
   }
 }
 
@@ -117,13 +149,24 @@
     background: var(--paper-raised);
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
-    box-shadow: 0 1px 2px rgb(var(--shadow-rgb) / 0.05);
+    box-shadow:
+      0 1px 2px rgb(var(--shadow-rgb) / 0.04),
+      0 8px 20px -12px rgb(var(--shadow-rgb) / 0.22);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   }
 
   .card-lift {
     box-shadow:
-      0 1px 2px rgb(var(--shadow-rgb) / 0.06),
-      0 10px 24px -14px rgb(var(--shadow-rgb) / 0.28);
+      0 2px 4px rgb(var(--shadow-rgb) / 0.05),
+      0 16px 32px -16px rgb(var(--shadow-rgb) / 0.32);
+  }
+
+  .card-hover:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 10px rgb(var(--shadow-rgb) / 0.06),
+      0 20px 36px -18px rgb(var(--shadow-rgb) / 0.36);
   }
 
   .stagger > * {

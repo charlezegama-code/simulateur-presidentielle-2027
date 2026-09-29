@@ -32,13 +32,48 @@ function Section({ titre, tone, items, vide }: { titre: string; tone: 'positive'
   )
 }
 
+/** Résumé chiffré replié par défaut : compte réel pour CE profil, jamais silencieux quand il vaut zéro. */
+function Summary({ r, expanded, onToggle }: { r: CandidateResult; expanded: boolean; onToggle: () => void }) {
+  const nPos = r.positifs.length
+  const nNeg = r.negatifs.length
+  const rien = nPos === 0 && nNeg === 0
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-3">
+      {rien ? (
+        <p className="text-sm font-medium text-[var(--ink-soft)]">Aucun avantage ni inconvénient identifié pour ton profil dans les mesures analysées.</p>
+      ) : (
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+          <span className={`font-semibold ${nPos > 0 ? 'text-[var(--positive-strong)]' : 'text-[var(--ink-faint)]'}`}>
+            {nPos > 0 ? `${nPos} avantage${nPos > 1 ? 's' : ''}` : 'Aucun avantage'}
+          </span>
+          <span aria-hidden="true" className="text-[var(--ink-faint)]">
+            ·
+          </span>
+          <span className={`font-semibold ${nNeg > 0 ? 'text-[var(--negative-strong)]' : 'text-[var(--ink-faint)]'}`}>
+            {nNeg > 0 ? `${nNeg} désavantage${nNeg > 1 ? 's' : ''}` : 'Aucun désavantage'}
+          </span>
+          <span className="text-[var(--ink-faint)]">pour ton profil</span>
+        </p>
+      )}
+      {!rien && (
+        <button type="button" onClick={onToggle} aria-expanded={expanded} className={BUTTON_GHOST}>
+          {expanded ? 'Réduire' : 'Voir le détail'}
+        </button>
+      )}
+    </div>
+  )
+}
+
 /**
  * Carte candidat·e : même gabarit strict pour tout le monde, sur le modèle des professions de foi officielles —
- * photo au même format, puis nom, parti, statut ; « ce qui change pour toi » en premier ; détails et sources repliables.
+ * photo au même format, puis nom, parti, statut ; résumé chiffré repliable, jamais une liste d'effets ouverte par
+ * défaut (pour ne pas donner une impression uniformément positive) ; détails et sources repliables.
  */
 export function CandidateCard({ r, nbMesures }: { r: CandidateResult; nbMesures: number }) {
   const c = r.candidat
   const id = `cand-${c.id}`
+  const [expanded, setExpanded] = useState(false)
+  const rien = r.positifs.length === 0 && r.negatifs.length === 0
   return (
     <article id={id} aria-labelledby={`${id}-titre`} className="card card-lift scroll-mt-24 space-y-5 p-5 sm:p-6">
       <header className="flex items-start gap-4 border-b border-[var(--line)] pb-4">
@@ -55,9 +90,17 @@ export function CandidateCard({ r, nbMesures }: { r: CandidateResult; nbMesures:
           </p>
         </div>
       </header>
-      <Section titre="Ce qui t’avantagerait" tone="positive" items={r.positifs} vide="Aucun avantage identifié pour ton profil dans les mesures analysées." />
-      <Section titre="Ce qui te désavantagerait" tone="negative" items={r.negatifs} vide="Aucun inconvénient identifié pour ton profil dans les mesures analysées." />
-      {r.autres.length > 0 && <Section titre="Effets incertains ou nuls" tone="neutral" items={r.autres} vide="" />}
+
+      <Summary r={r} expanded={expanded} onToggle={() => setExpanded((v) => !v)} />
+
+      {expanded && !rien && (
+        <div className="q-enter space-y-5">
+          <Section titre="Ce qui t’avantagerait" tone="positive" items={r.positifs} vide="Aucun avantage identifié pour ton profil dans les mesures analysées." />
+          <Section titre="Ce qui te désavantagerait" tone="negative" items={r.negatifs} vide="Aucun inconvénient identifié pour ton profil dans les mesures analysées." />
+          {r.autres.length > 0 && <Section titre="Effets incertains ou nuls" tone="neutral" items={r.autres} vide="" />}
+        </div>
+      )}
+
       {r.autresMesures.length > 0 && (
         <details className="group/m text-sm">
           <summary className="flex cursor-pointer select-none items-center gap-1.5 py-1 font-medium text-[var(--accent-strong)] marker:content-none">

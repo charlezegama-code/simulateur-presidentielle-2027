@@ -17,7 +17,7 @@ export function Candidates() {
       </Notice>
       <ul className="stagger grid gap-3 sm:grid-cols-2">
         {sorted.map((c) => (
-          <li key={c.id} className="card flex gap-3 p-4">
+          <li key={c.id} className="card card-hover flex gap-3 p-4">
             <CandidateAvatar candidat={c} size="sm" />
             <div className="min-w-0 flex-1 space-y-1.5">
               <p className="font-display font-semibold text-[var(--ink)]">
