@@ -1,35 +1,33 @@
+import type { ReactNode } from 'react'
 import { Link } from 'wouter'
+import { IconChevronDown } from './icons'
+import { LINK } from './ui'
 import { meta } from '../data/loader'
 import { dateFr, ISSUE_URL } from '../lib/format'
 
-const LINK = 'font-medium text-[var(--accent-strong)] underline decoration-[var(--line-strong)] underline-offset-3 hover:decoration-[var(--accent)]'
-
-function Item({ q, a }: { q: string; a: React.ReactNode }) {
+function Item({ q, a }: { q: string; a: ReactNode }) {
   return (
-    <details className="group/faq card overflow-hidden">
-      <summary className="flex cursor-pointer select-none list-none items-center justify-between gap-3 p-4 font-semibold text-[var(--ink)] marker:content-none">
+    <details className="disclosure raised overflow-hidden rounded-2xl">
+      <summary className="flex items-center justify-between gap-3 p-4 font-bold text-[var(--ink)]">
         {q}
-        <span
-          aria-hidden="true"
-          className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)] transition-transform duration-200 group-open/faq:rotate-45"
-        >
-          +
-        </span>
+        <IconChevronDown className="chevron size-4 shrink-0 text-[var(--ink-faint)]" />
       </summary>
-      <div className="space-y-2 border-t border-[var(--line)] p-4 pt-3 text-sm leading-relaxed text-[var(--ink-soft)]">{a}</div>
+      <div className="space-y-2 border-t border-[var(--line)] p-4 pt-3 text-[15px] leading-relaxed text-[var(--ink-soft)]">{a}</div>
     </details>
   )
 }
 
+const N_ANALYSE = 7
+
 export function Faq() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <Item
         q="Pourquoi certains candidats n'ont aucune position ?"
         a={
           <>
             <p>
-              L'app analyse en détail {7} programmes pour l'instant, parmi les candidatures déclarées ou pressenties (liste complète sur{' '}
+              L'app analyse en détail {N_ANALYSE} programmes pour l'instant, parmi les candidatures déclarées ou pressenties (liste complète sur{' '}
               <Link href="/candidats" className={LINK}>
                 Candidats
               </Link>
@@ -45,20 +43,11 @@ export function Faq() {
       <Item
         q="Mes réponses sont-elles envoyées quelque part ?"
         a={
-          <>
-            <p>
-              Non. Ton profil est calculé et gardé uniquement dans ton navigateur — en mémoire le temps de ta visite, ou dans le stockage local de
-              l'appareil si tu coches « se souvenir ». Aucune requête réseau ne contient tes réponses ; c'est vérifié automatiquement à chaque mise
-              en ligne du site.
-            </p>
-            <p>
-              Détails sur{' '}
-              <Link href="/neutralite" className={LINK}>
-                Neutralité et vie privée
-              </Link>
-              .
-            </p>
-          </>
+          <p>
+            Non. Ton profil est calculé et gardé uniquement sur ton téléphone — en mémoire le temps de ta visite, ou dans le stockage local de
+            l'appareil si tu coches « se souvenir ». Aucune requête réseau ne contient tes réponses ; c'est vérifié automatiquement à chaque mise
+            en ligne du site.
+          </p>
         }
       />
       <Item
@@ -79,19 +68,11 @@ export function Faq() {
             <a href={ISSUE_URL} target="_blank" rel="noopener noreferrer" className={LINK}>
               Signaler une erreur
             </a>{' '}
-            (en bas de chaque page) : ça ouvre un formulaire pré-rempli où tu peux coller la source correcte. On corrige et on republie.
+            : ça ouvre un formulaire pré-rempli où tu peux coller la source correcte. On corrige et on republie.
           </p>
         }
       />
-      <Item
-        q="C'est à jour jusqu'à quand ?"
-        a={
-          <p>
-            Les données sont mises à jour au fil des annonces des candidats, jusqu'au premier tour (18 avril 2027). Dernière mise à jour :{' '}
-            {dateFr(meta.dateMaj)}, visible en bas de chaque page.
-          </p>
-        }
-      />
+      <Item q="C'est à jour jusqu'à quand ?" a={<p>Les données sont mises à jour au fil des annonces des candidats, jusqu'au premier tour (18 avril 2027). Dernière mise à jour : {dateFr(meta.dateMaj)}.</p>} />
     </div>
   )
 }

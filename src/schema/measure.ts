@@ -122,6 +122,8 @@ export const measureSchema = z
     candidatId: slug,
     theme: z.enum(THEMES),
     intitule: z.string().min(5).max(120),
+    // Libellé pour les lignes de liste (Résultat/Comparer) : jamais tronqué visuellement, donc écrit court à la main.
+    libelleCourt: z.string().min(5).max(60),
     description: z.string().min(10).max(600),
     type: z.enum(['chiffrable', 'qualitatif', 'flou']),
     parametres: parametresSchema.nullable(),

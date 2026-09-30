@@ -1,372 +1,378 @@
 {
-  "candidatId": "candidat-a",
-  "dateMaj": "2026-09-27",
-  "sources": [
-    {
-      "id": "a-prog",
-      "url": "https://example.org/candidat-a/programme",
-      "titre": "Programme (fictif)",
-      "editeur": "Parti fictif A",
-      "datePublication": "2026-09-10",
-      "dateConsultation": "2026-09-27",
-      "type": "programme",
-      "archiveUrl": null
-    },
-    {
-      "id": "a-tv",
-      "url": "https://example.org/media/a-tv",
-      "titre": "Passage TV (fictif)",
-      "editeur": "Média exemple",
-      "datePublication": "2026-09-15",
-      "dateConsultation": "2026-09-27",
-      "type": "declaration",
-      "archiveUrl": null
-    }
-  ],
-  "mesures": [
-    {
-      "id": "a-smic-5",
-      "candidatId": "candidat-a",
-      "theme": "salaires",
-      "intitule": "Hausse du SMIC de 5 %",
-      "description": "Le candidat A (fictif) propose d'augmenter le SMIC de 5 % dès la première année du mandat.",
-      "type": "chiffrable",
-      "parametres": {
-        "kind": "smic_pct",
-        "variationPct": 5
-      },
-      "financement": {
-        "texte": "Le programme prévoit une compensation partielle aux entreprises via une baisse de cotisations patronales.",
-        "sourceIds": [
-          "a-prog"
-        ]
-      },
-      "sourceIds": [
-        "a-prog"
-      ],
-      "statut": "active",
-      "historique": [],
-      "contradictions": [],
-      "effets": [
+    "candidatId": "candidat-a",
+    "dateMaj": "2026-09-27",
+    "sources": [
         {
-          "id": "a-smic-5-gain",
-          "cible": {
-            "all": [
-              {
-                "champ": "statutPro",
-                "op": "in",
-                "valeur": [
-                  "salarie_prive",
-                  "alternant"
+            "id": "a-prog",
+            "url": "https://example.org/candidat-a/programme",
+            "titre": "Programme (fictif)",
+            "editeur": "Parti fictif A",
+            "datePublication": "2026-09-10",
+            "dateConsultation": "2026-09-27",
+            "type": "programme",
+            "archiveUrl": null
+        },
+        {
+            "id": "a-tv",
+            "url": "https://example.org/media/a-tv",
+            "titre": "Passage TV (fictif)",
+            "editeur": "Média exemple",
+            "datePublication": "2026-09-15",
+            "dateConsultation": "2026-09-27",
+            "type": "declaration",
+            "archiveUrl": null
+        }
+    ],
+    "mesures": [
+        {
+            "id": "a-smic-5",
+            "candidatId": "candidat-a",
+            "theme": "salaires",
+            "intitule": "Hausse du SMIC de 5 %",
+            "description": "Le candidat A (fictif) propose d'augmenter le SMIC de 5 % dès la première année du mandat.",
+            "type": "chiffrable",
+            "parametres": {
+                "kind": "smic_pct",
+                "variationPct": 5
+            },
+            "financement": {
+                "texte": "Le programme prévoit une compensation partielle aux entreprises via une baisse de cotisations patronales.",
+                "sourceIds": [
+                    "a-prog"
                 ]
-              },
-              {
-                "champ": "revenuTranche",
-                "op": "lte",
-                "valeur": "r2"
-              }
-            ]
-          },
-          "sens": "positif",
-          "type": "chiffre",
-          "libelle": "Hausse du salaire net pour un temps plein payé au SMIC",
-          "ampleur": {
-            "kind": "castype"
-          },
-          "hypotheses": [
-            "Temps plein payé au SMIC",
-            "Appliqué dès 2028, à législation constante hors mesure"
-          ],
-          "perimetreSimulation": "Ne modélise pas les effets sur l'emploi ni l'éventuelle baisse de la prime d'activité liée à la hausse du salaire.",
-          "confiance": "moyenne",
-          "horizon": "2028",
-          "sourceIds": [
-            "a-prog"
-          ]
-        }
-      ],
-      "dateMaj": "2026-09-27"
-    },
-    {
-      "id": "a-apl-10",
-      "candidatId": "candidat-a",
-      "theme": "logement",
-      "intitule": "Revalorisation des APL de 10 %",
-      "description": "Le candidat A (fictif) prévoit une hausse de 10 % des aides personnalisées au logement.",
-      "type": "chiffrable",
-      "parametres": {
-        "kind": "montant_prestation",
-        "prestation": "apl",
-        "variationPct": 10
-      },
-      "financement": {
-        "nonPrecise": true
-      },
-      "sourceIds": [
-        "a-prog"
-      ],
-      "statut": "active",
-      "historique": [],
-      "contradictions": [],
-      "effets": [
+            },
+            "sourceIds": [
+                "a-prog"
+            ],
+            "statut": "active",
+            "historique": [],
+            "contradictions": [],
+            "effets": [
+                {
+                    "id": "a-smic-5-gain",
+                    "cible": {
+                        "all": [
+                            {
+                                "champ": "statutPro",
+                                "op": "in",
+                                "valeur": [
+                                    "salarie_prive",
+                                    "alternant"
+                                ]
+                            },
+                            {
+                                "champ": "revenuTranche",
+                                "op": "lte",
+                                "valeur": "r2"
+                            }
+                        ]
+                    },
+                    "sens": "positif",
+                    "type": "chiffre",
+                    "libelle": "Hausse du salaire net pour un temps plein payé au SMIC",
+                    "ampleur": {
+                        "kind": "castype"
+                    },
+                    "hypotheses": [
+                        "Temps plein payé au SMIC",
+                        "Appliqué dès 2028, à législation constante hors mesure"
+                    ],
+                    "perimetreSimulation": "Ne modélise pas les effets sur l'emploi ni l'éventuelle baisse de la prime d'activité liée à la hausse du salaire.",
+                    "confiance": "moyenne",
+                    "horizon": "2028",
+                    "sourceIds": [
+                        "a-prog"
+                    ]
+                }
+            ],
+            "dateMaj": "2026-09-27",
+            "libelleCourt": "Hausse du SMIC de 5 %"
+        },
         {
-          "id": "a-apl-10-gain",
-          "cible": {
-            "all": [
-              {
-                "champ": "logement",
-                "op": "in",
-                "valeur": [
-                  "locataire_prive",
-                  "locataire_social"
+            "id": "a-apl-10",
+            "candidatId": "candidat-a",
+            "theme": "logement",
+            "intitule": "Revalorisation des APL de 10 %",
+            "description": "Le candidat A (fictif) prévoit une hausse de 10 % des aides personnalisées au logement.",
+            "type": "chiffrable",
+            "parametres": {
+                "kind": "montant_prestation",
+                "prestation": "apl",
+                "variationPct": 10
+            },
+            "financement": {
+                "nonPrecise": true
+            },
+            "sourceIds": [
+                "a-prog"
+            ],
+            "statut": "active",
+            "historique": [],
+            "contradictions": [],
+            "effets": [
+                {
+                    "id": "a-apl-10-gain",
+                    "cible": {
+                        "all": [
+                            {
+                                "champ": "logement",
+                                "op": "in",
+                                "valeur": [
+                                    "locataire_prive",
+                                    "locataire_social"
+                                ]
+                            },
+                            {
+                                "champ": "revenuTranche",
+                                "op": "lte",
+                                "valeur": "r3"
+                            }
+                        ]
+                    },
+                    "sens": "positif",
+                    "type": "chiffre",
+                    "libelle": "Hausse de l'aide au logement pour les locataires éligibles",
+                    "ampleur": {
+                        "kind": "castype"
+                    },
+                    "hypotheses": [
+                        "Éligibilité aux APL selon les règles actuelles",
+                        "Zone APL approximée à partir du type de commune"
+                    ],
+                    "perimetreSimulation": "Ne modélise pas un éventuel effet de la hausse des aides sur les loyers.",
+                    "confiance": "moyenne",
+                    "horizon": "2028",
+                    "sourceIds": [
+                        "a-prog"
+                    ]
+                }
+            ],
+            "dateMaj": "2026-09-27",
+            "libelleCourt": "Revalorisation des APL de 10 %"
+        },
+        {
+            "id": "a-tva-energie",
+            "candidatId": "candidat-a",
+            "theme": "energie_prix",
+            "intitule": "Baisse de la TVA sur l'électricité et le gaz",
+            "description": "Le candidat A (fictif) propose de ramener la TVA sur l'électricité et le gaz à 5,5 %.",
+            "type": "chiffrable",
+            "parametres": {
+                "kind": "conso_tva",
+                "postes": [
+                    "0451",
+                    "0452"
+                ],
+                "tauxAvantPct": 20,
+                "tauxApresPct": 5.5
+            },
+            "financement": {
+                "texte": "Le programme annonce un financement par une taxe sur les dividendes des énergéticiens.",
+                "sourceIds": [
+                    "a-tv"
                 ]
-              },
-              {
-                "champ": "revenuTranche",
-                "op": "lte",
-                "valeur": "r3"
-              }
-            ]
-          },
-          "sens": "positif",
-          "type": "chiffre",
-          "libelle": "Hausse de l'aide au logement pour les locataires éligibles",
-          "ampleur": {
-            "kind": "castype"
-          },
-          "hypotheses": [
-            "Éligibilité aux APL selon les règles actuelles",
-            "Zone APL approximée à partir du type de commune"
-          ],
-          "perimetreSimulation": "Ne modélise pas un éventuel effet de la hausse des aides sur les loyers.",
-          "confiance": "moyenne",
-          "horizon": "2028",
-          "sourceIds": [
-            "a-prog"
-          ]
-        }
-      ],
-      "dateMaj": "2026-09-27"
-    },
-    {
-      "id": "a-tva-energie",
-      "candidatId": "candidat-a",
-      "theme": "energie_prix",
-      "intitule": "Baisse de la TVA sur l'électricité et le gaz",
-      "description": "Le candidat A (fictif) propose de ramener la TVA sur l'électricité et le gaz à 5,5 %.",
-      "type": "chiffrable",
-      "parametres": {
-        "kind": "conso_tva",
-        "postes": [
-          "0451",
-          "0452"
-        ],
-        "tauxAvantPct": 20,
-        "tauxApresPct": 5.5
-      },
-      "financement": {
-        "texte": "Le programme annonce un financement par une taxe sur les dividendes des énergéticiens.",
-        "sourceIds": [
-          "a-tv"
-        ]
-      },
-      "sourceIds": [
-        "a-prog",
-        "a-tv"
-      ],
-      "statut": "active",
-      "historique": [],
-      "contradictions": [],
-      "effets": [
+            },
+            "sourceIds": [
+                "a-prog",
+                "a-tv"
+            ],
+            "statut": "active",
+            "historique": [],
+            "contradictions": [],
+            "effets": [
+                {
+                    "id": "a-tva-energie-facture",
+                    "cible": {
+                        "tous": true
+                    },
+                    "sens": "positif",
+                    "type": "chiffre",
+                    "libelle": "Baisse de la facture d'électricité et de gaz",
+                    "ampleur": {
+                        "kind": "consommation"
+                    },
+                    "hypotheses": [
+                        "Dépenses d'électricité et de gaz d'un ménage comparable (INSEE, Budget de famille 2017, prix 2025)",
+                        "Taux de TVA moyen de 20 % avant la mesure"
+                    ],
+                    "perimetreSimulation": "La part d'abonnement déjà taxée à 5,5 % n'est pas distinguée.",
+                    "confiance": "faible",
+                    "horizon": "2028",
+                    "sourceIds": [
+                        "a-prog"
+                    ]
+                }
+            ],
+            "dateMaj": "2026-09-27",
+            "libelleCourt": "Baisse de la TVA sur l'électricité et le gaz"
+        },
         {
-          "id": "a-tva-energie-facture",
-          "cible": {
-            "tous": true
-          },
-          "sens": "positif",
-          "type": "chiffre",
-          "libelle": "Baisse de la facture d'électricité et de gaz",
-          "ampleur": {
-            "kind": "consommation"
-          },
-          "hypotheses": [
-            "Dépenses d'électricité et de gaz d'un ménage comparable (INSEE, Budget de famille 2017, prix 2025)",
-            "Taux de TVA moyen de 20 % avant la mesure"
-          ],
-          "perimetreSimulation": "La part d'abonnement déjà taxée à 5,5 % n'est pas distinguée.",
-          "confiance": "faible",
-          "horizon": "2028",
-          "sourceIds": [
-            "a-prog"
-          ]
-        }
-      ],
-      "dateMaj": "2026-09-27"
-    },
-    {
-      "id": "a-etudes-repas",
-      "candidatId": "candidat-a",
-      "theme": "etudes",
-      "intitule": "Repas à 1 € au restaurant universitaire pour tous",
-      "description": "Le candidat A (fictif) prévoit d'étendre le repas à 1 € à tous les étudiants.",
-      "type": "qualitatif",
-      "parametres": null,
-      "financement": {
-        "nonPrecise": true
-      },
-      "sourceIds": [
-        "a-prog"
-      ],
-      "statut": "active",
-      "historique": [],
-      "contradictions": [],
-      "effets": [
+            "id": "a-etudes-repas",
+            "candidatId": "candidat-a",
+            "theme": "etudes",
+            "intitule": "Repas à 1 € au restaurant universitaire pour tous",
+            "description": "Le candidat A (fictif) prévoit d'étendre le repas à 1 € à tous les étudiants.",
+            "type": "qualitatif",
+            "parametres": null,
+            "financement": {
+                "nonPrecise": true
+            },
+            "sourceIds": [
+                "a-prog"
+            ],
+            "statut": "active",
+            "historique": [],
+            "contradictions": [],
+            "effets": [
+                {
+                    "id": "a-etudes-repas-effet",
+                    "cible": {
+                        "all": [
+                            {
+                                "champ": "statutPro",
+                                "op": "in",
+                                "valeur": [
+                                    "etudiant",
+                                    "alternant"
+                                ]
+                            }
+                        ]
+                    },
+                    "sens": "positif",
+                    "type": "qualitatif",
+                    "libelle": "Repas moins chers au restaurant universitaire",
+                    "ampleur": null,
+                    "hypotheses": [
+                        "Accès à un restaurant universitaire à proximité"
+                    ],
+                    "perimetreSimulation": "Le gain dépend du nombre de repas pris au restaurant universitaire, inconnu.",
+                    "confiance": "moyenne",
+                    "horizon": "non précisé",
+                    "sourceIds": [
+                        "a-prog"
+                    ]
+                }
+            ],
+            "dateMaj": "2026-09-27",
+            "libelleCourt": "Repas à 1 € au restaurant universitaire pour tous"
+        },
         {
-          "id": "a-etudes-repas-effet",
-          "cible": {
-            "all": [
-              {
-                "champ": "statutPro",
-                "op": "in",
-                "valeur": [
-                  "etudiant",
-                  "alternant"
-                ]
-              }
-            ]
-          },
-          "sens": "positif",
-          "type": "qualitatif",
-          "libelle": "Repas moins chers au restaurant universitaire",
-          "ampleur": null,
-          "hypotheses": [
-            "Accès à un restaurant universitaire à proximité"
-          ],
-          "perimetreSimulation": "Le gain dépend du nombre de repas pris au restaurant universitaire, inconnu.",
-          "confiance": "moyenne",
-          "horizon": "non précisé",
-          "sourceIds": [
-            "a-prog"
-          ]
-        }
-      ],
-      "dateMaj": "2026-09-27"
-    },
-    {
-      "id": "a-bourses-10",
-      "candidatId": "candidat-a",
-      "theme": "etudes",
-      "intitule": "Hausse de 10 % des bourses sur critères sociaux",
-      "description": "Le candidat A (fictif) propose d'augmenter de 10 % le montant de chaque échelon de bourse.",
-      "type": "chiffrable",
-      "parametres": {
-        "kind": "montant_prestation",
-        "prestation": "bourse",
-        "variationPct": 10
-      },
-      "financement": {
-        "nonPrecise": true
-      },
-      "sourceIds": [
-        "a-prog"
-      ],
-      "statut": "active",
-      "historique": [],
-      "contradictions": [],
-      "effets": [
+            "id": "a-bourses-10",
+            "candidatId": "candidat-a",
+            "theme": "etudes",
+            "intitule": "Hausse de 10 % des bourses sur critères sociaux",
+            "description": "Le candidat A (fictif) propose d'augmenter de 10 % le montant de chaque échelon de bourse.",
+            "type": "chiffrable",
+            "parametres": {
+                "kind": "montant_prestation",
+                "prestation": "bourse",
+                "variationPct": 10
+            },
+            "financement": {
+                "nonPrecise": true
+            },
+            "sourceIds": [
+                "a-prog"
+            ],
+            "statut": "active",
+            "historique": [],
+            "contradictions": [],
+            "effets": [
+                {
+                    "id": "a-bourses-10-gain",
+                    "cible": {
+                        "all": [
+                            {
+                                "champ": "statutPro",
+                                "op": "eq",
+                                "valeur": "etudiant"
+                            },
+                            {
+                                "champ": "echelonBourse",
+                                "op": "gte",
+                                "valeur": "0bis"
+                            }
+                        ]
+                    },
+                    "sens": "positif",
+                    "type": "chiffre",
+                    "libelle": "Hausse du montant annuel de ta bourse",
+                    "ampleur": {
+                        "kind": "castype"
+                    },
+                    "hypotheses": [
+                        "Échelon de bourse inchangé",
+                        "Versement sur 10 mois"
+                    ],
+                    "perimetreSimulation": "Ne modélise pas un éventuel changement des plafonds de ressources donnant droit à un échelon.",
+                    "confiance": "haute",
+                    "horizon": "rentrée 2027",
+                    "sourceIds": [
+                        "a-prog"
+                    ]
+                }
+            ],
+            "dateMaj": "2026-09-27",
+            "libelleCourt": "Hausse de 10 % des bourses sur critères sociaux"
+        },
         {
-          "id": "a-bourses-10-gain",
-          "cible": {
-            "all": [
-              {
-                "champ": "statutPro",
-                "op": "eq",
-                "valeur": "etudiant"
-              },
-              {
-                "champ": "echelonBourse",
-                "op": "gte",
-                "valeur": "0bis"
-              }
-            ]
-          },
-          "sens": "positif",
-          "type": "chiffre",
-          "libelle": "Hausse du montant annuel de ta bourse",
-          "ampleur": {
-            "kind": "castype"
-          },
-          "hypotheses": [
-            "Échelon de bourse inchangé",
-            "Versement sur 10 mois"
-          ],
-          "perimetreSimulation": "Ne modélise pas un éventuel changement des plafonds de ressources donnant droit à un échelon.",
-          "confiance": "haute",
-          "horizon": "rentrée 2027",
-          "sourceIds": [
-            "a-prog"
-          ]
+            "id": "a-retraites-flou",
+            "candidatId": "candidat-a",
+            "theme": "retraites",
+            "intitule": "Réforme du système de retraites",
+            "description": "Le candidat A (fictif) a évoqué une remise à plat des retraites sans en préciser les paramètres.",
+            "type": "flou",
+            "parametres": null,
+            "financement": {
+                "nonPrecise": true
+            },
+            "sourceIds": [
+                "a-tv"
+            ],
+            "statut": "active",
+            "historique": [],
+            "contradictions": [
+                {
+                    "description": "Le programme mentionne un maintien de l'âge légal, la déclaration TV évoque un report.",
+                    "sourceIds": [
+                        "a-prog",
+                        "a-tv"
+                    ]
+                }
+            ],
+            "effets": [],
+            "dateMaj": "2026-09-27",
+            "libelleCourt": "Réforme du système de retraites"
         }
-      ],
-      "dateMaj": "2026-09-27"
-    },
-    {
-      "id": "a-retraites-flou",
-      "candidatId": "candidat-a",
-      "theme": "retraites",
-      "intitule": "Réforme du système de retraites",
-      "description": "Le candidat A (fictif) a évoqué une remise à plat des retraites sans en préciser les paramètres.",
-      "type": "flou",
-      "parametres": null,
-      "financement": {
-        "nonPrecise": true
-      },
-      "sourceIds": [
-        "a-tv"
-      ],
-      "statut": "active",
-      "historique": [],
-      "contradictions": [
+    ],
+    "sansPosition": [
         {
-          "description": "Le programme mentionne un maintien de l'âge légal, la déclaration TV évoque un report.",
-          "sourceIds": [
-            "a-prog",
-            "a-tv"
-          ]
+            "theme": "fiscalite",
+            "dateRecherche": "2026-09-27"
+        },
+        {
+            "theme": "aides_sociales",
+            "dateRecherche": "2026-09-27"
+        },
+        {
+            "theme": "famille",
+            "dateRecherche": "2026-09-27"
+        },
+        {
+            "theme": "emploi_chomage",
+            "dateRecherche": "2026-09-27"
+        },
+        {
+            "theme": "sante",
+            "dateRecherche": "2026-09-27"
+        },
+        {
+            "theme": "service_national",
+            "dateRecherche": "2026-09-27"
+        },
+        {
+            "theme": "handicap",
+            "dateRecherche": "2026-09-27"
         }
-      ],
-      "effets": [],
-      "dateMaj": "2026-09-27"
-    }
-  ],
-  "sansPosition": [
-    {
-      "theme": "fiscalite",
-      "dateRecherche": "2026-09-27"
-    },
-    {
-      "theme": "aides_sociales",
-      "dateRecherche": "2026-09-27"
-    },
-    {
-      "theme": "famille",
-      "dateRecherche": "2026-09-27"
-    },
-    {
-      "theme": "emploi_chomage",
-      "dateRecherche": "2026-09-27"
-    },
-    {
-      "theme": "sante",
-      "dateRecherche": "2026-09-27"
-    },
-    {
-      "theme": "service_national",
-      "dateRecherche": "2026-09-27"
-    },
-    {
-      "theme": "handicap",
-      "dateRecherche": "2026-09-27"
-    }
-  ]
+    ]
 }

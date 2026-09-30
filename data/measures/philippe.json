@@ -95,7 +95,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Une part fiscale entière dès le deuxième enfant"
     },
     {
       "id": "philippe-aide-famille-unique",
@@ -141,7 +142,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Aide financière unique et universelle pour les familles"
     },
     {
       "id": "philippe-temps-partiel-parental",
@@ -196,7 +198,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Temps partiel parental payé à 100 % pendant 2 mois"
     },
     {
       "id": "philippe-retraites",
@@ -245,7 +248,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Travailler plus longtemps et pilier de capitalisation"
     },
     {
       "id": "philippe-salaire-net",
@@ -295,7 +299,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Financement du modèle social moins assis sur le travail"
     },
     {
       "id": "philippe-moratoire-fiscal",
@@ -335,7 +340,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Aucun nouvel impôt pendant le quinquennat"
     },
     {
       "id": "philippe-sante",
@@ -375,7 +381,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Stabilisation des dépenses de santé"
     },
     {
       "id": "philippe-energie",
@@ -395,7 +402,8 @@
       "historique": [],
       "contradictions": [],
       "effets": [],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Relance du nucléaire et électrification des usages"
     }
   ],
   "sansPosition": [

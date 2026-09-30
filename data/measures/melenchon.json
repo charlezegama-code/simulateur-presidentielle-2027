@@ -222,7 +222,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "SMIC porté à 1 600 € net par mois"
     },
     {
       "id": "lfi-indexation-salaires",
@@ -272,7 +273,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Indexation des salaires sur l'inflation"
     },
     {
       "id": "lfi-retraite-60",
@@ -328,7 +330,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Retraite à 60 ans à taux plein avec 40 annuités"
     },
     {
       "id": "lfi-pensions-smic",
@@ -379,7 +382,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Pensions au moins au niveau du SMIC (carrière complète)"
     },
     {
       "id": "lfi-aspa-seuil-pauvrete",
@@ -445,7 +449,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Minimum vieillesse au niveau du seuil de pauvreté"
     },
     {
       "id": "lfi-aah-smic",
@@ -497,7 +502,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "AAH portée au niveau du SMIC"
     },
     {
       "id": "lfi-garantie-autonomie",
@@ -545,7 +551,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Garantie d'autonomie au niveau du seuil de pauvreté"
     },
     {
       "id": "lfi-ir-14-tranches",
@@ -585,7 +592,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Impôt sur le revenu à 14 tranches"
     },
     {
       "id": "lfi-csg-progressive",
@@ -625,7 +633,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "CSG progressive à 14 tranches"
     },
     {
       "id": "lfi-quotient",
@@ -697,7 +706,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Crédit d’impôt par enfant à la place du quotient familial"
     },
     {
       "id": "lfi-tva-premiere-necessite",
@@ -740,7 +750,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Baisse de la TVA sur les produits de première nécessité"
     },
     {
       "id": "lfi-energie",
@@ -782,7 +793,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Première tranche gratuite d'électricité, de gaz et d'eau"
     },
     {
       "id": "lfi-etudes-gratuites",
@@ -828,7 +840,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Enseignement supérieur gratuit, suppression de la CVEC"
     },
     {
       "id": "lfi-creches",
@@ -874,7 +887,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Crèches publiques gratuites"
     },
     {
       "id": "lfi-loyers",
@@ -920,7 +934,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Encadrement des loyers sur tout le territoire"
     },
     {
       "id": "lfi-sante-100",
@@ -960,7 +975,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Remboursement à 100 % des soins prescrits"
     },
     {
       "id": "lfi-garantie-emploi",
@@ -1007,7 +1023,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Garantie d'emploi pour les chômeurs de longue durée"
     },
     {
       "id": "lfi-service-citoyen",
@@ -1053,7 +1070,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Service citoyen obligatoire"
     }
   ],
   "sansPosition": []

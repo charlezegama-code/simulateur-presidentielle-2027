@@ -91,7 +91,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Heures au-delà du seuil annuel sans cotisations ni impôt"
     },
     {
       "id": "retailleau-plafond-aides",
@@ -152,7 +153,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Plafonnement des aides sociales à 70 % du SMIC"
     },
     {
       "id": "retailleau-ria",
@@ -245,7 +247,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Revenu d'incitation à l'activité, 15h/semaine requises"
     },
     {
       "id": "retailleau-chomage",
@@ -294,7 +297,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Arrêt de l'indemnisation après trois refus d'offre"
     },
     {
       "id": "retailleau-retraites",
@@ -340,7 +344,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Âge de départ lié à l'espérance de vie en bonne santé"
     }
   ],
   "sansPosition": [

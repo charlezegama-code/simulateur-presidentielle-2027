@@ -1,7 +1,7 @@
 import { useId, useState, type ReactNode } from 'react'
 
 /** Définitions d'une ligne, en langage courant, pour les sigles inévitables dans les données. */
-const TERMS: Record<string, string> = {
+export const TERMS: Record<string, string> = {
   SMIC: 'Le salaire minimum légal en France, avant impôts.',
   RSA: 'Un revenu minimum garanti si tu as très peu ou pas de ressources.',
   APL: "Une aide de la CAF qui réduit ce que tu paies pour ton loyer.",

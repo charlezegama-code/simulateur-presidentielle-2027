@@ -1,94 +1,233 @@
-import { useMemo } from 'react'
-import { Link, Redirect } from 'wouter'
-import { CandidateCard } from '../components/CandidateCard'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Redirect, useSearch } from 'wouter'
+import { Avatar } from '../components/Avatar'
+import { EffectDetail } from '../components/EffectDetail'
+import { EffectRow } from '../components/EffectRow'
+import { IconArrowDown, IconArrowUp, IconWaver } from '../components/icons'
+import { ProfileChip } from '../components/ProfileChip'
+import { Row, type RowContent } from '../components/Row'
 import { SeedBar } from '../components/SeedBar'
-import { BUTTON_GHOST, BUTTON_SECONDARY, H1, Notice } from '../components/ui'
-import { summarize } from '../domain/questionnaire'
-import type { Profile } from '../domain/profile'
+import { SegmentedControl } from '../components/SegmentedControl'
+import { ThemePills } from '../components/ThemePills'
+import { TopBar } from '../components/TopBar'
+import { Notice } from '../components/ui'
+import { measures } from '../data/loader'
+import { THEMES, type Theme } from '../domain/theme'
+import { compareEffects, simulate, type CandidateResult, type EffectView } from '../engine/simulate'
 import { ecartChiffrage } from '../engine/compare'
-import { simulate, type CandidateResult } from '../engine/simulate'
-import { candidates, measures } from '../data/loader'
+import { dateFr, STATUT_LABELS } from '../lib/format'
 import { useShuffled } from '../lib/seed'
 import { useDataset } from '../lib/useDataset'
 import { useProfile } from '../state/profile'
+import type { MeasuresFile } from '../schema/measure'
 
 const byCandidateId = (r: CandidateResult) => r.candidat.id
 
-/** Minuscule initiale, sauf pour les sigles (AAH, HLM…). */
-const lowerFirst = (t: string) => (t.length > 1 && t[1] === t[1].toLowerCase() ? t[0].toLowerCase() + t.slice(1) : t)
+function mfOf(r: CandidateResult): MeasuresFile {
+  return measures[`${r.candidat.id}.json`]
+}
 
-export function ProfileSummary({ profile }: { profile: Profile }) {
-  const parts = summarize(profile).map((s) => s.reponse)
+function themeRowContent(r: CandidateResult, theme: Theme): RowContent {
+  const mf = mfOf(r)
+  const actives = mf.mesures.filter((m) => m.theme === theme && m.statut !== 'abandonnee')
+  if (actives.length === 0) {
+    const sp = mf.sansPosition.find((s) => s.theme === theme)
+    return { kind: 'none', date: dateFr(sp?.dateRecherche ?? mf.dateMaj) }
+  }
+  const views = [...r.positifs, ...r.negatifs, ...r.autres].filter((v) => v.theme === theme).sort(compareEffects)
+  if (views.length > 0) return { kind: 'effect', v: views[0] }
+  const ref = r.autresMesures.find((m) => m.theme === theme)
+  if (ref) return { kind: 'measure', libelleCourt: ref.libelleCourt, type: ref.type }
+  return { kind: 'none', date: dateFr(mf.dateMaj) }
+}
+
+function GroupHeader({ label, Icon, tone, n, total }: { label: string; Icon: typeof IconArrowUp; tone: string; n: number; total: number }) {
   return (
-    <p className="rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-4 py-2 text-sm text-[var(--ink-soft)]">
-      Ton profil : <span className="text-[var(--ink)]">{parts.map(lowerFirst).join(' · ')}</span>
+    <p className={`flex items-center gap-1.5 text-sm font-bold ${tone}`}>
+      <Icon className="size-4" />
+      {label} <span className="font-normal text-[var(--ink-faint)]">· {n} sur {total} mesures analysées</span>
     </p>
+  )
+}
+
+function CandidateCard({ r, onOpen }: { r: CandidateResult; onOpen: (v: EffectView) => void }) {
+  const c = r.candidat
+  const mf = mfOf(r)
+  const total = mf.mesures.filter((m) => m.statut !== 'abandonnee').length
+  return (
+    <div className="raised space-y-4 rounded-2xl p-4">
+      <div className="flex items-center gap-3">
+        <Avatar candidat={c} size="md" />
+        <div className="min-w-0">
+          <p className="truncate font-display text-lg font-extrabold text-[var(--ink)]">
+            {c.prenom} {c.nom}
+          </p>
+          <p className="truncate text-[13px] text-[var(--ink-faint)]">
+            {c.parti} · {STATUT_LABELS[c.statut]} depuis le {dateFr(c.statutDate)}
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2.5">
+        <GroupHeader label="Avantages" Icon={IconArrowUp} tone="text-[var(--positive-strong)]" n={r.positifs.length} total={total} />
+        {r.positifs.length === 0 ? (
+          <p className="text-sm text-[var(--ink-faint)]">Aucun avantage identifié pour ton profil.</p>
+        ) : (
+          <div className="space-y-2">
+            {r.positifs.map((v) => (
+              <EffectRow key={v.effetId} v={v} onClick={() => onOpen(v)} />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-2.5">
+        <GroupHeader label="Désavantages" Icon={IconArrowDown} tone="text-[var(--negative-strong)]" n={r.negatifs.length} total={total} />
+        {r.negatifs.length === 0 ? (
+          <p className="text-sm text-[var(--ink-faint)]">Aucun désavantage identifié pour ton profil.</p>
+        ) : (
+          <div className="space-y-2">
+            {r.negatifs.map((v) => (
+              <EffectRow key={v.effetId} v={v} onClick={() => onOpen(v)} />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {r.autres.length > 0 && (
+        <div className="space-y-2.5">
+          <GroupHeader label="Incertain" Icon={IconWaver} tone="text-[var(--ink-soft)]" n={r.autres.length} total={total} />
+          <div className="space-y-2">
+            {r.autres.map((v) => (
+              <EffectRow key={v.effetId} v={v} onClick={() => onOpen(v)} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function CandidatePager({ ordered, onOpen }: { ordered: CandidateResult[]; onOpen: (v: EffectView) => void }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [index, setIndex] = useState(0)
+  const onScroll = () => {
+    const el = ref.current
+    if (!el) return
+    setIndex(Math.round(el.scrollLeft / el.clientWidth))
+  }
+  return (
+    <div className="pt-2">
+      <div ref={ref} onScroll={onScroll} className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth">
+        {ordered.map((r) => (
+          <div key={r.candidat.id} className="w-full shrink-0 snap-center px-5">
+            <CandidateCard r={r} onOpen={onOpen} />
+          </div>
+        ))}
+      </div>
+      {ordered.length > 1 && (
+        <div className="flex justify-center gap-1.5 pt-3" aria-hidden="true">
+          {ordered.map((r, i) => (
+            <span key={r.candidat.id} className={`size-1.5 rounded-full transition-colors ${i === index ? 'bg-[var(--accent)]' : 'bg-[var(--line-strong)]'}`} />
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 
 export function Results() {
   const { profile } = useProfile()
   const { dataset, error } = useDataset()
+  const search = useSearch()
   const results = useMemo(() => (profile && dataset ? simulate(profile, dataset) : []), [profile, dataset])
   const ordered = useShuffled(results, byCandidateId)
   const ecart = useMemo(() => ecartChiffrage(measures), [])
-  const couverture = useMemo(() => {
-    const n = Object.values(measures).map((mf) => mf.mesures.filter((m) => m.statut !== 'abandonnee').length)
-    return { min: Math.min(...n), max: Math.max(...n) }
-  }, [])
-  const nonAnalyses = candidates.candidats.filter((c) => !c.analyse).length
+  const [view, setView] = useState<'theme' | 'candidat'>('theme')
+  const [theme, setTheme] = useState<Theme | null>(null)
+  const [detail, setDetail] = useState<EffectView | null>(null)
+
+  const themesOrdered = useMemo(() => {
+    if (ordered.length === 0) return THEMES
+    // Priorité aux effets chiffrés (un montant en € doit être visible sans scroll sur le premier écran), puis à
+    // la présence de tout effet pertinent (chiffré, qualitatif ou flou) pour départager.
+    const chiffres = new Map<Theme, number>()
+    const pertinents = new Map<Theme, number>()
+    for (const t of THEMES) {
+      const contents = ordered.map((r) => themeRowContent(r, t))
+      chiffres.set(t, contents.filter((c) => c.kind === 'effect' && c.v.type === 'chiffre').length)
+      pertinents.set(t, contents.filter((c) => c.kind === 'effect').length)
+    }
+    return [...THEMES].sort((a, b) => chiffres.get(b)! - chiffres.get(a)! || pertinents.get(b)! - pertinents.get(a)! || THEMES.indexOf(a) - THEMES.indexOf(b))
+  }, [ordered])
+
+  useEffect(() => {
+    if (theme !== null || ordered.length === 0) return
+    const fromUrl = new URLSearchParams(search).get('theme') as Theme | null
+    setTheme(fromUrl && (THEMES as readonly string[]).includes(fromUrl) ? fromUrl : themesOrdered[0])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ordered.length, themesOrdered])
 
   if (!profile) return <Redirect to="/questionnaire" />
 
   return (
-    <div className="space-y-5">
-      <H1>Ce qui changerait pour toi</H1>
-      <ProfileSummary profile={profile} />
-      <div className="flex flex-wrap gap-3">
-        <Link href="/questionnaire" className={BUTTON_SECONDARY}>
-          Modifier mes réponses
-        </Link>
-        <Link href="/comparer" className={BUTTON_SECONDARY}>
-          Comparer par thème
-        </Link>
+    <div>
+      <TopBar title="Résultat" />
+      <ProfileChip profile={profile} />
+      <div className="px-5 pt-4">
+        <SegmentedControl
+          options={[
+            { value: 'theme', label: 'Par thème' },
+            { value: 'candidat', label: 'Par candidat' },
+          ]}
+          active={view}
+          onChange={setView}
+        />
       </div>
-      <p className="text-sm text-[var(--ink-soft)]">
-        Montants par an pour ton foyer. Pas de total : les mesures ne s’additionnent pas simplement. Sous chaque ligne, « Hypothèses, limites
-        et sources » explique le calcul.
-      </p>
-      <Notice tone="warn">
-        Les programmes ne sont pas tous aussi détaillés à ce jour : entre {couverture.min} et {couverture.max} mesures analysées selon les
-        candidat·es
-        {ecart > 0.25 && <>, et une part de mesures chiffrables qui varie de {Math.round(ecart * 100)} points</>}. Moins de lignes ou moins de
-        chiffres ne veut pas dire moins d’effets : seulement des propositions moins précisées pour l’instant.
-      </Notice>
-      <SeedBar />
-      {ordered.length > 0 && (
-        <nav aria-label="Candidat·es" className="flex flex-wrap gap-2 text-sm">
-          {ordered.map((r) => (
-            <a
-              key={r.candidat.id}
-              href={`#cand-${r.candidat.id}`}
-              className="rounded-full border border-[var(--line)] bg-[var(--paper-raised)] px-3 py-1.5 text-[var(--ink-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-strong)]"
-            >
-              {r.candidat.prenom} {r.candidat.nom}
-            </a>
-          ))}
-        </nav>
+
+      {error && (
+        <div className="px-5 pt-4">
+          <Notice tone="warn">Impossible de charger les calculs ({error}). Recharge la page.</Notice>
+        </div>
       )}
-      {error && <Notice tone="warn">Impossible de charger les calculs ({error}). Recharge la page.</Notice>}
-      {!dataset && !error && <p aria-live="polite">Calcul en cours…</p>}
-      <div className="stagger space-y-6">
-        {ordered.map((r) => (
-          <CandidateCard key={r.candidat.id} r={r} nbMesures={measures[`${r.candidat.id}.json`].mesures.filter((m) => m.statut !== 'abandonnee').length} />
-        ))}
-      </div>
-      <p className="text-sm text-[var(--ink-soft)]">
-        {nonAnalyses} autres candidat·es déclaré·es ou pressenti·es ne sont pas encore analysé·es.{' '}
-        <Link href="/candidats" className={BUTTON_GHOST}>
-          Voir la liste et le critère retenu
-        </Link>
-      </p>
+      {!dataset && !error && (
+        <p className="px-5 pt-6 text-[var(--ink-soft)]" aria-live="polite">
+          Calcul en cours…
+        </p>
+      )}
+
+      {dataset && ordered.length > 0 && theme && (
+        <>
+          {view === 'theme' ? (
+            <div className="space-y-3 pt-3">
+              <ThemePills themes={themesOrdered} active={theme} onSelect={setTheme} />
+              <div className="space-y-2 px-5">
+                {ordered.map((r) => {
+                  const content = themeRowContent(r, theme)
+                  return <Row key={r.candidat.id} candidat={r.candidat} content={content} onClick={() => content.kind === 'effect' && setDetail(content.v)} />
+                })}
+              </div>
+            </div>
+          ) : (
+            <CandidatePager ordered={ordered} onOpen={setDetail} />
+          )}
+
+          {ecart > 0.25 && (
+            <div className="px-5 pt-4">
+              <Notice tone="warn">
+                Les programmes ne sont pas tous aussi détaillés à ce jour : la part de mesures chiffrables varie de {Math.round(ecart * 100)} points
+                selon les candidat·es. Moins de chiffres ne veut pas dire moins d’effets, seulement des propositions moins précisées pour l’instant.
+              </Notice>
+            </div>
+          )}
+
+          <div className="pt-4">
+            <SeedBar />
+          </div>
+        </>
+      )}
+
+      <EffectDetail v={detail} open={!!detail} onClose={() => setDetail(null)} />
     </div>
   )
 }

@@ -40,6 +40,8 @@ export interface EffectView {
   mesureId: string
   theme: Theme
   intituleMesure: string
+  /** Libellé court (≤60 caractères) pour les lignes de liste, jamais tronqué visuellement. */
+  libelleCourtMesure: string
   libelle: string
   /** Type affiché : un effet "chiffre" non calculable pour ce profil devient "qualitatif". */
   type: Effect['type']
@@ -63,6 +65,7 @@ export interface MeasureRef {
   mesureId: string
   theme: Theme
   intitule: string
+  libelleCourt: string
   type: Measure['type']
   sources: Source[]
 }
@@ -159,7 +162,7 @@ export function simulate(profile: Profile, dataset: Dataset): CandidateResult[] 
 
         const matched = m.effets.filter((e) => matches(e.cible, derived))
         if (matched.length === 0) {
-          autresMesures.push({ mesureId: m.id, theme: m.theme, intitule: m.intitule, type: m.type, sources: resolve(m.sourceIds) })
+          autresMesures.push({ mesureId: m.id, theme: m.theme, intitule: m.intitule, libelleCourt: m.libelleCourt, type: m.type, sources: resolve(m.sourceIds) })
           continue
         }
 
@@ -169,6 +172,7 @@ export function simulate(profile: Profile, dataset: Dataset): CandidateResult[] 
             mesureId: m.id,
             theme: m.theme,
             intituleMesure: m.intitule,
+            libelleCourtMesure: m.libelleCourt,
             libelle: e.libelle,
             type: e.type,
             sens: e.sens,

@@ -115,7 +115,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Salaire minimum à 2 000 € brut par mois dès 2027"
     },
     {
       "id": "eco-garantie-autonomie",
@@ -209,7 +210,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Garantie d'autonomie à 50 % du SMIC net à la place du RSA"
     },
     {
       "id": "eco-garantie-18-ans",
@@ -274,7 +276,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Garantie d'autonomie accessible dès 18 ans"
     },
     {
       "id": "eco-apl-10",
@@ -329,7 +332,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "APL revalorisées de 10 %"
     },
     {
       "id": "eco-loyers",
@@ -375,7 +379,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Encadrement des loyers généralisé"
     },
     {
       "id": "eco-aah-250",
@@ -427,7 +432,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "AAH augmentée de 250 € par mois"
     },
     {
       "id": "eco-af-premier-enfant",
@@ -474,7 +480,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Allocations familiales dès le premier enfant"
     },
     {
       "id": "eco-retraite-62",
@@ -521,7 +528,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Retraite à 62 ans, 60 ans si carrière longue ou pénible"
     },
     {
       "id": "eco-ir",
@@ -571,7 +579,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Baisse de l'impôt sur le revenu pour les tranches basses"
     },
     {
       "id": "eco-csg",
@@ -642,7 +651,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "CSG progressive et relevée d’un point"
     },
     {
       "id": "eco-etudes",
@@ -688,7 +698,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Suppression de la CVEC et bourses revalorisées"
     },
     {
       "id": "eco-electricite",
@@ -728,7 +739,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Abonnement électrique allégé et tarification progressive"
     },
     {
       "id": "eco-depassements",
@@ -774,7 +786,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Dépassements d'honoraires interdits (ménages modestes)"
     },
     {
       "id": "eco-32h",
@@ -824,7 +837,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "32h sans perte de salaire (métiers pénibles ou de nuit)"
     },
     {
       "id": "eco-service-civique",
@@ -870,7 +884,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Plus de missions de service civique volontaire"
     }
   ],
   "sansPosition": []

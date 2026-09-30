@@ -2,9 +2,8 @@
 @import '@fontsource-variable/hanken-grotesk/wght.css';
 
 /*
- * Système typographique unique : une seule famille (Hanken Grotesk Variable), sans-serif,
- * cohérente avec boutons/badges. La hiérarchie (titres vs texte) vient du poids et de la taille,
- * pas d'une deuxième police serif. Voir CLAUDE.md « Typographie ».
+ * Système typographique unique : une seule famille (Hanken Grotesk Variable), sans-serif.
+ * La hiérarchie (titres vs texte) vient du poids et de la taille, pas d'une deuxième police. Voir CLAUDE.md.
  */
 @theme {
   --font-display: 'Hanken Grotesk Variable', system-ui, -apple-system, sans-serif;
@@ -12,8 +11,8 @@
 }
 
 /*
- * Palette « violet neutre » : fond gris-neutre (pas de beige), un seul accent (violet, non associé
- * à un parti), vert/corail réservés au sens positif/négatif des effets. Voir CLAUDE.md « Couleurs ».
+ * Palette « violet neutre » : fond gris-neutre, un seul accent (violet, non associé à un parti), vert/corail
+ * réservés au sens positif/négatif des effets. Voir CLAUDE.md « Couleurs ».
  */
 :root {
   --paper: #f7f6fb;
@@ -27,16 +26,16 @@
   --accent-strong: #5b21b6;
   --accent-soft: #f1e9fe;
   --on-accent: #ffffff;
-  --positive: #10b981;
+  --positive: #0d8f63;
   --positive-strong: #047857;
   --positive-soft: #d1fae5;
-  --negative: #e4572e;
+  --negative: #c94a20;
   --negative-strong: #b8391b;
   --negative-soft: #fbe3d9;
   --flou: #b45309;
   --flou-soft: #fef3c7;
   --shadow-rgb: 40 20 70;
-  --radius-card: 1.25rem;
+  --radius-card: 1.125rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,6 +73,7 @@
     color-scheme: light dark;
     scrollbar-color: var(--line-strong) transparent;
     scrollbar-width: thin;
+    font-variant-numeric: tabular-nums;
   }
 
   body {
@@ -101,7 +101,6 @@
     border-radius: 2px;
   }
 
-  /* Scrollbar personnalisée (Chromium/Safari) : fine, discrète, teinte de l'accent au survol. */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -126,59 +125,162 @@
   }
 }
 
+/*
+ * Système de composants de la refonte structurelle (docs/ux-spec.md) : lignes pleine largeur (élévation par
+ * ombre, jamais de bordure fine), tuiles, pastilles, feuilles modales, barre d'onglets. Remplace les cartes à
+ * bordure + lien souligné et l'accordéon +/× de la V3.
+ */
 @layer components {
-  .card {
+  /* Élévation douce, sans bordure — utilisée par .tile, .row, .sheet, .pill-card. */
+  .raised {
     background: var(--paper-raised);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-card);
     box-shadow:
       0 1px 2px rgb(var(--shadow-rgb) / 0.04),
-      0 8px 20px -12px rgb(var(--shadow-rgb) / 0.22);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      0 8px 20px -14px rgb(var(--shadow-rgb) / 0.3);
   }
 
-  .card-lift {
-    box-shadow:
-      0 2px 4px rgb(var(--shadow-rgb) / 0.05),
-      0 16px 32px -16px rgb(var(--shadow-rgb) / 0.32);
+  .tile {
+    text-align: left;
+    border-radius: 1rem;
+    padding: 1rem 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    min-height: 5.5rem;
+    justify-content: center;
+    transition: transform 0.12s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+  .tile:active {
+    transform: scale(0.97);
+  }
+  .tile.selected {
+    background: var(--accent-soft);
+    box-shadow: 0 4px 14px -6px rgb(109 40 217 / 0.35);
   }
 
-  .card-hover:hover {
-    border-color: var(--line-strong);
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 10px rgb(var(--shadow-rgb) / 0.06),
-      0 20px 36px -18px rgb(var(--shadow-rgb) / 0.36);
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 1rem;
+    padding: 0.75rem 0.875rem;
+    min-height: 4rem;
+    text-align: left;
+    width: 100%;
+    transition: transform 0.12s ease, box-shadow 0.15s ease;
+  }
+  .row:active {
+    transform: scale(0.98);
+  }
+  .row.no-position {
+    background: transparent;
+    box-shadow: none;
+    outline: 1.5px dashed var(--line-strong);
+    outline-offset: -1.5px;
+  }
+
+  .pill {
+    flex-shrink: 0;
+    padding: 0.5rem 0.875rem;
+    border-radius: 999px;
+    font-size: 0.845rem;
+    font-weight: 600;
+    background: var(--paper-raised);
+    color: var(--ink-soft);
+    box-shadow: 0 1px 2px rgb(var(--shadow-rgb) / 0.05);
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+  }
+  .pill:active {
+    transform: scale(0.96);
+  }
+  .pill.selected {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .segctrl {
+    display: flex;
+    background: var(--line);
+    border-radius: 0.75rem;
+    padding: 3px;
+  }
+  .segctrl button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0.5rem 0;
+    border-radius: 0.5625rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .segctrl button.active {
+    background: var(--paper-raised);
+    color: var(--accent-strong);
+    box-shadow: 0 1px 3px rgb(var(--shadow-rgb) / 0.12);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 999px;
+    padding: 0.5rem 0.875rem 0.5rem 0.375rem;
+    transition: transform 0.12s ease;
+  }
+  .chip:active {
+    transform: scale(0.97);
+  }
+
+  /* Disclosure : chevron qui pivote, jamais le +/× de la V3. */
+  .disclosure summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .disclosure summary::-webkit-details-marker {
+    display: none;
+  }
+  .disclosure .chevron {
+    transition: transform 0.2s ease;
+  }
+  .disclosure[open] .chevron {
+    transform: rotate(180deg);
   }
 
   .stagger > * {
-    animation: rise-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: rise-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   .stagger > *:nth-child(1) {
     animation-delay: 0.02s;
   }
   .stagger > *:nth-child(2) {
-    animation-delay: 0.08s;
+    animation-delay: 0.06s;
   }
   .stagger > *:nth-child(3) {
-    animation-delay: 0.14s;
+    animation-delay: 0.1s;
   }
   .stagger > *:nth-child(4) {
-    animation-delay: 0.2s;
+    animation-delay: 0.14s;
   }
-  .stagger > *:nth-child(5) {
-    animation-delay: 0.26s;
-  }
-  .stagger > *:nth-child(n + 6) {
-    animation-delay: 0.32s;
+  .stagger > *:nth-child(n + 5) {
+    animation-delay: 0.18s;
   }
 
-  .q-enter {
-    animation: rise-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .slide-enter {
+    animation: slide-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .pop-check {
-    animation: pop-check 0.25s ease;
+  .pop {
+    animation: pop 0.22s ease;
+  }
+
+  /* Feuille modale : contenu, pas la structure de page (voir Sheet.tsx). */
+  .sheet-backdrop {
+    animation: fade-in 0.18s ease both;
+  }
+  .sheet-panel {
+    animation: sheet-up 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
 
@@ -193,17 +295,48 @@
   }
 }
 
-@keyframes pop-check {
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pop {
   0% {
-    transform: scale(0.6);
+    transform: scale(0.7);
     opacity: 0;
   }
   60% {
-    transform: scale(1.15);
+    transform: scale(1.12);
     opacity: 1;
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

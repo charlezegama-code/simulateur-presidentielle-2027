@@ -111,7 +111,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "TVA à 5,5 % sur carburants, fioul, électricité et gaz"
     },
     {
       "id": "lepen-retraite-62",
@@ -167,7 +168,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Retraite à 62 ans, 60 ans si début avant 20 ans"
     },
     {
       "id": "lepen-priorite-nationale-logement",
@@ -216,7 +218,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Logement social et APL réservés aux ressortissants français"
     },
     {
       "id": "lepen-100-renov",
@@ -262,7 +265,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Prêt sans intérêts pour la rénovation (« 100 % Rénov »)"
     },
     {
       "id": "lepen-dpe",
@@ -309,7 +313,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Diagnostic de performance énergétique rendu indicatif"
     }
   ],
   "sansPosition": [

@@ -46,13 +46,15 @@ Ce n'est PAS un outil de recommandation de vote : pas de score global, pas de «
 - `npm run build` exécute aussi `check-bundle` : aucune requête hors du site.
 
 ## Mise à jour des données
-1. Modifier `data/` (sources datées, ne rien supprimer : statut `modifiee`/`abandonnee` + historique).
+1. Modifier `data/` (sources datées, ne rien supprimer : statut `modifiee`/`abandonnee` + historique). Toute
+   nouvelle mesure a un `libelleCourt` (≤ 60 caractères) en plus de son `intitule` complet.
 2. Mesure chiffrable modifiée : `npx tsx scripts/export-grid.ts` puis `cd scripts/openfisca && uv run python run.py --data ../../data`.
 3. `npm run validate-data && npm test && npm run build`.
 
 ## Photos des candidat·es
-- Un seul portrait par candidat·e (analysé·e ou non), recadré au même format (7:9, ~480×617) que tous les autres —
-  voir `src/components/CandidateAvatar.tsx`. Fichiers dans `public/candidats/<id>.jpg`.
+- Un seul portrait par candidat·e (analysé·e ou non), recadré au même format (7:9, ~480×617) que tous les autres,
+  affiché en rond (cadrage carré centré sur le visage via `object-position`) — voir `src/components/Avatar.tsx`.
+  Fichiers dans `public/candidats/<id>.jpg`.
 - Uniquement des photos sous licence libre vérifiée (Wikimedia Commons de préférence : CC0, CC BY, CC BY-SA, ou
   Licence Ouverte/Etalab pour une source officielle). Jamais une photo de presse sans licence claire.
 - Éviter les photos où un vêtement, un logo ou un fond trahit la couleur d'un parti (neutralité) ; préférer un visage
@@ -70,10 +72,34 @@ Ce n'est PAS un outil de recommandation de vote : pas de score global, pas de «
   (src/index.css) pointent vers la même famille : les classes `font-display` existantes restent valides sans à
   changer chaque composant.
 
-## Onboarding
-- Écran d'accueil en 3 étapes affiché une seule fois (mémorisé dans `localStorage`, clé `onboarding-vu`), avant la
-  première interaction. Bouton « Passer » à tout moment. Revisible depuis Méthodologie (« Revoir l'introduction »).
-  Voir `src/components/Onboarding.tsx`.
+## Structure de navigation (refonte V4)
+- Refonte structurelle complète (docs/ux-spec.md) : plus de nav texte en haut d'écran, ni sur mobile ni sur
+  desktop. Chaque écran affiche son propre `<TopBar>` (titre + flèche retour ou icône d'action seulement).
+  Navigation entre les 4 sections principales (Résultat / Comparer / Candidats / Aide) uniquement via la bottom
+  tab bar (`src/components/Layout.tsx`), visible sur toutes les tailles d'écran, masquée sur l'accueil.
+- Accueil (`src/pages/Home.tsx`) : écran d'entrée hors des 4 onglets, pas de bottom tab bar. Une phrase, un bouton
+  « Commencer », la mention vie privée, une icône ⓘ ouvre une feuille avec l'explication complète (a remplacé
+  l'ancien onboarding en 3 étapes modal — pas de nouvel écran forcé au premier lancement).
+- Composants transverses : `.tile` (questionnaire), `.row` (lignes Résultat/Comparer), `.pill` (thèmes),
+  `.segctrl` (Par thème / Par candidat), feuilles modales (`Sheet.tsx`, rendues via portail React, jamais imbriquées
+  dans un conteneur animé). Disclosure (FAQ, méthodologie, thèmes de la fiche candidat·e) : chevron qui pivote à
+  180°, jamais l'icône +/× de la V3.
+- Questionnaire : une question par écran, tap sur une tuile = sélection **et** avance automatique (pas de bouton
+  Suivant), progression en segments, flèche retour en haut à gauche, lien discret « Pourquoi cette question ? »
+  sous les tuiles.
+- Résultat : puce de profil courte (2 éléments, jamais tous les champs bruts) tappable pour revenir au récap ;
+  bascule Par thème (pastilles de thèmes triées par pertinence — d'abord les thèmes avec un effet **chiffré**,
+  garantit un montant en € visible sans scroll) / Par candidat (pager horizontal, effets groupés
+  Avantages/Désavantages/Incertain, jamais un compte isolé — toujours « x sur N mesures analysées »).
+
+## Vocabulaire des types d'effets
+- Un seul vocabulaire partout : **Chiffré** / **Qualitatif** / **Flou** (`TypeBadge`, `src/components/ui.tsx`),
+  jamais « non chiffré » ici et « trop flou » ailleurs. Un pictogramme distinct par état (pièce / page à lignes /
+  brume), jamais le même pictogramme pour deux concepts différents dans l'app (règle stricte de
+  `src/components/icons.tsx`).
+- `Measure.libelleCourt` (`src/schema/measure.ts`, ≤ 60 caractères, écrit à la main mesure par mesure) : libellé
+  pour les lignes de liste (Résultat/Comparer), jamais tronqué visuellement par du texte coupé en "…". Le libellé
+  complet (`intitule`) reste affiché dans la feuille de détail et la fiche candidat·e.
 
 ## Couleurs
 - Un seul accent : **violet** (`--accent`, #6d28d9 en light / #a78bfa en dark). Choisi parce qu'aucun parti français
@@ -87,5 +113,5 @@ Ce n'est PAS un outil de recommandation de vote : pas de score global, pas de «
   signal parti (le corail évite volontairement le rouge franc de LFI et le rose du PS).
 - Toutes les paires texte/fond utilisées visent AA (≥ 4.5:1 texte normal, vérifié par calcul de contraste WCAG lors
   du choix de la palette).
-- Scrollbar personnalisée, ombres de carte plus marquées, hover/focus visibles partout où un élément est cliquable
-  (voir `src/index.css`, classes `.card`, `.card-hover`, `.card-lift`).
+- Scrollbar personnalisée, élévation par ombre douce plutôt que bordure fine, hover/focus/pressed visibles partout
+  où un élément est cliquable (voir `src/index.css`, classe `.raised` et les composants `.tile`/`.row`/`.pill`).

@@ -104,7 +104,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Baisse des cotisations salariales pour le salaire net"
     },
     {
       "id": "attal-heures-sup",
@@ -154,7 +155,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Suppression du plafond légal d’heures supplémentaires"
     },
     {
       "id": "attal-assurance-chomage",
@@ -200,7 +202,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Réforme de l'assurance chômage"
     },
     {
       "id": "attal-retraites-duree",
@@ -248,7 +251,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Fin de l'âge légal au profit de la durée de cotisation"
     },
     {
       "id": "attal-annee-blanche",
@@ -316,7 +320,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Frein d'urgence et année blanche sur les dépenses sociales"
     },
     {
       "id": "attal-carburant",
@@ -372,7 +377,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Prime carburant employeur jusqu'à 1 000 €/an"
     },
     {
       "id": "attal-electricite",
@@ -412,7 +418,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Un prix de l'électricité plus bas pour les fournisseurs"
     },
     {
       "id": "attal-creches",
@@ -458,7 +465,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Livret d’épargne pour financer des places en crèche"
     },
     {
       "id": "attal-etudes",
@@ -504,7 +512,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Réorganisation de l'enseignement supérieur"
     }
   ],
   "sansPosition": [

@@ -58,7 +58,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Baisse des taxes sur l'essence"
     },
     {
       "id": "roussel-salaires-pensions",
@@ -113,7 +114,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Hausse des salaires et des pensions"
     },
     {
       "id": "roussel-fiscalite",
@@ -153,7 +155,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "ISF rétabli, héritages sous 200 000 € exonérés"
     },
     {
       "id": "roussel-loi-travail",
@@ -202,7 +205,8 @@
           ]
         }
       ],
-      "dateMaj": "2026-09-27"
+      "dateMaj": "2026-09-27",
+      "libelleCourt": "Abrogation de la loi Travail"
     }
   ],
   "sansPosition": [
